@@ -1,0 +1,1332 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>顧好肺 活得長久｜長者慢性病互動教學簡報</title>
+<style>
+:root{
+  --orange:#E8552D; --amber:#F4A93C; --teal:#028090; --ink:#12343B;
+  --th:#028090; --thd:#12343B;
+  --bg:#FDFBF7; --card:#FFFFFF; --line:#E1D8CA;
+  --navh:48px; --s:1; --hs:1;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC","Heiti TC",sans-serif;}
+body{overflow:hidden}
+button{font-family:inherit;color:inherit}
+#stage{position:absolute;left:0;right:0;top:0;bottom:var(--navh);overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden}
+.slide.on{opacity:1;visibility:visible;animation:fadein .2s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.pad{position:absolute;inset:0;padding:1.6vh 2.2vw;display:flex;flex-direction:column;gap:.7vh;overflow:hidden}
+.pad.mid{justify-content:center;align-items:center;text-align:center}
+
+/* ---------- header ---------- */
+.hd{flex:0 0 auto}
+.tagrow{display:flex;align-items:center;gap:calc(11px*var(--hs));margin-bottom:calc(3px*var(--hs))}
+.tag{background:var(--th);color:#fff;border-radius:999px;padding:calc(4px*var(--hs)) calc(15px*var(--hs));
+  font-size:calc(17px*var(--hs));font-weight:800;letter-spacing:.06em;white-space:nowrap}
+.rule{flex:1;height:calc(4px*var(--hs));background:var(--th);opacity:.2;border-radius:99px}
+h1.t{margin:0;font-size:calc(43px*var(--hs));line-height:1.22;font-weight:900;letter-spacing:.01em}
+.lead{margin:calc(2px*var(--hs)) 0 0;font-size:calc(21px*var(--hs));line-height:1.25;color:#54666b;font-weight:700}
+.src{flex:0 0 auto;font-size:calc(13px*var(--s));color:#9aa3a6;line-height:1.25;padding-top:.1vh}
+
+/* ---------- flow layout: rows of equal tiles, column count chosen per slide ---------- */
+.flow{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.8vh;--g:.9vw;--c:2}
+.frow{flex:1 1 0;min-height:0;display:flex;justify-content:center;gap:var(--g)}
+.frow>*{flex:0 0 auto;width:calc((100% - (var(--c) - 1)*var(--g))/var(--c));min-width:0;min-height:0}
+.card .v,.stat .d,.sc .tx,.pi .tx,.pl .tx,.opt .tx,.oi .tx,.rf .v,.task .v{text-wrap:balance}
+
+/* ---------- generic body ---------- */
+.body{flex:1 1 auto;min-height:0;display:grid;gap:.8vh .9vw;grid-auto-rows:minmax(0,1fr)}
+.c2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.c22{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr)}
+.card{background:var(--card);border:calc(3px*var(--s)) solid var(--line);border-radius:calc(16px*var(--s));
+  padding:calc(9px*var(--s)) calc(15px*var(--s));display:flex;flex-direction:column;justify-content:center;
+  gap:calc(2px*var(--s));min-height:0;overflow:hidden}
+.card .k{font-size:calc(28px*var(--s)*var(--cs,1));font-weight:900;color:var(--th);line-height:1.22}
+.card .v{font-size:calc(33px*var(--s)*var(--cs,1));line-height:1.34;font-weight:700}
+.card .v b{color:var(--orange)}
+.core .card{border-color:var(--th);background:#fff}
+
+/* ---------- cover ---------- */
+.cover{background:linear-gradient(150deg,var(--th) 0%,var(--thd) 100%);color:#fff}
+.cover .ct{font-size:calc(90px*var(--s));font-weight:900;line-height:1.16;letter-spacing:.02em;margin:0}
+.cover .cs{font-size:calc(36px*var(--s));font-weight:700;margin:calc(20px*var(--s)) 0 0;opacity:.95;line-height:1.35}
+.cover .cd{width:calc(120px*var(--s));height:calc(8px*var(--s));background:var(--amber);border-radius:99px;margin:calc(26px*var(--s)) 0}
+.cover .cm{font-size:calc(25px*var(--s));font-weight:700;opacity:.88}
+.cover .cdis{font-size:calc(23px*var(--s));opacity:.78;margin-top:calc(6px*var(--s))}
+
+/* ---------- section ---------- */
+.sect{background:var(--th);color:#fff}
+.sect .sn{font-size:calc(31px*var(--s));font-weight:900;background:rgba(255,255,255,.2);
+  padding:calc(8px*var(--s)) calc(26px*var(--s));border-radius:99px;display:inline-block}
+.sect .sh{font-size:calc(72px*var(--s));font-weight:900;margin:calc(24px*var(--s)) 0 0;line-height:1.2}
+.sect .sl{font-size:calc(33px*var(--s));margin:calc(18px*var(--s)) 0 0;opacity:.95;line-height:1.35;font-weight:700;max-width:82%}
+
+/* ---------- stats ---------- */
+.stat{background:var(--card);border:calc(3px*var(--s)) solid var(--line);border-radius:calc(18px*var(--s));
+  padding:calc(10px*var(--s));display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:calc(2px*var(--s));text-align:center;min-height:0;overflow:hidden;border-top:calc(10px*var(--s)) solid var(--th)}
+.stat .n{font-size:calc(66px*var(--s)*var(--cs,1));font-weight:900;color:var(--th);line-height:1.18;letter-spacing:-.01em}
+.stat .u{font-size:calc(24px*var(--s)*var(--cs,1));font-weight:800;color:var(--orange)}
+.stat .d{font-size:calc(32px*var(--s)*var(--cs,1));font-weight:700;line-height:1.28;color:#2c3b40}
+
+/* ---------- choice ---------- */
+.q{flex:0 0 auto;background:#fff;border:calc(3px*var(--s)) dashed var(--th);border-radius:calc(14px*var(--s));
+  padding:calc(11px*var(--s)) calc(20px*var(--s));font-size:calc(34px*var(--s));font-weight:800;line-height:1.3}
+.opts{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.85vh}
+.opt{flex:1 1 0;min-height:0;display:flex;align-items:center;gap:calc(14px*var(--s));cursor:pointer;
+  background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(6px*var(--s)) calc(17px*var(--s));text-align:left;font-size:calc(36px*var(--s)*var(--cs,1));font-weight:700;line-height:1.25}
+.opt .ch{flex:0 0 auto;width:calc(50px*var(--s)*var(--cs,1));height:calc(50px*var(--s)*var(--cs,1));border-radius:50%;
+  background:var(--th);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:calc(28px*var(--s)*var(--cs,1));font-weight:900}
+.opt .mk{flex:0 0 auto;margin-left:auto;font-size:calc(36px*var(--s)*var(--cs,1));width:calc(46px*var(--s)*var(--cs,1));text-align:center;display:inline-block}
+.opt:hover{border-color:var(--th)}
+.opt.right{border-color:#1e8449;background:#eafaf1}
+.opt.wrong{border-color:#c0392b;background:#fdecea}
+.done .opt{cursor:default}
+
+/* ---------- fill ---------- */
+.bank{flex:0 0 auto;display:flex;flex-wrap:wrap;gap:calc(9px*var(--s));justify-content:center}
+.word{background:var(--amber);color:#3b2a10;border:none;border-radius:calc(12px*var(--s));
+  padding:calc(8px*var(--s)) calc(20px*var(--s));font-size:calc(31px*var(--s));font-weight:900;cursor:pointer}
+.word.sel{background:var(--orange);color:#fff;box-shadow:0 0 0 calc(4px*var(--s)) rgba(232,85,45,.3)}
+.word.used{opacity:.3;cursor:default}
+.blanks{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.9vh}
+.bl{flex:1 1 0;min-height:0;display:flex;align-items:center;overflow:hidden;font-size:calc(37px*var(--s)*var(--cs,1));font-weight:700;line-height:1.35;background:#fff;
+  border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(10px*var(--s)) calc(18px*var(--s))}
+.bl .in{width:100%}
+.slot{display:inline-block;white-space:nowrap;min-width:var(--bw);text-align:center;border-bottom:calc(4px*var(--s)) solid var(--th);
+  color:var(--orange);font-weight:900;cursor:pointer;padding:0 calc(6px*var(--s));margin:0 calc(3px*var(--s))}
+.slot.empty{color:#c8cfd1}
+.bl.right{border-color:#1e8449;background:#eafaf1}
+.bl.wrong{border-color:#c0392b;background:#fdecea}
+
+/* ---------- order ---------- */
+.ord{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.85vh}
+.oi{flex:1 1 0;min-height:0;display:flex;align-items:center;gap:calc(14px*var(--s));cursor:pointer;
+  background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(6px*var(--s)) calc(17px*var(--s));text-align:left;font-size:calc(34px*var(--s)*var(--cs,1));font-weight:700;line-height:1.25}
+.oi .num{flex:0 0 auto;width:calc(54px*var(--s)*var(--cs,1));height:calc(54px*var(--s)*var(--cs,1));border-radius:calc(12px*var(--s));
+  background:#EFEAE2;color:#9aa4a8;display:flex;align-items:center;justify-content:center;
+  font-size:calc(30px*var(--s)*var(--cs,1));font-weight:900}
+.oi.picked .num{background:var(--th);color:#fff}
+.oi.right{border-color:#1e8449;background:#eafaf1}
+.oi.wrong{border-color:#c0392b;background:#fdecea}
+
+/* ---------- spot ---------- */
+.cards{flex:1 1 auto;min-height:0;display:grid;gap:.9vh .85vw;grid-auto-rows:minmax(0,1fr)}
+.g8{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:minmax(0,1fr) minmax(0,1fr)}
+.g9{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+.sc{position:relative;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(16px*var(--s));
+  padding:calc(18px*var(--s)) calc(12px*var(--s));display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:calc(37px*var(--s)*var(--cs,1));font-weight:800;line-height:1.25;cursor:pointer;min-height:0;overflow:hidden}
+.sc .no{position:absolute;top:calc(4px*var(--s));left:calc(9px*var(--s));font-size:calc(18px*var(--s));
+  color:#b6bec1;font-weight:900}
+.sc .bd{position:absolute;bottom:calc(4px*var(--s));right:calc(9px*var(--s));font-size:calc(19px*var(--s));font-weight:900;display:inline-block}
+.sc.bad{border-color:#c0392b;background:#fdecea}
+.sc.bad .bd{color:#c0392b}
+.sc.good{border-color:#1b7fa8;background:#eaf4fb}
+.sc.good .bd{color:#1b7fa8}
+.shake{animation:sh .4s}
+@keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.exbar{position:relative;flex:0 0 auto;background:#fff;border:calc(3px*var(--s)) solid var(--th);
+  border-radius:calc(14px*var(--s));padding:calc(10px*var(--s)) calc(18px*var(--s))}
+.exg{visibility:hidden;font-size:calc(29px*var(--s));font-weight:700;line-height:1.3}
+.exl{position:absolute;inset:calc(10px*var(--s)) calc(18px*var(--s));display:flex;align-items:center;
+  font-size:calc(29px*var(--s));font-weight:700;line-height:1.3}
+
+/* ---------- sort ---------- */
+.pool{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:.85vh .85vw}
+.pi{position:relative;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(16px*var(--s)) calc(10px*var(--s));display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:calc(33px*var(--s)*var(--cs,1));font-weight:800;line-height:1.25;cursor:pointer;min-height:0;overflow:hidden}
+.pi.sel{border-color:var(--orange);box-shadow:0 0 0 calc(4px*var(--s)) rgba(232,85,45,.24)}
+.pi .pb{position:absolute;top:calc(4px*var(--s));right:calc(7px*var(--s));font-size:calc(19px*var(--s));
+  font-weight:900;color:#fff;background:var(--th);border-radius:99px;padding:calc(1px*var(--s)) calc(9px*var(--s));
+  min-width:calc(28px*var(--s));text-align:center}
+.pi .pb.off{background:transparent;color:transparent}
+.pi.right{border-color:#1e8449;background:#eafaf1}
+.pi.wrong{border-color:#c0392b;background:#fdecea}
+.bins{flex:0 0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.85vw}
+.bin{background:var(--th);color:#fff;border:none;border-radius:calc(14px*var(--s));
+  padding:calc(11px*var(--s));font-size:calc(30px*var(--s));font-weight:900;cursor:pointer;line-height:1.2}
+.bin.sel{outline:calc(5px*var(--s)) solid var(--amber)}
+
+/* ---------- movie ---------- */
+.mv{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:1vw}
+.mvL,.mvR{display:flex;flex-direction:column;gap:.85vh;min-height:0}
+.task{flex:1 1 0;min-height:0;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-left:calc(10px*var(--s)) solid var(--amber);
+  border-radius:calc(12px*var(--s));padding:calc(8px*var(--s)) calc(14px*var(--s));display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.task .k{font-size:calc(19px*var(--s)*var(--cs,1));font-weight:900;color:var(--orange)}
+.task .v{font-size:calc(30px*var(--s)*var(--cs,1));font-weight:700;line-height:1.3}
+.clip{flex:1 1 0;min-height:0;overflow:hidden;display:flex;align-items:center;gap:.5em;background:var(--ink);color:#fff;
+  border:none;border-radius:calc(12px*var(--s));padding:calc(6px*var(--s)) calc(12px*var(--s));
+  font-size:calc(23px*var(--s)*var(--cs,1));font-weight:800;cursor:pointer;text-align:left;line-height:1.2}
+.clip .plyb{flex:0 0 auto;width:1.5em;height:1.5em;border-radius:50%;background:#E62117;
+  display:flex;align-items:center;justify-content:center;font-size:.9em}
+.vote{flex:0 0 auto;display:flex;flex-direction:column;background:#fff;border:calc(3px*var(--s)) dashed var(--th);border-radius:calc(12px*var(--s));
+  padding:calc(7px*var(--s)) calc(14px*var(--s)) calc(9px*var(--s))}
+.vote .vq{flex:0 0 auto;font-size:calc(23px*var(--s));font-weight:900;margin-bottom:calc(4px*var(--s))}
+.vrow{flex:0 0 auto;display:flex;align-items:center;gap:.4em;width:100%;background:#F7F3EC;border:none;
+  border-radius:calc(9px*var(--s));padding:calc(6px*var(--s)) calc(13px*var(--s));margin-top:calc(5px*var(--s));
+  font-size:calc(28px*var(--s));font-weight:700;cursor:pointer;text-align:left;line-height:1.2}
+.vrow .cnt{margin-left:auto;background:var(--th);color:#fff;border-radius:99px;min-width:1.6em;
+  text-align:center;font-weight:900;padding:0 .3em;line-height:1.3}
+
+/* ---------- reflect / pledge ---------- */
+.rf{background:#fff;border:calc(3px*var(--s)) solid var(--line);border-left:calc(12px*var(--s)) solid var(--th);
+  border-radius:calc(14px*var(--s));padding:calc(12px*var(--s)) calc(18px*var(--s));display:flex;flex-direction:column;
+  justify-content:center;gap:calc(4px*var(--s));min-height:0;overflow:hidden}
+.rf .k{font-size:calc(28px*var(--s)*var(--cs,1));font-weight:900;color:var(--th)}
+.rf .v{font-size:calc(30px*var(--s)*var(--cs,1));font-weight:700;line-height:1.35}
+.pl{position:relative;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(8px*var(--s)) calc(16px*var(--s)) calc(8px*var(--s)) calc(56px*var(--s));
+  display:flex;align-items:center;font-size:calc(31px*var(--s)*var(--cs,1));font-weight:700;line-height:1.25;
+  cursor:pointer;min-height:0;overflow:hidden;text-align:left}
+.pl .bx{position:absolute;left:calc(13px*var(--s));width:calc(32px*var(--s));height:calc(32px*var(--s));
+  border:calc(3px*var(--s)) solid var(--th);border-radius:calc(7px*var(--s));display:flex;align-items:center;
+  justify-content:center;font-size:calc(22px*var(--s));line-height:1;overflow:hidden;color:#fff}
+.pl.on{border-color:var(--th);background:#f2fbfa}
+.pl.on .bx{background:var(--th)}
+
+/* ---------- score ---------- */
+.scw{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:calc(12px*var(--s))}
+.scw .big{font-size:calc(130px*var(--s));font-weight:900;color:var(--th);line-height:1.15}
+.scw .sub{font-size:calc(34px*var(--s));font-weight:800}
+.scw .stars{font-size:calc(46px*var(--s));letter-spacing:.06em;line-height:1.25;max-width:82vw}
+.scw .stars i{font-style:normal;display:inline-block;opacity:0;animation:pin .4s both}
+@keyframes pin{from{opacity:0;transform:scale(0) rotate(-40deg)}to{opacity:1;transform:none}}
+.scw .msg{font-size:calc(30px*var(--s));font-weight:700;color:#4a5b60;line-height:1.4;max-width:74vw}
+#cfx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:30}
+
+/* ---------- entrance animation ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+.rise{animation:rise .40s var(--d,0ms) both cubic-bezier(.2,.8,.3,1)}
+@keyframes popin{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.opt.right .mk,.opt.wrong .mk,.sc.bad .bd,.sc.good .bd{animation:popin .32s cubic-bezier(.2,.9,.3,1.5)}
+@keyframes gpulse{0%{transform:scale(1)}45%{transform:scale(1.03)}100%{transform:scale(1)}}
+.opt.right,.oi.right,.pi.right,.bl.right{animation:gpulse .5s}
+.opt.wrong{animation:sh .4s}
+
+html.noanim *{animation:none!important;transition:none!important}
+
+/* ---------- nav ---------- */
+#nav{position:absolute;left:0;right:0;bottom:0;height:var(--navh);background:var(--ink);color:#fff;
+  display:flex;align-items:center;gap:8px;padding:0 12px;font-size:15px;font-weight:700;z-index:40}
+#nav button,#nav a{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:8px;padding:7px 12px;
+  font-size:15px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block;line-height:1.2}
+#nav button:hover,#nav a:hover{background:rgba(255,255,255,.26)}
+#nav a#bhome{background:var(--amber);color:#3b2a10}
+#pg{font-size:16px;font-weight:900;min-width:80px;text-align:center}
+#sctr{background:var(--amber);color:#3b2a10;border-radius:99px;padding:4px 13px;font-weight:900}
+@keyframes bump{0%,100%{transform:scale(1)}40%{transform:scale(1.3)}}
+#sctr.bump{animation:bump .5s}
+.spacer{flex:1}
+#tmr{display:none;background:var(--orange);border-radius:99px;padding:4px 14px;font-weight:900}
+#tmr.on{display:block}
+.fly{position:fixed;z-index:70;font-size:38px;font-weight:900;color:#F4A93C;pointer-events:none;
+  text-shadow:0 2px 10px rgba(0,0,0,.4);animation:fly 1.1s ease-out forwards}
+@keyframes fly{0%{opacity:0;transform:translateY(0) scale(.5)}18%{opacity:1;transform:translateY(-16px) scale(1.2)}
+  100%{opacity:0;transform:translateY(-96px) scale(1)}}
+
+/* ---------- overlays ---------- */
+.ov{position:absolute;inset:0;background:rgba(18,52,59,.74);display:none;z-index:50;
+  align-items:center;justify-content:center;padding:4vh 4vw}
+.ov.on{display:flex}
+#ansv .box{background:#fff;border-radius:24px;max-width:min(900px,88vw);width:100%;padding:30px 38px;text-align:center;
+  box-shadow:0 24px 70px rgba(0,0,0,.34);animation:pop .34s cubic-bezier(.2,.9,.3,1.25)}
+@keyframes pop{0%{transform:scale(.85);opacity:0}62%{transform:scale(1.03)}100%{transform:scale(1);opacity:1}}
+#ansv .ic{font-size:74px;line-height:1}
+#ansv .ti{font-size:42px;font-weight:900;margin:4px 0 14px}
+#ansv .fb{border:3px dashed var(--th);border-radius:14px;padding:16px 20px;font-size:29px;font-weight:700;
+  line-height:1.45;text-align:left}
+#ansv .ok{margin-top:20px;background:var(--th);color:#fff;border:none;border-radius:12px;padding:13px 38px;
+  font-size:25px;font-weight:900;cursor:pointer}
+#tocv .box{background:#fff;border-radius:20px;max-width:min(1180px,92vw);width:100%;max-height:88vh;overflow:auto;padding:22px}
+#tocv h3{margin:0 0 12px;font-size:23px}
+#tocg{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+#tocg button{text-align:left;background:#F7F3EC;border:2px solid var(--line);border-radius:11px;padding:9px 11px;
+  font-size:16px;font-weight:700;cursor:pointer;line-height:1.3}
+#tocg button.cur{border-color:var(--th);background:#fff}
+#tocg .ix{color:var(--th);font-weight:900;margin-right:6px}
+#lbv .box{width:min(1180px,92vw)}
+#lbv .fr{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:12px;overflow:hidden}
+#lbv iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+#lbv .bar{display:flex;gap:10px;margin-top:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+#lbv a,#lbv button{background:#fff;color:var(--ink);border:none;border-radius:11px;padding:10px 18px;
+  font-size:18px;font-weight:800;cursor:pointer;text-decoration:none}
+#lbv .hint{color:#fff;font-size:16px;font-weight:600;opacity:.9}
+#notep{position:absolute;left:0;right:0;bottom:var(--navh);background:#12343B;color:#F4E9D8;
+  padding:15px 20px;font-size:20px;line-height:1.5;font-weight:600;display:none;z-index:45;
+  border-top:4px solid var(--amber);max-height:40vh;overflow:auto}
+#notep.on{display:block}
+#notep b{color:var(--amber)}
+@media (max-width:860px){ #nav{font-size:12px;gap:6px} #nav button,#nav a{padding:6px 8px;font-size:12px} }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div id="notep"></div>
+<div id="nav">
+  <button id="bprev">‹ 上一頁</button>
+  <span id="pg">1 / 24</span>
+  <button id="bnext">下一頁 ›</button>
+  <span id="sctr">⭐ 0 / 9</span>
+  <span id="tmr">⏱ 20</span>
+  <span class="spacer"></span>
+  <a id="bhome" href="index.html" title="回到 12 個主題的主選單">🏠 主選單</a>
+  <button id="btoc">目錄</button>
+  <button id="bnote">講師提示 N</button>
+  <button id="bsnd">🔊 音效 S</button>
+  <button id="btime">計時 T</button>
+  <button id="bfull">全螢幕 F</button>
+</div>
+<div class="ov" id="ansv"><div class="box">
+  <div class="ic" id="anic">✅</div><div class="ti" id="anti"></div>
+  <div class="fb" id="anfb"></div><button class="ok" id="anok">知道了，繼續</button>
+</div></div>
+<div class="ov" id="tocv"><div class="box"><h3>目錄｜點一下直接跳頁</h3><div id="tocg"></div></div></div>
+<div class="ov" id="lbv"><div class="box">
+  <div class="fr"><iframe id="lbf" allowfullscreen></iframe></div>
+  <div class="bar"><span class="hint">若出現「錯誤 153」代表該頻道不開放內嵌，請按右邊按鈕改用 YouTube 開啟。</span>
+  <span><a id="lbo" target="_blank" rel="noopener">在 YouTube 開啟大畫面</a> <button id="lbc">關閉</button></span></div>
+</div></div>
+<script>
+const DECK = {
+  title: "顧好肺 活得長久",
+  subtitle: "咳、痰、喘超過三週，就要看醫師",
+  disease: "慢性阻塞性肺病（COPD，肺阻塞）與老年氣喘",
+  theme: "#37718E",
+  slides: [
+    {
+      t: "cover",
+      h: "顧好肺 活得長久",
+      sub: "咳、痰、喘超過三週，就要看醫師",
+      meta: "愛迪樂健康促進團隊",
+      note: "開場先不講病。請大家吸一口氣、慢慢吐，看誰吐得最久，笑完再問：爬樓梯會喘的請舉手、早上起來會咳的再舉一次。用舉手的人數開場，長輩比較不會覺得是在說他。"
+    },
+    {
+      t: "points",
+      tag: "先聽大家講",
+      h: "大家常聽到的說法",
+      lead: "這些話一定聽過。先不分對錯，我們聽聽看。",
+      cols: 2,
+      items: [
+        { k: "老了都會喘", v: "「這年紀爬樓梯會喘，<b>正常的啦</b>，哪是病。」" },
+        { k: "抽一輩子", v: "「我抽幾十年也好好的，隔壁沒抽的反而先走。」" },
+        { k: "痰是正常的", v: "「早上咳兩聲，把痰吐掉就好了。」" },
+        { k: "藥會上癮", v: "「吸入劑<b>用久會依賴</b>，撐得住就不要用。」" }
+      ],
+      note: "這頁只收集、不糾正。每一條問一句「有聽過的點頭」，把長輩講出來的說法寫在白板角落，後面破迷思那頁再回頭對照，效果比你當場糾正好很多。"
+    },
+    {
+      t: "fill",
+      tag: "暖身動腦",
+      h: "老話裡的咳與喘",
+      lead: "把最合適的詞放進去，用台語念也會通。",
+      bank: ["嗽", "癢", "三週", "三天", "登階", "跳舞"],
+      lines: [
+        { pre: "俗語講「土水師驚掠漏，醫生驚治", ans: "嗽", post: "」，久咳確實麻煩" },
+        { pre: "咳、痰、喘若超過", ans: "三週", post: "，就要去給醫師看" },
+        { pre: "想知道肺力好不好，可以做一分鐘「", ans: "登階", post: "」測試" }
+      ],
+      fb: "連醫師都怕治咳嗽，不是醫師沒本事，是咳嗽背後的原因太多。所以拖久了要查清楚，不是自己買藥壓下去。",
+      note: "第一句先請一位長輩用台語念出來，現場會笑，氣氛就開了。第二句的「三週」是今天最重要的數字，先寫在白板上，整堂課會回來用好幾次。"
+    },
+    {
+      t: "points",
+      tag: "提問①",
+      h: "身體裡到底發生什麼事",
+      lead: "把肺想成一串小氣球，接在一條一條的吸管上。",
+      cols: 2,
+      core: true,
+      items: [
+        { k: "氣管是吸管", v: "空氣的通道。被菸和油煙燻久，會腫、會窄、積痰。" },
+        { k: "肺泡是氣球", v: "氣球有彈性才吐得乾淨。彈性壞了就<b>回不去</b>了。" },
+        { k: "喘是吐不出", v: "肺阻塞多半卡在<b>吐氣</b>，舊氣排不掉，新的吸不進。" },
+        { k: "氣喘不一樣", v: "氣管一陣一陣收緊，時好時壞，多數<b>控制得很好</b>。" }
+      ],
+      note: "用手比一個氣球慢慢消不下去的樣子，長輩很吃這一套。這裡要講清楚兩件事：肺阻塞的傷害不可逆但可以控制住，氣喘則是可以控制到跟一般人一樣，不要讓長輩把兩種都當絕症。"
+    },
+    {
+      t: "stats",
+      tag: "台灣現況",
+      h: "台灣的肺部成績單",
+      items: [
+        { n: "6.1", u: "%", d: "40歲以上得肺阻塞的比率" },
+        { n: "40", u: "萬人", d: "中重度肺阻塞卻不知道" },
+        { n: "44.1", u: "%", d: "得病後仍然沒戒菸的人" },
+        { n: "第8", u: "名", d: "慢性下呼吸道疾病死因排名" }
+      ],
+      src: "衛福部／國民健康署（2017年國民健康訪問調查、2021年新聞稿）；台灣胸腔暨重症加護醫學會2020年推估；衛福部113年（2024）國人死因統計",
+      note: "40萬人這個數字最有感：等於一整個嘉義市的人肺已經壞了一半卻不知道。請現場算一下，40歲以上每16人就有1人，這個團體裡大概會有幾位，長輩馬上會安靜下來聽。"
+    },
+    {
+      t: "choice",
+      tag: "認識題",
+      h: "哪一項才能確定診斷",
+      q: "要確定是不是肺阻塞，最關鍵的檢查是下列哪一項？",
+      opts: ["照一張胸部X光", "吹氣的肺功能檢查", "抽血驗發炎指數", "手指夾血氧機看數字"],
+      ans: 1,
+      fb: "確診靠肺功能檢查（肺量計），用力吹氣看你吐得快不快。X光和血氧機有用，但不能用來確診。",
+      src: "2023台灣肺阻塞臨床照護指引（台灣胸腔暨重症加護醫學會）",
+      note: "很多長輩以為照個X光就知道，答錯很正常，先說「X光確實常照，但它看的是別的事」。順便講吹氣檢查會連吹三次、有點累，先講清楚長輩才不會臨陣退場。"
+    },
+    {
+      t: "points",
+      tag: "為什麼會",
+      h: "改得動的、改不動的",
+      lead: "改不動的先接受，改得動的今天就能動手。",
+      cols: 3,
+      items: [
+        { k: "自己抽菸", v: "最大的原因。抽菸的人風險是不抽的<b>六倍多</b>。" },
+        { k: "二手菸", v: "自己沒抽也會中。家裡有人抽，全家的肺一起吸。" },
+        { k: "油煙香火", v: "廚房不開抽油煙機、關窗燒香拜拜，肺一樣受傷。" },
+        { k: "工作粉塵", v: "做工地、木工、務農噴藥、廚房掌廚，都是長年累積。" },
+        { k: "年紀", v: "肺功能本來就會隨年紀走下坡，這條改不動。" },
+        { k: "小時候體質", v: "小時候常肺炎、有氣喘體質，長大比較容易出問題。" }
+      ],
+      src: "吸菸風險6.3倍出自衛福部2021年新聞稿引國民健康訪問調查",
+      note: "問一句「你們家煮菜有開抽油煙機嗎、會開多久」，現場答案會很精彩。改不動的那兩項要輕輕帶過，重點放在「你今天回去就能改的是哪一項」，讓長輩有得選。"
+    },
+    {
+      t: "movie",
+      tag: "來看影片",
+      h: "看影片，找三件事",
+      lead: "先講任務再播，看完我們來投票。",
+      tasks: [
+        { k: "任務一", v: "影片裡講的症狀，有哪幾個你身上也有？" },
+        { k: "任務二", v: "一分鐘登階測試怎麼做？爬不到幾階要注意？" },
+        { k: "任務三", v: "有哪一句話，是你以前不知道的？" }
+      ],
+      clips: [
+        { t: "2019 肺阻塞衛教片（台灣胸腔暨重症加護醫學會）", id: "JsoTkEJgl68" },
+        { t: "您有肺阻塞嗎？1分鐘358輕鬆檢測", id: "Kd-RkZCJG_g" },
+        { t: "定量噴霧吸入劑使用及注意事項", id: "A7D9cO5YhN0" }
+      ],
+      search: "肺阻塞 一分鐘登階 358 衛教影片 胸腔暨重症加護醫學會",
+      vote: {
+        q: "看完影片，你覺得自己最需要處理的是哪一項？",
+        opts: ["咳和痰拖太久沒看", "爬樓梯越來越喘", "吸入劑用法沒把握"]
+      },
+      note: "任務先唸完再播，長輩才知道要看什麼。三支不必全播，看現場反應決定。播完先別急著解說，讓兩三位長輩講他們看到什麼。投票只計票、不判對錯。"
+    },
+    {
+      t: "spot",
+      tag: "找看看",
+      h: "這些做法，哪裡怪怪的",
+      lead: "有幾張其實做得很好，別急著都挑掉。",
+      need: 4,
+      cards: [
+        { x: "喘了才拿吸入劑用", w: 1, why: "保養型的吸入劑是天天用的，不是等喘才用。哪一支天天用、哪一支救急用，回診請醫師或藥師在藥袋上寫清楚。" },
+        { x: "吸完藥沒漱口就睡", w: 1, why: "含類固醇的吸入劑留在嘴裡，容易長鵝口瘡、聲音沙啞。用完漱口再吐掉，不要吞下去。" },
+        { x: "痰變黃綠只多喝水", w: 1, why: "痰的顏色變黃綠、量變多，常是急性惡化或感染的訊號。多喝水沒有錯，但要同時就醫，不要只靠喝水撐。" },
+        { x: "怕喘所以整天坐著", w: 1, why: "越不動，肌力越差，同樣的路會越走越喘。要在喘得住的範圍內慢慢動，走走停停也算。" },
+        { x: "客廳規定不能抽菸", d: 1, ok: "把家裡變成無菸環境，保護的是全家人的肺，也讓想戒的人少一點誘惑。這件事做得非常好。" },
+        { x: "每天走路二十分鐘", d: 1, ok: "規律走路就是最好的肺部復健之一，能練心肺也練腿力，喘的感覺會慢慢變輕。" },
+        { x: "回診帶藥給護理師看", d: 1, ok: "把藥全部帶去，當場吸一次給護理師看，是最快抓出用法錯誤的方法，很多人吸了好幾年其實都吸進喉嚨而已。" },
+        { x: "秋天去打流感疫苗", d: 1, ok: "一次感冒或流感就可能讓肺阻塞急性惡化到住院。疫苗打了，是替自己的肺買保險。" }
+      ],
+      fb: "四張有問題的，都跟同一件事有關：把訊號當成正常。喘、痰變色、藥用錯，這些都是身體在講話。",
+      note: "讓長輩上台指卡片，指完問「為什麼你覺得這張怪」。誘答卡被挑到時不要急著否認，先問理由，再說「這張其實做得很好」，長輩會記得更牢。「吸完藥沒漱口」那張要停久一點，現場示範漱口吐掉的動作。"
+    },
+    {
+      t: "stats",
+      tag: "不控制會怎樣",
+      h: "拖下去的代價",
+      items: [
+        { n: "22", u: "%", d: "急性惡化住院後一年內死亡" },
+        { n: "8", u: "成", d: "肺阻塞死因與吸菸有關" },
+        { n: "6.3", u: "倍", d: "吸菸者得肺阻塞的風險" },
+        { n: "6", u: "成", d: "患者覺得生活受影響" }
+      ],
+      src: "台灣胸腔暨重症加護醫學會2020年資料；衛福部2021年新聞稿引2017年國民健康訪問調查",
+      note: "這頁講事實就好，不要嚇人。22%可以這樣講：住院一次之後，五個人裡面大概有一個撐不過一年，所以我們的目標很簡單，就是不要住院。講完馬上接下一頁的做法，不要把長輩留在害怕裡。"
+    },
+    {
+      t: "sort",
+      tag: "分類看看",
+      h: "這九件事，各歸各位",
+      lead: "把每一張放進最合適的籃子。",
+      bins: [
+        { id: "a", t: "天天就要做" },
+        { id: "b", t: "喘起來先做" },
+        { id: "c", t: "要打119" }
+      ],
+      items: [
+        { x: "保養型吸入劑天天用", b: "a" },
+        { x: "每天走路練腳力", b: "a" },
+        { x: "家裡不抽菸不燒香", b: "a" },
+        { x: "坐起來身體向前傾", b: "b" },
+        { x: "圓唇慢慢把氣吐長", b: "b" },
+        { x: "照醫師交代用緩解藥", b: "b" },
+        { x: "嘴唇指甲發紫", b: "c" },
+        { x: "一句話講不完就喘", b: "c" },
+        { x: "用了藥還是越來越喘", b: "c" }
+      ],
+      fb: "三個籃子就是三個層次：平常顧好、發作先穩住、真的不對就找救護車。最後那三張出現任何一張，不要撐，直接打119。",
+      note: "邊分類邊問「這張為什麼放這裡」，講理由比放對重要。「保養型天天用」那張特別停一下，問問看現場有幾位是喘才用。最後三張唸出來時放慢速度，讓長輩記住那個畫面。"
+    },
+    {
+      t: "section",
+      n: "提問②",
+      h: "控制好，對誰有幫助",
+      lead: "肺顧好，受惠的不只你一個人。我們一項一項來看。",
+      note: "這頁只是換氣口，不要講太多。問一句「你覺得你喘不喘，家裡誰最緊張」，讓長輩自己講出名字，下一頁的內容就有主角了。"
+    },
+    {
+      t: "points",
+      tag: "對自己",
+      h: "顧好肺，四筆帳",
+      lead: "算給自己聽，這四筆帳都是你的。",
+      cols: 2,
+      items: [
+        { k: "身體", v: "喘得少，睡得著，感冒不會一次就拖成住院。" },
+        { k: "荷包", v: "少一次急診住院，省下的是好幾個月的<b>菜錢</b>。" },
+        { k: "自由", v: "能自己走去市場、自己上廁所，不用等人來扶。" },
+        { k: "心情", v: "喘的人怕出門，不喘才敢去據點、跟人聊天。" }
+      ],
+      note: "荷包那項可以請長輩自己估：住院一次要多少、請人顧一天要多少。他們算出來的數字比你講的有力。自由那項多停一下，很多長輩最怕的不是死，是拖累人。"
+    },
+    {
+      t: "points",
+      tag: "對別人",
+      h: "對家人、社區、國家",
+      lead: "你把肺顧好，是替很多人省事。",
+      cols: 3,
+      items: [
+        { k: "對家人", v: "少一次半夜掛急診，孩子就少請一次假、少一次擔心。" },
+        { k: "對社區", v: "你出門，據點多一個人。你戒菸，鄰居少吸二手菸。" },
+        { k: "對國家", v: "肺阻塞的住院很花健保錢，少住一次就是幫大家省。" }
+      ],
+      note: "對社區那項可以現場點名：誰是被你揪來上課的、誰是你會去載的。長輩最有價值的角色是把人帶出來，這件事年輕人做不到。"
+    },
+    {
+      t: "order",
+      tag: "怎麼辦",
+      h: "喘起來的正確順序",
+      lead: "把這五步排成正確的先後順序。",
+      items: [
+        "發現比平常喘，或痰變多、變黃綠",
+        "坐起來身體向前傾，用圓唇呼吸慢慢吐氣",
+        "依照醫師交代，使用緩解型（救急）吸入劑",
+        "沒改善、嘴唇發紫或話講不完整，打119",
+        "事後回診，跟醫師檢討這次為什麼會惡化"
+      ],
+      fb: "先穩住呼吸再用藥，用了沒好轉就叫車，不要自己撐。最後一步最常被跳過：找出這次惡化的原因，下一次才防得住。",
+      note: "請五位長輩各拿一張站到前面排隊，比在螢幕上點更熱鬧。排完請他們說明理由。要強調第四步不用猶豫，救護車不是麻煩人，是他們的工作。第五步問一句「上次你喘到不行，後來有回去跟醫師講嗎」。"
+    },
+    {
+      t: "choice",
+      tag: "破迷思",
+      h: "哪一句才是對的",
+      q: "關於肺阻塞和氣喘，下面哪一個說法是正確的？",
+      opts: ["會喘就要少動，才不會傷肺", "吸入劑用久會上癮，能少用就少", "會喘也要慢慢動，越不動越喘", "沒抽過菸的人，就不會得肺阻塞"],
+      ans: 2,
+      fb: "不動，同一段路只會越走越喘。吸入劑是治療用藥，不是成癮藥；吸二手菸、油煙一樣會得。",
+      src: "2023台灣肺阻塞臨床照護指引；衛福部戒菸與肺阻塞衛教資料",
+      note: "先讓大家舉手投票再公布，錯的人多才有討論價值。回到第二頁白板上記的說法，一條一條對照回來。「吸入劑會上癮」這條要講清楚，這是最常讓長輩自己停藥的原因。"
+    },
+    {
+      t: "points",
+      tag: "提問③",
+      h: "我做得到的六件事",
+      lead: "不用一次做完，先挑一件從今天開始。",
+      cols: 3,
+      core: true,
+      items: [
+        { k: "一、會分", v: "分清楚哪支<b>天天用</b>、哪支<b>救急用</b>，請藥師標在藥袋上。" },
+        { k: "二、會漱", v: "吸入劑用完漱口吐掉，嘴巴才不會破、聲音不會啞。" },
+        { k: "三、會吹", v: "咳、痰、喘超過三週，掛胸腔內科做肺功能檢查。" },
+        { k: "四、會呼吸", v: "圓唇呼吸和腹式呼吸每天練，喘的時候就用得上。" },
+        { k: "五、會動", v: "走路、健康操都好，走走停停也算，重點是天天動。" },
+        { k: "六、傳下去", v: "在家裡立下不抽菸的規矩，<b>這件事只有你講得動</b>。" }
+      ],
+      src: "咳痰喘三週就醫、一分鐘登階自我檢測出自衛福部與國民健康署衛教資料",
+      note: "第六件要特別停住。長輩常說「我講他們不聽」，你可以回：規矩是主人定的，這間房子是你的。請每個人講出一個要規勸的對象，講出名字最有力。第四件可以現場帶做三次圓唇呼吸。"
+    },
+    {
+      t: "points",
+      tag: "提問④",
+      h: "台灣給你的資源",
+      lead: "這些都是你的權益，不用客氣。",
+      cols: 3,
+      core: true,
+      items: [
+        { k: "免費健檢", v: "成人預防保健：40到64歲三年一次，<b>65歲後每年</b>。" },
+        { k: "健保照護", v: "健保有肺阻塞照護方案，加入的診所會固定追蹤衛教。" },
+        { k: "戒菸幫手", v: "戒菸門診、戒菸衛教有補助，免費專線<b>0800-636363</b>。" },
+        { k: "打疫苗", v: "65歲以上公費流感疫苗、肺炎鏈球菌疫苗，記得去打。" },
+        { k: "長照專線", v: "喘到影響生活、需要人幫忙，打<b>1966</b>問長照服務。" },
+        { k: "慢箋與復健", v: "穩定後可拿慢性病連續處方箋，醫院也有肺部復健。" }
+      ],
+      src: "國民健康署成人預防保健（114年起30歲起適用）；健保署慢性阻塞性肺病醫療給付改善方案；衛福部疾管署公費疫苗；衛福部長照專線1966",
+      note: "請據點的人先查好附近哪幾家診所有做肺功能檢查、哪家有加入肺阻塞照護方案，直接寫在白板上比講原則有用。0800-636363和1966現場請大家跟著唸兩遍，抄在電話旁邊。"
+    },
+    {
+      t: "spot",
+      tag: "大魔王",
+      h: "九張卡，挑出五個問題",
+      lead: "這回混得比較兇，慢慢看。",
+      need: 5,
+      cards: [
+        { x: "咳兩個月當成老毛病", w: 1, why: "超過三週就該檢查，兩個月太久了。久咳的原因很多，要靠肺功能檢查和醫師分辨，不是自己判斷。" },
+        { x: "覺得好了就停保養藥", w: 1, why: "感覺變好，常常是藥在幫忙。自行停藥容易讓病情反彈。要調藥、要停藥，都先跟醫師講。" },
+        { x: "關窗燒香一整個下午", w: 1, why: "香火煙塵在密閉空間濃度很高，對肺阻塞和氣喘都是刺激。拜拜時開窗、開抽風，或改用電子香、減量。" },
+        { x: "藥用完自己去藥局買", w: 1, why: "吸入劑種類多、劑量不同，用錯反而危險。藥快用完就先回診，穩定的人可以請醫師開慢性病連續處方箋。" },
+        { x: "嘴唇發紫先躺著休息", w: 1, why: "嘴唇或指甲發紫代表缺氧，躺平反而更喘。要坐起來前傾，並且立刻打119。" },
+        { x: "把吸入劑放在飯桌上", d: 1, ok: "放在天天看得到、吃飯會經過的地方，是最有效的提醒方法，比記在腦子裡可靠。" },
+        { x: "炒完菜抽油煙機多開", d: 1, ok: "油煙不會馬上散掉，多開幾分鐘可以把殘留的煙抽乾淨，對煮飯的人保護最大。" },
+        { x: "喘的時候圓唇吐氣", d: 1, ok: "圓唇呼吸能把氣道撐住，讓卡住的空氣吐出來，是喘起來第一時間最該做的事。" },
+        { x: "去問據點有沒有肺復健", d: 1, ok: "主動找資源非常好。醫院和社區都有呼吸訓練與運動課程，有人帶著練，比自己在家亂練有效又安全。" }
+      ],
+      fb: "五個問題可以歸成兩句話：訊號不要拖，藥不要自己作主。做得好的四張，你今天就可以帶回家用。",
+      note: "這關讓長輩分組討論再派代表回答，會比個人舉手熱烈。「嘴唇發紫先躺著」那張一定要講到，很多家屬第一反應就是叫人躺下。最後把四張誘答卡再唸一次，當成今天的行動清單。"
+    },
+    {
+      t: "fill",
+      tag: "帶回家",
+      h: "今天的三句話",
+      lead: "把詞填進去，我們一起大聲唸一遍。",
+      bank: ["漱口", "擦嘴", "三週", "三天", "前傾", "後仰"],
+      lines: [
+        { pre: "吸入劑用完，記得", ans: "漱口", post: "，嘴巴才不會破" },
+        { pre: "咳、痰、喘超過", ans: "三週", post: "，就掛胸腔內科檢查" },
+        { pre: "喘的時候坐好，身體向", ans: "前傾", post: "，圓唇慢慢吐氣" }
+      ],
+      fb: "三句話，一句管用藥、一句管就醫、一句管急救。記住這三句，今天就沒有白來。",
+      note: "填完請全體站起來，跟著你大聲唸三遍，第三遍可以用台語念。唸完問「回去要唸給誰聽」，讓長輩指定一個人。這頁是整堂課的帶走重點，不要趕。"
+    },
+    {
+      t: "reflect",
+      tag: "回想一下",
+      h: "我們今天走過什麼",
+      items: [
+        { k: "Facts 發生什麼", v: "今天聽到最讓你意外的一個數字或一句話是什麼？" },
+        { k: "Feelings 感受", v: "講到喘、講到住院的時候，你心裡想到誰？" },
+        { k: "Findings 發現", v: "你原本以為對的事情裡面，有哪一件其實不太對？" },
+        { k: "Future 接下來", v: "這禮拜你要先做哪一件？打電話、掛號，還是先漱口？" }
+      ],
+      note: "四個問題不用每個都問全場，一題找兩三位講就好。Feelings那題會有人紅眼眶，給他時間，不要急著接話。Future那題請每個人講一句，直接接到下一頁的承諾。"
+    },
+    {
+      t: "pledge",
+      tag: "說出來",
+      h: "我要做的一件事",
+      lead: "選一項，說出來，讓大家做見證。",
+      items: [
+        "我今天用完吸入劑就漱口",
+        "我回診要吸一次給護理師看",
+        "我下禮拜去做一分鐘登階",
+        "我咳超過三週就去掛號",
+        "我把家裡改成不能抽菸",
+        "我炒菜一定開抽油煙機",
+        "我每天走路二十分鐘",
+        "我把119和1966寫在電話旁"
+      ],
+      note: "一人只選一項，選完請他站起來大聲講。請據點的人記下每個人選的項目，下次上課直接點名追蹤。若有人選戒菸，現場把0800-636363給他，當下打最有效。"
+    },
+    {
+      t: "section",
+      n: "結語",
+      h: "你的肺，用了一輩子",
+      lead: "它替你做過工、養過孩子、走過那麼多路。現在換你顧它。你本來就懂怎麼過日子，今天只是多了幾個看得懂身體訊號的方法。",
+      note: "這頁放慢，唸完停三秒再說話。可以說：你們這一代吸過的煙、油煙、粉塵，是為了養家。不是你們的錯，但從今天起可以換一種方式對待自己的肺。最後謝謝大家願意坐到最後。"
+    },
+    {
+      t: "score",
+      h: "今天的成績單",
+      note: "分數只是收尾，重點放在鼓掌。可以說「答錯的那幾題，就是你今天賺到的」。最後再問一次今天的三句話，讓大家帶著聲音離開教室。"
+    }
+  ]
+};
+
+/* ===================== engine ===================== */
+(function(){
+"use strict";
+var S = DECK.slides;
+var SCORED = ['fill','choice','order','spot','sort','movie'];
+var TOTAL = S.filter(function(s){return SCORED.indexOf(s.t)>=0;}).length;
+var cur = 0, score = 0, NOANIM = false;
+var stage = document.getElementById('stage');
+var els = [];
+var ORD = [2,4,0,3,1];
+
+document.documentElement.style.setProperty('--th', DECK.theme);
+document.documentElement.style.setProperty('--thd', shade(DECK.theme,-42));
+document.title = DECK.title + '｜長者慢性病互動教學簡報';
+
+function shade(hex,d){
+  var n=parseInt(hex.slice(1),16), r=(n>>16)+d, g=((n>>8)&255)+d, b=(n&255)+d;
+  function c(x){return Math.max(0,Math.min(255,x));}
+  return '#'+((1<<24)+(c(r)<<16)+(c(g)<<8)+c(b)).toString(16).slice(1);
+}
+function el(tag,cls,html){var e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e;}
+
+/* ---------- sound (WebAudio, no files, works offline) ---------- */
+var AC=null, SND=true;
+function actx(){
+  if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ AC=null; } }
+  if(AC && AC.state==='suspended'){ try{ AC.resume(); }catch(e){} }
+  return AC;
+}
+function tone(f,t0,dur,type,vol,to){
+  if(!SND) return; var c=actx(); if(!c) return;
+  var t=c.currentTime+t0;
+  var o=c.createOscillator(), g=c.createGain();
+  o.type=type||'sine'; o.frequency.setValueAtTime(f,t);
+  if(to) o.frequency.exponentialRampToValueAtTime(to,t+dur);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(vol||0.16,t+0.014);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g); g.connect(c.destination);
+  o.start(t); o.stop(t+dur+0.03);
+}
+var SFX={
+  click:function(){ tone(760,0,0.05,'triangle',0.08); },
+  page:function(){ tone(400,0,0.12,'sine',0.05,720); },
+  right:function(){ [523.25,659.25,783.99,1046.5].forEach(function(f,i){ tone(f,i*0.07,0.17,'sine',0.15); }); },
+  wrong:function(){ tone(300,0,0.13,'triangle',0.12,210); tone(232,0.15,0.19,'triangle',0.11,168); },
+  found:function(){ tone(700,0,0.09,'sine',0.12,1050); tone(1050,0.09,0.14,'sine',0.10); },
+  miss:function(){ tone(520,0,0.11,'sine',0.09,380); },
+  star:function(){ tone(1318.5,0,0.3,'sine',0.13); tone(1975.5,0.06,0.36,'sine',0.08); },
+  win:function(){ [523.25,659.25,783.99,1046.5,1318.5].forEach(function(f,i){ tone(f,i*0.11,0.34,'sine',0.14); }); }
+};
+['pointerdown','keydown'].forEach(function(ev){
+  document.addEventListener(ev,function(){ actx(); },{once:true});
+});
+var bsnd=document.getElementById('bsnd');
+function toggleSnd(){ SND=!SND; bsnd.textContent=(SND?'🔊':'🔇')+' 音效 S'; if(SND){ actx(); SFX.click(); } }
+bsnd.onclick=toggleSnd;
+
+/* ---------- flow layout helpers ---------- */
+function flow(nodes,extra){ var f=el('div','flow'+(extra?' '+extra:'')); f.dataset.n=nodes.length; f._items=nodes; layout(f,candidates(nodes.length)[0]); return f; }
+function layout(f,c){
+  f.innerHTML=''; f.style.setProperty('--c',c); f.dataset.c=c;
+  var it=f._items;
+  for(var i=0;i<it.length;i+=c){ var row=el('div','frow'); for(var j=i;j<Math.min(i+c,it.length);j++) row.appendChild(it[j]); f.appendChild(row); }
+}
+function candidates(n){ return ({3:[3,1],4:[2,4],6:[3,2],8:[4,2,3],9:[3,5]})[n]||[Math.min(n,3)]; }
+
+/* ---------- header helpers ---------- */
+function head(s){
+  var h=el('div','hd');
+  if(s.tag){var tr=el('div','tagrow'); tr.appendChild(el('span','tag',s.tag)); tr.appendChild(el('span','rule')); h.appendChild(tr);}
+  h.appendChild(el('h1','t',s.h||''));
+  if(s.lead) h.appendChild(el('p','lead',s.lead));
+  return h;
+}
+function addSrc(pad,s){ if(s.src) pad.appendChild(el('div','src','資料來源：'+s.src)); }
+
+/* ---------- answer modal ---------- */
+var ansv=document.getElementById('ansv');
+function modal(okFlag,title,body,icon){
+  setTimeout(function(){
+    if(modal._for!==cur) return;
+    document.getElementById('anic').textContent = icon || (okFlag?'🎉':'💡');
+    document.getElementById('anti').textContent = title;
+    document.getElementById('anfb').innerHTML = body;
+    ansv.classList.add('on');
+  },700);
+  modal._for = cur;
+}
+function closeModal(){ ansv.classList.remove('on'); }
+document.getElementById('anok').onclick=function(){ SFX.click(); closeModal(); };
+ansv.onclick=function(e){ if(e.target===ansv) closeModal(); };
+
+/* ---------- scoring ---------- */
+var sctr=document.getElementById('sctr');
+function star(){
+  score++;
+  sctr.textContent='⭐ '+score+' / '+TOTAL;
+  sctr.classList.remove('bump'); void sctr.offsetWidth; sctr.classList.add('bump');
+  SFX.star();
+  var r=sctr.getBoundingClientRect();
+  var f=el('div','fly','+1 ⭐');
+  f.style.left=(r.left+r.width/2-38)+'px'; f.style.top=(r.top-14)+'px';
+  document.body.appendChild(f);
+  setTimeout(function(){ f.remove(); },1150);
+}
+
+/* ---------- builders ---------- */
+function bCover(s){
+  var sl=el('section','slide cover'), pad=el('div','pad mid');
+  pad.appendChild(el('h1','ct',s.h));
+  if(s.sub) pad.appendChild(el('p','cs',s.sub));
+  pad.appendChild(el('div','cd'));
+  if(DECK.disease) pad.appendChild(el('div','cdis','主題疾病：'+DECK.disease));
+  pad.appendChild(el('div','cm',s.meta||'愛迪樂健康促進團隊'));
+  sl.appendChild(pad); return sl;
+}
+function bSection(s){
+  var sl=el('section','slide sect'), pad=el('div','pad mid');
+  if(s.n) pad.appendChild(el('div','sn',s.n));
+  pad.appendChild(el('div','sh',s.h));
+  if(s.lead) pad.appendChild(el('div','sl',s.lead));
+  sl.appendChild(pad); return sl;
+}
+function bPoints(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(it){
+    var c=el('div','card'); c.dataset.clip='1';
+    c.appendChild(el('div','k',it.k)); c.appendChild(el('div','v',it.v)); return c;
+  });
+  pad.appendChild(flow(cards,s.core?'core':'')); addSrc(pad,s); sl.appendChild(pad); return sl;
+}
+function bStats(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(it){
+    var c=el('div','stat'); c.dataset.clip='1';
+    c.appendChild(el('div','n',it.n)); if(it.u) c.appendChild(el('div','u',it.u));
+    c.appendChild(el('div','d',it.d)); return c;
+  });
+  pad.appendChild(flow(cards)); addSrc(pad,s); sl.appendChild(pad); return sl;
+}
+function bChoice(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  pad.appendChild(el('div','q',s.q));
+  var b=el('div','opts');
+  s.opts.forEach(function(o,i){
+    var btn=el('button','opt');
+    btn.appendChild(el('span','ch','ABCD'[i]));
+    btn.appendChild(el('span','tx',o));
+    btn.appendChild(el('span','mk',''));
+    btn.onclick=function(){
+      if(sl.dataset.done) return; sl.dataset.done='1'; b.classList.add('done');
+      var ok = (i===s.ans);
+      b.children[s.ans].classList.add('right'); b.children[s.ans].querySelector('.mk').textContent='○';
+      if(!ok){ btn.classList.add('wrong'); btn.querySelector('.mk').textContent='✕'; }
+      if(ok){ SFX.right(); star(); } else SFX.wrong();
+      modal(ok, ok?'答對了！':'再想看看', s.fb);
+    };
+    b.appendChild(btn);
+  });
+  pad.appendChild(b); addSrc(pad,s); sl.appendChild(pad); return sl;
+}
+function bFill(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var maxa=0; s.lines.forEach(function(l){ maxa=Math.max(maxa,l.ans.length); });
+  sl.style.setProperty('--bw', (maxa*1.06+0.95)+'em');
+  var bank=el('div','bank'), sel=null;
+  var chips=s.bank.map(function(w){
+    var c=el('button','word',w);
+    c.onclick=function(){
+      if(sl.dataset.done||c.classList.contains('used')) return;
+      SFX.click();
+      if(sel===c){ sel=null; c.classList.remove('sel'); return; }
+      if(sel) sel.classList.remove('sel');
+      sel=c; c.classList.add('sel');
+    };
+    bank.appendChild(c); return c;
+  });
+  pad.appendChild(bank);
+  var wrap=el('div','blanks'), slots=[];
+  s.lines.forEach(function(l,i){
+    var line=el('div','bl'), inn=el('div','in'); line.appendChild(inn);
+    inn.appendChild(el('span','',l.pre||''));
+    var sp=el('span','slot empty','？'); inn.appendChild(sp);
+    inn.appendChild(el('span','',l.post||''));
+    sp.onclick=function(){
+      if(sl.dataset.done) return;
+      if(sp.dataset.w){ chips[+sp.dataset.c].classList.remove('used'); sp.textContent='？';
+        sp.classList.add('empty'); delete sp.dataset.w; delete sp.dataset.c; SFX.click(); return; }
+      if(!sel) return;
+      sp.textContent=sel.textContent; sp.classList.remove('empty');
+      sp.dataset.w=sel.textContent; sp.dataset.c=chips.indexOf(sel);
+      sel.classList.add('used'); sel.classList.remove('sel'); sel=null;
+      SFX.found(); check();
+    };
+    slots.push({sp:sp,line:line,ans:l.ans});
+    wrap.appendChild(line);
+  });
+  function check(){
+    if(slots.some(function(o){return !o.sp.dataset.w;})) return;
+    sl.dataset.done='1';
+    var allok=true;
+    slots.forEach(function(o){
+      var ok=o.sp.dataset.w===o.ans;
+      o.line.classList.add(ok?'right':'wrong');
+      if(!ok){ allok=false; o.sp.textContent=o.ans; }
+    });
+    if(allok){ SFX.right(); star(); } else SFX.wrong();
+    modal(allok, allok?'三句都對！':'看一下正確的說法', s.fb);
+  }
+  pad.appendChild(wrap); sl.appendChild(pad); return sl;
+}
+function bOrder(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var b=el('div','ord'), picks=[], rows=[];
+  ORD.forEach(function(oi){
+    var row=el('button','oi');
+    var num=el('span','num','–'); row.appendChild(num);
+    row.appendChild(el('span','tx',s.items[oi]));
+    row.dataset.o=oi;
+    row.onclick=function(){
+      if(sl.dataset.done||row.classList.contains('picked')) return;
+      picks.push(oi); row.classList.add('picked'); num.textContent=picks.length;
+      SFX.click();
+      if(picks.length===s.items.length) check();
+    };
+    rows.push(row); b.appendChild(row);
+  });
+  function check(){
+    sl.dataset.done='1'; var allok=true;
+    rows.forEach(function(r){
+      var o=+r.dataset.o, ok=picks[o]===o;
+      r.classList.add(ok?'right':'wrong'); if(!ok) allok=false;
+    });
+    rows.forEach(function(r){ r.querySelector('.num').textContent = (+r.dataset.o)+1; });
+    if(allok){ SFX.right(); star(); } else SFX.wrong();
+    modal(allok, allok?'順序完全正確！':'正確的順序是這樣', s.fb);
+  }
+  pad.appendChild(b); sl.appendChild(pad); return sl;
+}
+function bSpot(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var found=0, tiles=[];
+  var longest=''; s.cards.forEach(function(c){ var t=(c.why||c.ok||''); if(t.length>longest.length) longest=t; });
+  s.cards.forEach(function(c,i){
+    var card=el('div','sc'); card.dataset.clip='1';
+    card.appendChild(el('span','no',(i+1)+''));
+    card.appendChild(el('span','tx',c.x));
+    card.appendChild(el('span','bd',''));
+    card.onclick=function(){
+      if(card.dataset.hit) return; card.dataset.hit='1';
+      if(c.w){ card.classList.add('bad'); card.querySelector('.bd').textContent='⚠ 有問題';
+        live.innerHTML='<b>'+(i+1)+'　⚠</b>　'+c.why; found++; SFX.found();
+        if(found===s.need && !sl.dataset.done){ sl.dataset.done='1'; star();
+          modal(true,'全部找出來了！',s.fb,'🔍'); }
+      } else { card.classList.add('shake'); SFX.miss();
+        setTimeout(function(){card.classList.remove('shake');card.classList.add('good');
+          card.querySelector('.bd').textContent='👍 做得很好';},380);
+        live.innerHTML='<b>'+(i+1)+'　👍</b>　'+c.ok;
+      }
+    };
+    tiles.push(card);
+  });
+  pad.appendChild(flow(tiles));
+  var bar=el('div','exbar');
+  bar.appendChild(el('div','exg','<b>00　⚠</b>　'+longest));
+  var live=el('div','exl','點卡片，一張一張問大家：「這樣做，可以嗎？」');
+  bar.appendChild(live); pad.appendChild(bar);
+  sl.appendChild(pad); return sl;
+}
+function bSort(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var sel=null, done=0, tiles=[];
+  s.items.forEach(function(it){
+    var t=el('div','pi'); t.dataset.clip='1';
+    t.appendChild(el('span','tx',it.x));
+    var bd=el('span','pb off','0'); t.appendChild(bd);
+    t.dataset.b=it.b;
+    t.onclick=function(){
+      if(sl.dataset.done||t.dataset.set) return;
+      SFX.click();
+      if(sel===t){ sel=null; t.classList.remove('sel'); return; }
+      if(sel) sel.classList.remove('sel'); sel=t; t.classList.add('sel');
+    };
+    tiles.push(t);
+  });
+  pad.appendChild(flow(tiles));
+  var bins=el('div','bins');
+  s.bins.forEach(function(bn,bi){
+    var btn=el('button','bin','①②③'[bi]+' '+bn.t);
+    btn.onclick=function(){
+      if(sl.dataset.done||!sel) return;
+      sel.dataset.set=bn.id;
+      var bd=sel.querySelector('.pb'); bd.textContent='①②③'[bi]; bd.classList.remove('off');
+      sel.classList.remove('sel'); sel=null; done++; SFX.found();
+      if(done===s.items.length) check();
+    };
+    bins.appendChild(btn);
+  });
+  function check(){
+    sl.dataset.done='1'; var allok=true;
+    tiles.forEach(function(t){
+      var ok=t.dataset.set===t.dataset.b;
+      t.classList.add(ok?'right':'wrong'); if(!ok) allok=false;
+    });
+    if(allok){ SFX.right(); star(); } else SFX.wrong();
+    modal(allok, allok?'分類完全正確！':'我們一起對一下', s.fb,'🗂️');
+  }
+  pad.appendChild(bins); sl.appendChild(pad); return sl;
+}
+function bMovie(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var b=el('div','mv'), L=el('div','mvL'), R=el('div','mvR');
+  (s.tasks||[]).forEach(function(t){
+    var c=el('div','task'); c.dataset.clip='1';
+    c.appendChild(el('div','k',t.k)); c.appendChild(el('div','v',t.v)); L.appendChild(c);
+  });
+  (s.clips||[]).forEach(function(c){
+    var btn=el('button','clip');
+    btn.appendChild(el('span','plyb','▶'));
+    btn.appendChild(el('span','tx',c.t));
+    btn.onclick=function(){ SFX.click(); openClip(c.id); };
+    R.appendChild(btn);
+  });
+  if(s.vote){
+    var v=el('div','vote'); v.appendChild(el('div','vq',s.vote.q));
+    s.vote.opts.forEach(function(o){
+      var row=el('button','vrow');
+      row.appendChild(el('span','tx',o));
+      var c=el('span','cnt','0'); row.appendChild(c);
+      row.onclick=function(){
+        c.textContent=(+c.textContent)+1; SFX.click();
+        if(!sl.dataset.done){ sl.dataset.done='1'; star(); }
+      };
+      v.appendChild(row);
+    });
+    R.appendChild(v);
+  }
+  b.appendChild(L); b.appendChild(R); pad.appendChild(b);
+  if(s.search) pad.appendChild(el('div','src','影片若無法播放，請用關鍵字現場搜尋：'+s.search));
+  sl.appendChild(pad); return sl;
+}
+function bReflect(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(it){
+    var c=el('div','rf'); c.dataset.clip='1';
+    c.appendChild(el('div','k',it.k)); c.appendChild(el('div','v',it.v)); return c;
+  });
+  pad.appendChild(flow(cards)); sl.appendChild(pad); return sl;
+}
+function bPledge(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(t){
+    var c=el('button','pl');
+    c.appendChild(el('span','bx','✓'));
+    c.appendChild(el('span','tx',t));
+    c.onclick=function(){ c.classList.toggle('on'); SFX.click(); };
+    return c;
+  });
+  pad.appendChild(flow(cards)); sl.appendChild(pad); return sl;
+}
+function bScore(s){
+  var sl=el('section','slide'), pad=el('div','pad mid');
+  var cv=el('canvas','','' ); cv.id='cfx';
+  var w=el('div','scw');
+  var big=el('div','big','0'); var stars=el('div','stars','');
+  w.appendChild(el('div','sub','今天的成績單'));
+  w.appendChild(big); w.appendChild(el('div','sub','／ '+TOTAL+' 顆星'));
+  w.appendChild(stars);
+  w.appendChild(el('div','msg','答對幾題不是重點——重點是今天帶回去的那一件事。<br>請每一位講一句：「我回去要開始做的是……」'));
+  sl.refresh=function(){
+    big.textContent=score;
+    var t=''; for(var i=0;i<TOTAL;i++) t += '<i style="animation-delay:'+(NOANIM?0:(i*90+300))+'ms">'+(i<score?'⭐':'☆')+'</i>';
+    stars.innerHTML=t;
+    if(!NOANIM){ SFX.win(); confetti(cv); }
+  };
+  pad.appendChild(cv); pad.appendChild(w); sl.appendChild(pad); return sl;
+}
+var B={cover:bCover,section:bSection,points:bPoints,stats:bStats,choice:bChoice,fill:bFill,
+  order:bOrder,spot:bSpot,sort:bSort,movie:bMovie,reflect:bReflect,pledge:bPledge,score:bScore};
+
+S.forEach(function(s,i){
+  var e=(B[s.t]||bPoints)(s,i);
+  e.dataset.i=i; els.push(e); stage.appendChild(e);
+});
+
+/* ---------- confetti ---------- */
+function confetti(cv){
+  var r=cv.parentNode.getBoundingClientRect();
+  cv.width=r.width; cv.height=r.height;
+  var g=cv.getContext('2d'), cols=['#E8552D','#F4A93C','#028090','#7B4EA3','#2E7D52'], ps=[];
+  for(var i=0;i<110;i++) ps.push({x:Math.random()*r.width,y:-Math.random()*r.height,
+    w:6+Math.random()*8,h:9+Math.random()*11,v:1.6+Math.random()*3.2,a:Math.random()*6.3,
+    s:(Math.random()-.5)*.22,c:cols[i%cols.length]});
+  var t0=Date.now();
+  (function loop(){
+    var el=Date.now()-t0;
+    g.clearRect(0,0,cv.width,cv.height);
+    ps.forEach(function(p){
+      p.y+=p.v; p.a+=p.s; p.x+=Math.sin(p.a)*.8;
+      g.save(); g.translate(p.x,p.y); g.rotate(p.a);
+      g.fillStyle=p.c; g.globalAlpha=Math.max(0,1-el/3400);
+      g.fillRect(-p.w/2,-p.h/2,p.w,p.h); g.restore();
+    });
+    if(el<3400) requestAnimationFrame(loop); else g.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+
+/* ---------- fit ---------- */
+/* Overflow is judged by geometry, not by scrollHeight: every child box must sit inside its parent's
+   box (the page's content box for the page itself). scrollHeight differs between browsers (Safari counts
+   glyph and letter-spacing overhang); getBoundingClientRect does not. scrollWidth is still used, with a
+   small font-relative tolerance, to catch a number or word too wide to wrap. */
+var ABS=(typeof WeakMap==='function')?new WeakMap():null;
+function isAbs(c){
+  var v=ABS?ABS.get(c):undefined;
+  if(v===undefined){ var p=getComputedStyle(c).position; v=(p==='absolute'||p==='fixed'); if(ABS) ABS.set(c,v); }
+  return v;
+}
+function hasBox(n){ return n.clientWidth>0||n.clientHeight>0; }
+var LASTBLOCK='';
+function badBox(n,contentBox){
+  if(n.scrollWidth>n.clientWidth+Math.max(4,0.06*(parseFloat(getComputedStyle(n).fontSize)||16))){
+    LASTBLOCK=n.className+' width '+n.scrollWidth+'/'+n.clientWidth; return true; }
+  var r=n.getBoundingClientRect(), t=r.top, b=r.bottom, l=r.left, rt=r.right;
+  var cs=getComputedStyle(n);
+  t+=parseFloat(cs.paddingTop)+parseFloat(cs.borderTopWidth); b-=parseFloat(cs.paddingBottom)+parseFloat(cs.borderBottomWidth);
+  l+=parseFloat(cs.paddingLeft)+parseFloat(cs.borderLeftWidth); rt-=parseFloat(cs.paddingRight)+parseFloat(cs.borderRightWidth);
+  var k=n.children;
+  for(var j=0;j<k.length;j++){
+    var c=k[j]; if(!hasBox(c)||isAbs(c)) continue;
+    var kr=c.getBoundingClientRect();
+    if(kr.top<t-3||kr.bottom>b+3||kr.left<l-3||kr.right>rt+3){
+      LASTBLOCK=(n.className||n.tagName)+' > '+(c.className||c.tagName)+' '+Math.round(kr.top-t)+'/'+Math.round(kr.bottom-b); return true; }
+  }
+  return false;
+}
+function overflow(root){
+  if(badBox(root,true)) return true;
+  var ns=root.querySelectorAll('*');
+  for(var i=0;i<ns.length;i++){ var n=ns[i]; if(!hasBox(n)) continue; if(badBox(n,false)) return true; }
+  return false;
+}
+var BOXSEL='.card,.stat,.sc,.pi,.opt,.oi,.rf,.pl,.task,.bl,.clip';
+function boxOver(n){
+  if(badBox(n,false)) return true;
+  var ds=n.querySelectorAll('*');
+  for(var j=0;j<ds.length;j++){ var d=ds[j]; if(!hasBox(d)) continue; if(badBox(d,false)) return true; }
+  return false;
+}
+/* each box is a fixed slot from the grid, so its own text can grow to fill it
+   without moving anything else — this is what kills the leftover white space */
+function fitBoxes(e){
+  var ns=e.querySelectorAll(BOXSEL);
+  Array.prototype.forEach.call(ns,function(n){
+    n.style.removeProperty('--cs');
+    var top=2.6, cs=top, best=0;
+    for(;cs>=1.0;cs-=0.15){                 /* coarse, from the top */
+      n.style.setProperty('--cs',cs.toFixed(3));
+      if(!boxOver(n)){ best=cs; break; }
+    }
+    if(!best){ n.style.removeProperty('--cs'); return; }
+    var probe=[best+0.1,best+0.05];          /* fine, just above the coarse hit */
+    for(var q=0;q<probe.length;q++){
+      if(probe[q]>top) continue;
+      n.style.setProperty('--cs',probe[q].toFixed(3));
+      if(!boxOver(n)){ best=probe[q]; break; }
+    }
+    n.style.setProperty('--cs',best.toFixed(3));
+  });
+}
+/* layout score: smallest text wins, but a layout that leaves the boxes half-empty loses points */
+function layoutScore(e){
+  var m=1e9, used=0, tot=0, maxLines=1;
+  Array.prototype.forEach.call(e.querySelectorAll(BOXSEL),function(n){
+    var tx=n.querySelector('.v,.d,.tx')||n;
+    var cs=getComputedStyle(tx), v=parseFloat(cs.fontSize); if(v<m) m=v;
+    var lh=parseFloat(cs.lineHeight)||v*1.3, ln=Math.round(tx.getBoundingClientRect().height/lh);
+    if(ln>maxLines) maxLines=ln;
+    var r=n.getBoundingClientRect(), top=1e9, bot=-1e9, k=n.children, any=false;
+    for(var j=0;j<k.length;j++){ if(getComputedStyle(k[j]).position==='absolute') continue;
+      var kr=k[j].getBoundingClientRect(); if(kr.top<top) top=kr.top; if(kr.bottom>bot) bot=kr.bottom; any=true; }
+    if(any){ used+=bot-top; tot+=r.height; }
+  });
+  if(m===1e9) return 0;
+  var fill=tot?used/tot:1;
+  var read = maxLines>=7 ? 0.62 : maxLines>=5 ? 0.8 : maxLines>=4 ? 0.78 : 1;   /* narrow columns read badly */
+  return m*(0.6+0.4*fill)*read;
+}
+/* headings scale with the screen too, but stay capped so they never starve the body text */
+function hsCap(){ return 1.16*Math.max(1, stage.clientHeight/720); }
+function setS(e,v){ e.style.setProperty('--s',String(v)); e.style.setProperty('--hs',String(Math.min(v,hsCap()))); }
+function gfit(e,pad){
+  var base=stage.clientHeight/720;                      /* 1.0 at a 720p projector */
+  function at(v){ setS(e,v); return !overflow(pad); }
+  var s=Math.min(4.0, 1.2+1.5*base), lo=0, floor=Math.max(0.6, 1.0*base);
+  for(;s>0.5;s-=0.1){ if(at(s)){ lo=s; break; } }         /* scan from the top: finds 2-line fits a binary search would skip */
+  if(lo && at(lo+0.05)) lo+=0.05;
+  if(!lo || lo<floor){ lo=Math.max(lo,floor); }          /* never show a page tiny because measuring failed */
+  setS(e,lo);
+}
+function fit(i){
+  var e=els[i], pad=e.querySelector('.pad');
+  Array.prototype.forEach.call(e.querySelectorAll('.rise'),function(n){ n.classList.remove('rise'); });
+  Array.prototype.forEach.call(e.querySelectorAll(BOXSEL),function(n){ n.style.removeProperty('--cs'); });
+  var f=e.querySelector('.flow');
+  if(f){
+    var cands=candidates(+f.dataset.n), best=-1, bestC=cands[0];
+    if(cands.length>1){
+      cands.forEach(function(c){ layout(f,c); gfit(e,pad); fitBoxes(e); var sc=layoutScore(e); if(sc>best){ best=sc; bestC=c; } });
+    }
+    layout(f,bestC);
+  }
+  gfit(e,pad);
+  fitBoxes(e);
+  e.dataset.fit='1';
+}
+
+/* ---------- entrance animation ---------- */
+var ANIM='.frow>*,.opts>*,.ord>*,.blanks>*,.bank>*,.mvL>*,.mvR>*,.q,.exbar,.bins>*,.scw>*';
+function animate(e){
+  if(NOANIM) return;
+  var ns=e.querySelectorAll(ANIM);
+  Array.prototype.forEach.call(ns,function(n,i){
+    n.classList.remove('rise');
+    n.style.setProperty('--d',(i*38)+'ms');
+  });
+  void e.offsetWidth;
+  Array.prototype.forEach.call(ns,function(n){ n.classList.add('rise'); });
+  clearTimeout(animate._t);
+  animate._t=setTimeout(function(){
+    Array.prototype.forEach.call(ns,function(n){ n.classList.remove('rise'); n.style.removeProperty('--d'); });
+  }, 420+ns.length*38+120);
+}
+
+/* ---------- navigation ---------- */
+var pg=document.getElementById('pg');
+function show(i){
+  i=Math.max(0,Math.min(S.length-1,i));
+  closeModal();
+  els[cur].classList.remove('on');
+  cur=i;
+  var e=els[cur];
+  e.classList.add('on');
+  if(e.refresh){ delete e.dataset.fit; e.refresh(); } else SFX.page();
+  if(!e.dataset.fit) fit(cur);
+  animate(e);
+  pg.textContent=(cur+1)+' / '+S.length;
+  document.getElementById('notep').innerHTML='<b>講師提示</b>　'+(S[cur].note||'');
+  Array.prototype.forEach.call(document.querySelectorAll('#tocg button'),function(b,k){
+    b.classList.toggle('cur',k===cur);
+  });
+}
+document.getElementById('bprev').onclick=function(){show(cur-1);};
+document.getElementById('bnext').onclick=function(){show(cur+1);};
+
+/* toc */
+var tocg=document.getElementById('tocg'), tocv=document.getElementById('tocv');
+S.forEach(function(s,i){
+  var b=el('button','','<span class="ix">'+(i+1)+'</span>'+(s.h||s.tag||''));
+  b.onclick=function(){ tocv.classList.remove('on'); show(i); };
+  tocg.appendChild(b);
+});
+document.getElementById('btoc').onclick=function(){ tocv.classList.toggle('on'); };
+tocv.onclick=function(e){ if(e.target===tocv) tocv.classList.remove('on'); };
+
+/* notes */
+function toggleNote(){ document.getElementById('notep').classList.toggle('on'); }
+document.getElementById('bnote').onclick=toggleNote;
+
+/* timer */
+var tmr=document.getElementById('tmr'), tid=null, left=20;
+function toggleTimer(){
+  if(tid){ clearInterval(tid); tid=null; tmr.classList.remove('on'); return; }
+  left=20; tmr.classList.add('on'); tmr.textContent='⏱ '+left;
+  tid=setInterval(function(){
+    left--; tmr.textContent = left>0 ? ('⏱ '+left) : '⏱ 時間到';
+    if(left<=3&&left>0) tone(880,0,0.07,'square',0.09);
+    if(left<=0){ clearInterval(tid); tid=null; tone(300,0,0.4,'sawtooth',0.12,180); }
+  },1000);
+}
+document.getElementById('btime').onclick=toggleTimer;
+
+/* fullscreen */
+function toggleFull(){
+  if(document.fullscreenElement) document.exitFullscreen();
+  else if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+}
+document.getElementById('bfull').onclick=toggleFull;
+
+/* lightbox */
+var lbv=document.getElementById('lbv'), lbf=document.getElementById('lbf'), lbo=document.getElementById('lbo');
+function openClip(id){
+  lbf.setAttribute('allow','autoplay; encrypted-media; fullscreen');
+  lbf.src='https://www.youtube-nocookie.com/embed/'+id+'?rel=0&autoplay=1';
+  lbo.href='https://www.youtube.com/watch?v='+id;
+  lbv.classList.add('on');
+}
+function closeClip(){ lbv.classList.remove('on'); lbf.removeAttribute('src'); lbf.removeAttribute('allow'); }
+document.getElementById('lbc').onclick=closeClip;
+lbv.onclick=function(e){ if(e.target===lbv) closeClip(); };
+
+/* keyboard */
+document.addEventListener('keydown',function(e){
+  var k=e.key;
+  if(lbv.classList.contains('on')){ if(k==='Escape') closeClip(); return; }
+  if(tocv.classList.contains('on')){ if(k==='Escape') tocv.classList.remove('on'); return; }
+  if(ansv.classList.contains('on')){
+    if(k==='Enter'||k===' '||k==='ArrowRight'||k==='Escape'){ e.preventDefault(); closeModal(); }
+    return;
+  }
+  if(k==='ArrowRight'||k===' '||k==='PageDown'){ e.preventDefault(); show(cur+1); }
+  else if(k==='ArrowLeft'||k==='PageUp'){ e.preventDefault(); show(cur-1); }
+  else if(k==='n'||k==='N'){ toggleNote(); }
+  else if(k==='t'||k==='T'){ toggleTimer(); }
+  else if(k==='f'||k==='F'){ toggleFull(); }
+  else if(k==='s'||k==='S'){ toggleSnd(); }
+  else if(k==='d'||k==='D'){ diag(); }
+  else if(k==='Home'){ show(0); }
+  else if(k==='End'){ show(S.length-1); }
+});
+
+/* diagnostics: press D to see why a page is the size it is */
+function diag(){
+  var e=els[cur], pad=e.querySelector('.pad');
+  var s=parseFloat(getComputedStyle(e).getPropertyValue('--s'))||0;
+  setS(e,s+0.2); var blocked=overflow(pad); var why=blocked?LASTBLOCK:'(nothing blocks at +0.2)'; setS(e,s);
+  var f=e.querySelector('.flow');
+  var txt='viewport '+window.innerWidth+'×'+window.innerHeight+'  dpr '+(window.devicePixelRatio||1)+'  stage '+stage.clientWidth+'×'+stage.clientHeight
+    +'\n--s '+s.toFixed(2)+(f?('  cols '+f.dataset.c):'')+'  UA '+navigator.userAgent.slice(0,80)
+    +'\nblocker @+0.2: '+why;
+  var d=document.getElementById('dbg');
+  if(!d){ d=el('pre','',''); d.id='dbg'; d.style.cssText='position:fixed;left:8px;top:8px;z-index:99;background:rgba(0,0,0,.85);color:#fff;font:14px/1.4 monospace;padding:10px 14px;border-radius:8px;white-space:pre-wrap;max-width:90vw'; document.body.appendChild(d); }
+  if(d.dataset.on==='1'){ d.remove(); return; }
+  d.dataset.on='1'; d.textContent=txt;
+}
+
+/* resize */
+var rt=null;
+window.addEventListener('resize',function(){
+  clearTimeout(rt);
+  rt=setTimeout(function(){
+    els.forEach(function(e){ delete e.dataset.fit; });
+    fit(cur); prefit();
+  },160);
+});
+
+var pre=null;
+function prefit(){
+  clearTimeout(pre);
+  var i=0;
+  (function step(){
+    while(i<els.length && els[i].dataset.fit) i++;
+    if(i>=els.length) return;
+    if(!els[i].refresh) fit(i);
+    else els[i].dataset.fit='1';
+    i++; pre=setTimeout(step,80);
+  })();
+}
+sctr.textContent='⭐ 0 / '+TOTAL;
+show(0);
+setTimeout(prefit,400);
+window.__deck={ check:function(i){ var e=els[i==null?cur:i]; var o=overflow(e.querySelector('.pad')); return o?LASTBLOCK:''; },
+  get cur(){return cur;}, get score(){return score;}, total:TOTAL, show:show, slides:S, els:els, fit:fit,
+  mute:function(){ SND=false; },
+  setAnim:function(v){ NOANIM=!v; document.documentElement.classList.toggle('noanim',NOANIM); if(NOANIM){ els.forEach(function(e){
+    Array.prototype.forEach.call(e.querySelectorAll('.rise'),function(n){ n.classList.remove('rise'); }); }); } } };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1336 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>血壓穩 日子順｜長者慢性病互動教學簡報</title>
+<style>
+:root{
+  --orange:#E8552D; --amber:#F4A93C; --teal:#028090; --ink:#12343B;
+  --th:#028090; --thd:#12343B;
+  --bg:#FDFBF7; --card:#FFFFFF; --line:#E1D8CA;
+  --navh:48px; --s:1; --hs:1;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC","Heiti TC",sans-serif;}
+body{overflow:hidden}
+button{font-family:inherit;color:inherit}
+#stage{position:absolute;left:0;right:0;top:0;bottom:var(--navh);overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden}
+.slide.on{opacity:1;visibility:visible;animation:fadein .2s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.pad{position:absolute;inset:0;padding:1.6vh 2.2vw;display:flex;flex-direction:column;gap:.7vh;overflow:hidden}
+.pad.mid{justify-content:center;align-items:center;text-align:center}
+
+/* ---------- header ---------- */
+.hd{flex:0 0 auto}
+.tagrow{display:flex;align-items:center;gap:calc(11px*var(--hs));margin-bottom:calc(3px*var(--hs))}
+.tag{background:var(--th);color:#fff;border-radius:999px;padding:calc(4px*var(--hs)) calc(15px*var(--hs));
+  font-size:calc(17px*var(--hs));font-weight:800;letter-spacing:.06em;white-space:nowrap}
+.rule{flex:1;height:calc(4px*var(--hs));background:var(--th);opacity:.2;border-radius:99px}
+h1.t{margin:0;font-size:calc(43px*var(--hs));line-height:1.22;font-weight:900;letter-spacing:.01em}
+.lead{margin:calc(2px*var(--hs)) 0 0;font-size:calc(21px*var(--hs));line-height:1.25;color:#54666b;font-weight:700}
+.src{flex:0 0 auto;font-size:calc(13px*var(--s));color:#9aa3a6;line-height:1.25;padding-top:.1vh}
+
+/* ---------- flow layout: rows of equal tiles, column count chosen per slide ---------- */
+.flow{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.8vh;--g:.9vw;--c:2}
+.frow{flex:1 1 0;min-height:0;display:flex;justify-content:center;gap:var(--g)}
+.frow>*{flex:0 0 auto;width:calc((100% - (var(--c) - 1)*var(--g))/var(--c));min-width:0;min-height:0}
+.card .v,.stat .d,.sc .tx,.pi .tx,.pl .tx,.opt .tx,.oi .tx,.rf .v,.task .v{text-wrap:balance}
+
+/* ---------- generic body ---------- */
+.body{flex:1 1 auto;min-height:0;display:grid;gap:.8vh .9vw;grid-auto-rows:minmax(0,1fr)}
+.c2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.c22{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr)}
+.card{background:var(--card);border:calc(3px*var(--s)) solid var(--line);border-radius:calc(16px*var(--s));
+  padding:calc(9px*var(--s)) calc(15px*var(--s));display:flex;flex-direction:column;justify-content:center;
+  gap:calc(2px*var(--s));min-height:0;overflow:hidden}
+.card .k{font-size:calc(28px*var(--s)*var(--cs,1));font-weight:900;color:var(--th);line-height:1.22}
+.card .v{font-size:calc(33px*var(--s)*var(--cs,1));line-height:1.34;font-weight:700}
+.card .v b{color:var(--orange)}
+.core .card{border-color:var(--th);background:#fff}
+
+/* ---------- cover ---------- */
+.cover{background:linear-gradient(150deg,var(--th) 0%,var(--thd) 100%);color:#fff}
+.cover .ct{font-size:calc(90px*var(--s));font-weight:900;line-height:1.16;letter-spacing:.02em;margin:0}
+.cover .cs{font-size:calc(36px*var(--s));font-weight:700;margin:calc(20px*var(--s)) 0 0;opacity:.95;line-height:1.35}
+.cover .cd{width:calc(120px*var(--s));height:calc(8px*var(--s));background:var(--amber);border-radius:99px;margin:calc(26px*var(--s)) 0}
+.cover .cm{font-size:calc(25px*var(--s));font-weight:700;opacity:.88}
+.cover .cdis{font-size:calc(23px*var(--s));opacity:.78;margin-top:calc(6px*var(--s))}
+
+/* ---------- section ---------- */
+.sect{background:var(--th);color:#fff}
+.sect .sn{font-size:calc(31px*var(--s));font-weight:900;background:rgba(255,255,255,.2);
+  padding:calc(8px*var(--s)) calc(26px*var(--s));border-radius:99px;display:inline-block}
+.sect .sh{font-size:calc(72px*var(--s));font-weight:900;margin:calc(24px*var(--s)) 0 0;line-height:1.2}
+.sect .sl{font-size:calc(33px*var(--s));margin:calc(18px*var(--s)) 0 0;opacity:.95;line-height:1.35;font-weight:700;max-width:82%}
+
+/* ---------- stats ---------- */
+.stat{background:var(--card);border:calc(3px*var(--s)) solid var(--line);border-radius:calc(18px*var(--s));
+  padding:calc(10px*var(--s));display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:calc(2px*var(--s));text-align:center;min-height:0;overflow:hidden;border-top:calc(10px*var(--s)) solid var(--th)}
+.stat .n{font-size:calc(66px*var(--s)*var(--cs,1));font-weight:900;color:var(--th);line-height:1.18;letter-spacing:-.01em}
+.stat .u{font-size:calc(24px*var(--s)*var(--cs,1));font-weight:800;color:var(--orange)}
+.stat .d{font-size:calc(32px*var(--s)*var(--cs,1));font-weight:700;line-height:1.28;color:#2c3b40}
+
+/* ---------- choice ---------- */
+.q{flex:0 0 auto;background:#fff;border:calc(3px*var(--s)) dashed var(--th);border-radius:calc(14px*var(--s));
+  padding:calc(11px*var(--s)) calc(20px*var(--s));font-size:calc(34px*var(--s));font-weight:800;line-height:1.3}
+.opts{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.85vh}
+.opt{flex:1 1 0;min-height:0;display:flex;align-items:center;gap:calc(14px*var(--s));cursor:pointer;
+  background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(6px*var(--s)) calc(17px*var(--s));text-align:left;font-size:calc(36px*var(--s)*var(--cs,1));font-weight:700;line-height:1.25}
+.opt .ch{flex:0 0 auto;width:calc(50px*var(--s)*var(--cs,1));height:calc(50px*var(--s)*var(--cs,1));border-radius:50%;
+  background:var(--th);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:calc(28px*var(--s)*var(--cs,1));font-weight:900}
+.opt .mk{flex:0 0 auto;margin-left:auto;font-size:calc(36px*var(--s)*var(--cs,1));width:calc(46px*var(--s)*var(--cs,1));text-align:center;display:inline-block}
+.opt:hover{border-color:var(--th)}
+.opt.right{border-color:#1e8449;background:#eafaf1}
+.opt.wrong{border-color:#c0392b;background:#fdecea}
+.done .opt{cursor:default}
+
+/* ---------- fill ---------- */
+.bank{flex:0 0 auto;display:flex;flex-wrap:wrap;gap:calc(9px*var(--s));justify-content:center}
+.word{background:var(--amber);color:#3b2a10;border:none;border-radius:calc(12px*var(--s));
+  padding:calc(8px*var(--s)) calc(20px*var(--s));font-size:calc(31px*var(--s));font-weight:900;cursor:pointer}
+.word.sel{background:var(--orange);color:#fff;box-shadow:0 0 0 calc(4px*var(--s)) rgba(232,85,45,.3)}
+.word.used{opacity:.3;cursor:default}
+.blanks{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.9vh}
+.bl{flex:1 1 0;min-height:0;display:flex;align-items:center;overflow:hidden;font-size:calc(37px*var(--s)*var(--cs,1));font-weight:700;line-height:1.35;background:#fff;
+  border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(10px*var(--s)) calc(18px*var(--s))}
+.bl .in{width:100%}
+.slot{display:inline-block;white-space:nowrap;min-width:var(--bw);text-align:center;border-bottom:calc(4px*var(--s)) solid var(--th);
+  color:var(--orange);font-weight:900;cursor:pointer;padding:0 calc(6px*var(--s));margin:0 calc(3px*var(--s))}
+.slot.empty{color:#c8cfd1}
+.bl.right{border-color:#1e8449;background:#eafaf1}
+.bl.wrong{border-color:#c0392b;background:#fdecea}
+
+/* ---------- order ---------- */
+.ord{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.85vh}
+.oi{flex:1 1 0;min-height:0;display:flex;align-items:center;gap:calc(14px*var(--s));cursor:pointer;
+  background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(6px*var(--s)) calc(17px*var(--s));text-align:left;font-size:calc(34px*var(--s)*var(--cs,1));font-weight:700;line-height:1.25}
+.oi .num{flex:0 0 auto;width:calc(54px*var(--s)*var(--cs,1));height:calc(54px*var(--s)*var(--cs,1));border-radius:calc(12px*var(--s));
+  background:#EFEAE2;color:#9aa4a8;display:flex;align-items:center;justify-content:center;
+  font-size:calc(30px*var(--s)*var(--cs,1));font-weight:900}
+.oi.picked .num{background:var(--th);color:#fff}
+.oi.right{border-color:#1e8449;background:#eafaf1}
+.oi.wrong{border-color:#c0392b;background:#fdecea}
+
+/* ---------- spot ---------- */
+.cards{flex:1 1 auto;min-height:0;display:grid;gap:.9vh .85vw;grid-auto-rows:minmax(0,1fr)}
+.g8{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:minmax(0,1fr) minmax(0,1fr)}
+.g9{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+.sc{position:relative;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(16px*var(--s));
+  padding:calc(18px*var(--s)) calc(12px*var(--s));display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:calc(37px*var(--s)*var(--cs,1));font-weight:800;line-height:1.25;cursor:pointer;min-height:0;overflow:hidden}
+.sc .no{position:absolute;top:calc(4px*var(--s));left:calc(9px*var(--s));font-size:calc(18px*var(--s));
+  color:#b6bec1;font-weight:900}
+.sc .bd{position:absolute;bottom:calc(4px*var(--s));right:calc(9px*var(--s));font-size:calc(19px*var(--s));font-weight:900;display:inline-block}
+.sc.bad{border-color:#c0392b;background:#fdecea}
+.sc.bad .bd{color:#c0392b}
+.sc.good{border-color:#1b7fa8;background:#eaf4fb}
+.sc.good .bd{color:#1b7fa8}
+.shake{animation:sh .4s}
+@keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.exbar{position:relative;flex:0 0 auto;background:#fff;border:calc(3px*var(--s)) solid var(--th);
+  border-radius:calc(14px*var(--s));padding:calc(10px*var(--s)) calc(18px*var(--s))}
+.exg{visibility:hidden;font-size:calc(29px*var(--s));font-weight:700;line-height:1.3}
+.exl{position:absolute;inset:calc(10px*var(--s)) calc(18px*var(--s));display:flex;align-items:center;
+  font-size:calc(29px*var(--s));font-weight:700;line-height:1.3}
+
+/* ---------- sort ---------- */
+.pool{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:.85vh .85vw}
+.pi{position:relative;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(16px*var(--s)) calc(10px*var(--s));display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:calc(33px*var(--s)*var(--cs,1));font-weight:800;line-height:1.25;cursor:pointer;min-height:0;overflow:hidden}
+.pi.sel{border-color:var(--orange);box-shadow:0 0 0 calc(4px*var(--s)) rgba(232,85,45,.24)}
+.pi .pb{position:absolute;top:calc(4px*var(--s));right:calc(7px*var(--s));font-size:calc(19px*var(--s));
+  font-weight:900;color:#fff;background:var(--th);border-radius:99px;padding:calc(1px*var(--s)) calc(9px*var(--s));
+  min-width:calc(28px*var(--s));text-align:center}
+.pi .pb.off{background:transparent;color:transparent}
+.pi.right{border-color:#1e8449;background:#eafaf1}
+.pi.wrong{border-color:#c0392b;background:#fdecea}
+.bins{flex:0 0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.85vw}
+.bin{background:var(--th);color:#fff;border:none;border-radius:calc(14px*var(--s));
+  padding:calc(11px*var(--s));font-size:calc(30px*var(--s));font-weight:900;cursor:pointer;line-height:1.2}
+.bin.sel{outline:calc(5px*var(--s)) solid var(--amber)}
+
+/* ---------- movie ---------- */
+.mv{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:1vw}
+.mvL,.mvR{display:flex;flex-direction:column;gap:.85vh;min-height:0}
+.task{flex:1 1 0;min-height:0;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-left:calc(10px*var(--s)) solid var(--amber);
+  border-radius:calc(12px*var(--s));padding:calc(8px*var(--s)) calc(14px*var(--s));display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.task .k{font-size:calc(19px*var(--s)*var(--cs,1));font-weight:900;color:var(--orange)}
+.task .v{font-size:calc(30px*var(--s)*var(--cs,1));font-weight:700;line-height:1.3}
+.clip{flex:1 1 0;min-height:0;overflow:hidden;display:flex;align-items:center;gap:.5em;background:var(--ink);color:#fff;
+  border:none;border-radius:calc(12px*var(--s));padding:calc(6px*var(--s)) calc(12px*var(--s));
+  font-size:calc(23px*var(--s)*var(--cs,1));font-weight:800;cursor:pointer;text-align:left;line-height:1.2}
+.clip .plyb{flex:0 0 auto;width:1.5em;height:1.5em;border-radius:50%;background:#E62117;
+  display:flex;align-items:center;justify-content:center;font-size:.9em}
+.vote{flex:0 0 auto;display:flex;flex-direction:column;background:#fff;border:calc(3px*var(--s)) dashed var(--th);border-radius:calc(12px*var(--s));
+  padding:calc(7px*var(--s)) calc(14px*var(--s)) calc(9px*var(--s))}
+.vote .vq{flex:0 0 auto;font-size:calc(23px*var(--s));font-weight:900;margin-bottom:calc(4px*var(--s))}
+.vrow{flex:0 0 auto;display:flex;align-items:center;gap:.4em;width:100%;background:#F7F3EC;border:none;
+  border-radius:calc(9px*var(--s));padding:calc(6px*var(--s)) calc(13px*var(--s));margin-top:calc(5px*var(--s));
+  font-size:calc(28px*var(--s));font-weight:700;cursor:pointer;text-align:left;line-height:1.2}
+.vrow .cnt{margin-left:auto;background:var(--th);color:#fff;border-radius:99px;min-width:1.6em;
+  text-align:center;font-weight:900;padding:0 .3em;line-height:1.3}
+
+/* ---------- reflect / pledge ---------- */
+.rf{background:#fff;border:calc(3px*var(--s)) solid var(--line);border-left:calc(12px*var(--s)) solid var(--th);
+  border-radius:calc(14px*var(--s));padding:calc(12px*var(--s)) calc(18px*var(--s));display:flex;flex-direction:column;
+  justify-content:center;gap:calc(4px*var(--s));min-height:0;overflow:hidden}
+.rf .k{font-size:calc(28px*var(--s)*var(--cs,1));font-weight:900;color:var(--th)}
+.rf .v{font-size:calc(30px*var(--s)*var(--cs,1));font-weight:700;line-height:1.35}
+.pl{position:relative;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(8px*var(--s)) calc(16px*var(--s)) calc(8px*var(--s)) calc(56px*var(--s));
+  display:flex;align-items:center;font-size:calc(31px*var(--s)*var(--cs,1));font-weight:700;line-height:1.25;
+  cursor:pointer;min-height:0;overflow:hidden;text-align:left}
+.pl .bx{position:absolute;left:calc(13px*var(--s));width:calc(32px*var(--s));height:calc(32px*var(--s));
+  border:calc(3px*var(--s)) solid var(--th);border-radius:calc(7px*var(--s));display:flex;align-items:center;
+  justify-content:center;font-size:calc(22px*var(--s));line-height:1;overflow:hidden;color:#fff}
+.pl.on{border-color:var(--th);background:#f2fbfa}
+.pl.on .bx{background:var(--th)}
+
+/* ---------- score ---------- */
+.scw{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:calc(12px*var(--s))}
+.scw .big{font-size:calc(130px*var(--s));font-weight:900;color:var(--th);line-height:1.15}
+.scw .sub{font-size:calc(34px*var(--s));font-weight:800}
+.scw .stars{font-size:calc(46px*var(--s));letter-spacing:.06em;line-height:1.25;max-width:82vw}
+.scw .stars i{font-style:normal;display:inline-block;opacity:0;animation:pin .4s both}
+@keyframes pin{from{opacity:0;transform:scale(0) rotate(-40deg)}to{opacity:1;transform:none}}
+.scw .msg{font-size:calc(30px*var(--s));font-weight:700;color:#4a5b60;line-height:1.4;max-width:74vw}
+#cfx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:30}
+
+/* ---------- entrance animation ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+.rise{animation:rise .40s var(--d,0ms) both cubic-bezier(.2,.8,.3,1)}
+@keyframes popin{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.opt.right .mk,.opt.wrong .mk,.sc.bad .bd,.sc.good .bd{animation:popin .32s cubic-bezier(.2,.9,.3,1.5)}
+@keyframes gpulse{0%{transform:scale(1)}45%{transform:scale(1.03)}100%{transform:scale(1)}}
+.opt.right,.oi.right,.pi.right,.bl.right{animation:gpulse .5s}
+.opt.wrong{animation:sh .4s}
+
+html.noanim *{animation:none!important;transition:none!important}
+
+/* ---------- nav ---------- */
+#nav{position:absolute;left:0;right:0;bottom:0;height:var(--navh);background:var(--ink);color:#fff;
+  display:flex;align-items:center;gap:8px;padding:0 12px;font-size:15px;font-weight:700;z-index:40}
+#nav button,#nav a{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:8px;padding:7px 12px;
+  font-size:15px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block;line-height:1.2}
+#nav button:hover,#nav a:hover{background:rgba(255,255,255,.26)}
+#nav a#bhome{background:var(--amber);color:#3b2a10}
+#pg{font-size:16px;font-weight:900;min-width:80px;text-align:center}
+#sctr{background:var(--amber);color:#3b2a10;border-radius:99px;padding:4px 13px;font-weight:900}
+@keyframes bump{0%,100%{transform:scale(1)}40%{transform:scale(1.3)}}
+#sctr.bump{animation:bump .5s}
+.spacer{flex:1}
+#tmr{display:none;background:var(--orange);border-radius:99px;padding:4px 14px;font-weight:900}
+#tmr.on{display:block}
+.fly{position:fixed;z-index:70;font-size:38px;font-weight:900;color:#F4A93C;pointer-events:none;
+  text-shadow:0 2px 10px rgba(0,0,0,.4);animation:fly 1.1s ease-out forwards}
+@keyframes fly{0%{opacity:0;transform:translateY(0) scale(.5)}18%{opacity:1;transform:translateY(-16px) scale(1.2)}
+  100%{opacity:0;transform:translateY(-96px) scale(1)}}
+
+/* ---------- overlays ---------- */
+.ov{position:absolute;inset:0;background:rgba(18,52,59,.74);display:none;z-index:50;
+  align-items:center;justify-content:center;padding:4vh 4vw}
+.ov.on{display:flex}
+#ansv .box{background:#fff;border-radius:24px;max-width:min(900px,88vw);width:100%;padding:30px 38px;text-align:center;
+  box-shadow:0 24px 70px rgba(0,0,0,.34);animation:pop .34s cubic-bezier(.2,.9,.3,1.25)}
+@keyframes pop{0%{transform:scale(.85);opacity:0}62%{transform:scale(1.03)}100%{transform:scale(1);opacity:1}}
+#ansv .ic{font-size:74px;line-height:1}
+#ansv .ti{font-size:42px;font-weight:900;margin:4px 0 14px}
+#ansv .fb{border:3px dashed var(--th);border-radius:14px;padding:16px 20px;font-size:29px;font-weight:700;
+  line-height:1.45;text-align:left}
+#ansv .ok{margin-top:20px;background:var(--th);color:#fff;border:none;border-radius:12px;padding:13px 38px;
+  font-size:25px;font-weight:900;cursor:pointer}
+#tocv .box{background:#fff;border-radius:20px;max-width:min(1180px,92vw);width:100%;max-height:88vh;overflow:auto;padding:22px}
+#tocv h3{margin:0 0 12px;font-size:23px}
+#tocg{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+#tocg button{text-align:left;background:#F7F3EC;border:2px solid var(--line);border-radius:11px;padding:9px 11px;
+  font-size:16px;font-weight:700;cursor:pointer;line-height:1.3}
+#tocg button.cur{border-color:var(--th);background:#fff}
+#tocg .ix{color:var(--th);font-weight:900;margin-right:6px}
+#lbv .box{width:min(1180px,92vw)}
+#lbv .fr{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:12px;overflow:hidden}
+#lbv iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+#lbv .bar{display:flex;gap:10px;margin-top:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+#lbv a,#lbv button{background:#fff;color:var(--ink);border:none;border-radius:11px;padding:10px 18px;
+  font-size:18px;font-weight:800;cursor:pointer;text-decoration:none}
+#lbv .hint{color:#fff;font-size:16px;font-weight:600;opacity:.9}
+#notep{position:absolute;left:0;right:0;bottom:var(--navh);background:#12343B;color:#F4E9D8;
+  padding:15px 20px;font-size:20px;line-height:1.5;font-weight:600;display:none;z-index:45;
+  border-top:4px solid var(--amber);max-height:40vh;overflow:auto}
+#notep.on{display:block}
+#notep b{color:var(--amber)}
+@media (max-width:860px){ #nav{font-size:12px;gap:6px} #nav button,#nav a{padding:6px 8px;font-size:12px} }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div id="notep"></div>
+<div id="nav">
+  <button id="bprev">‹ 上一頁</button>
+  <span id="pg">1 / 24</span>
+  <button id="bnext">下一頁 ›</button>
+  <span id="sctr">⭐ 0 / 9</span>
+  <span id="tmr">⏱ 20</span>
+  <span class="spacer"></span>
+  <a id="bhome" href="index.html" title="回到 12 個主題的主選單">🏠 主選單</a>
+  <button id="btoc">目錄</button>
+  <button id="bnote">講師提示 N</button>
+  <button id="bsnd">🔊 音效 S</button>
+  <button id="btime">計時 T</button>
+  <button id="bfull">全螢幕 F</button>
+</div>
+<div class="ov" id="ansv"><div class="box">
+  <div class="ic" id="anic">✅</div><div class="ti" id="anti"></div>
+  <div class="fb" id="anfb"></div><button class="ok" id="anok">知道了，繼續</button>
+</div></div>
+<div class="ov" id="tocv"><div class="box"><h3>目錄｜點一下直接跳頁</h3><div id="tocg"></div></div></div>
+<div class="ov" id="lbv"><div class="box">
+  <div class="fr"><iframe id="lbf" allowfullscreen></iframe></div>
+  <div class="bar"><span class="hint">若出現「錯誤 153」代表該頻道不開放內嵌，請按右邊按鈕改用 YouTube 開啟。</span>
+  <span><a id="lbo" target="_blank" rel="noopener">在 YouTube 開啟大畫面</a> <button id="lbc">關閉</button></span></div>
+</div></div>
+<script>
+const DECK = {
+  title: "血壓穩 日子順",
+  subtitle: "在家量血壓，722記起來",
+  disease: "高血壓（Hypertension）",
+  theme: "#C0392B",
+  slides: [
+    {
+      t: "cover",
+      h: "血壓穩 日子順",
+      sub: "在家量血壓，722記起來",
+      meta: "愛迪樂健康促進團隊",
+      note: "先不急著講內容。請大家舉手看看：家裡有血壓計的請舉手、今天早上有量的再舉一次。用舉手的人數當開場，讓大家知道自己不孤單。"
+    },
+    {
+      t: "points",
+      tag: "先聽大家講",
+      h: "大家常聽到的說法",
+      lead: "這些話你一定聽過。先不分對錯，我們聽聽看。",
+      cols: 2,
+      items: [
+        { k: "沒感覺", v: "「我又沒頭痛沒暈，血壓哪會高？」" },
+        { k: "吃一輩子", v: "「藥一吃就<b>吃到老</b>，所以我不敢開始。」" },
+        { k: "會洗腎", v: "「聽說西藥吃久了會傷腎臟。」" },
+        { k: "自己會好", v: "「少吃鹹一點，血壓自己就降下來。」" }
+      ],
+      note: "這頁只收集、不糾正。每一條都問一句「有聽過的請點頭」，讓長輩感覺被接住。把他們講出來的說法記在白板角落，後面破迷思那頁再回頭對照。"
+    },
+    {
+      t: "fill",
+      tag: "暖身動腦",
+      h: "老話裡的血壓",
+      lead: "把最合適的詞填進去，用台語念出來也通。",
+      bank: ["殺手", "貴人", "鹹", "甜", "血壓計", "體重計"],
+      lines: [
+        { pre: "高血壓被叫做「沉默的", ans: "殺手", post: "」，因為平常都沒感覺" },
+        { pre: "老一輩說「食傷", ans: "鹹", post: "，會傷腰」，鹽吃多血壓就上來" },
+        { pre: "家裡如果有一台", ans: "血壓計", post: "，自己量比較安心" }
+      ],
+      fb: "「沉默的殺手」不是嚇人，是說它不會痛。不會痛的病，只能靠量才知道。老話「食傷鹹，會傷腰」的意思就是：口味太重，腎臟和血管都會被拖累。",
+      note: "先讓長輩用台語把整句念一次，念過再選答案，氣氛會鬆。第二句可以順便問「你們家煮菜是鹹的還是淡的」，接到後面危險因子那頁。"
+    },
+    {
+      t: "points",
+      tag: "提問①",
+      h: "身體裡發生什麼事",
+      lead: "把身體想成一組水管，這樣就好懂了。",
+      cols: 2,
+      core: true,
+      items: [
+        { k: "心臟是幫浦", v: "心臟一縮一放，把血推到全身，一天約十萬次。" },
+        { k: "血管是水管", v: "水管有彈性，血推過去會撐一下，那個力就是<b>血壓</b>。" },
+        { k: "壓力太大", v: "水管長年被高壓沖，會變硬、變窄、結垢。" },
+        { k: "不會痛", v: "水管撐大不會痛，所以<b>只能靠量的</b>才知道。" }
+      ],
+      note: "講到「水管」時可以比一比自來水管的手勢，長輩很吃這一套。問一句「水管壓力太大會怎樣」，讓他們自己說出「會爆」，比你講更有力。"
+    },
+    {
+      t: "stats",
+      tag: "台灣現況",
+      h: "台灣的血壓成績單",
+      items: [
+        { n: "63.5", u: "%", d: "65歲以上的高血壓比率" },
+        { n: "529", u: "萬人", d: "18歲以上有高血壓的人" },
+        { n: "3", u: "成", d: "有高血壓卻不知道的人" },
+        { n: "第6", u: "名", d: "高血壓性疾病死因排名" }
+      ],
+      src: "國健署2017-2020國民營養健康狀況變遷調查；衛福部113年（2024）國人死因統計",
+      note: "63.5% 換句話說：在座每三位長輩，大概有兩位。可以現場請大家看看左右兩邊，畫面感最強。529萬人約等於整個台北加新北的人口。"
+    },
+    {
+      t: "choice",
+      tag: "認識題",
+      h: "在家量，多少算高？",
+      q: "依2022年台灣高血壓治療指引，自己在家量的血壓超過多少，就要當心？",
+      opts: ["120/70 mmHg", "130/80 mmHg", "140/90 mmHg", "150/95 mmHg"],
+      ans: 1,
+      fb: "2022年起，居家血壓標準改成130/80。在診間量的和在家量的不一樣，家裡的數字更準。",
+      src: "2022年台灣高血壓治療指引（中華民國心臟學會、台灣高血壓學會）",
+      note: "很多長輩記的是舊的140/90，會有人答錯，這很正常，先肯定「你記的是以前的標準，沒錯」。重點放在「標準變嚴了，是為了早一點抓到」。"
+    },
+    {
+      t: "points",
+      tag: "【原因】",
+      h: "為什麼血壓會高",
+      lead: "有的改不動，有的改得動。力氣要花在改得動的。",
+      cols: 2,
+      core: true,
+      items: [
+        { k: "改不動·年紀", v: "血管像水管，用久了會變硬、變窄。" },
+        { k: "改不動·體質", v: "父母有高血壓，自己的機率就比較高。" },
+        { k: "改不動·天氣", v: "天一冷血管就收縮，血壓自然往上跳。" },
+        { k: "改得動·口味", v: "重鹹、沾醬、湯汁喝光，<b>鈉</b>吃多血壓就上來。" },
+        { k: "改得動·身形", v: "腰圍粗、體重重，心臟每一下都要多出力。" },
+        { k: "改得動·菸酒", v: "抽菸傷血管，酒過量血壓會跟著衝高。" }
+      ],
+      note: "先講改不動的三項，讓長輩卸下自責——「這不是你的錯」。再把重點壓在改得動的三項。天氣那項在秋冬上課特別有共鳴，可以問「今年變天有沒有覺得頭比較重」。"
+    },
+    {
+      t: "movie",
+      tag: "來看影片",
+      h: "看影片，找三件事",
+      lead: "先講任務再播，看完我們來投票。",
+      tasks: [
+        { k: "任務一", v: "量血壓的時候，手、腳、背分別擺在哪裡？" },
+        { k: "任務二", v: "影片裡說一天要量幾次？什麼時候量？" },
+        { k: "任務三", v: "有哪一個動作，是你以前沒做過的？" }
+      ],
+      clips: [
+        { t: "722在家量血壓健康歌（臺語版）", id: "7_dq5F9leyY" },
+        { t: "高血壓自我照護（國語版）", id: "1Dx2uQgqlyo" },
+        { t: "無聲殺手高血壓 居家照護", id: "4cweirG1SOA" }
+      ],
+      search: "722 在家量血壓 國民健康署 衛教",
+      vote: {
+        q: "看完影片，你覺得自己最需要改的是哪一項？",
+        opts: ["量的姿勢不對", "沒有固定時間量", "量了沒有記下來"]
+      },
+      note: "任務先唸完再按播放，長輩才知道要看什麼。影片可以只播一支，看現場反應決定要不要加播。投票只計票、不講對錯，讓每個選項都有人舉手就成功了。"
+    },
+    {
+      t: "spot",
+      tag: "找看看",
+      h: "這些做法，哪裡怪怪的",
+      lead: "有幾張其實做得很好，別急著都挑掉。",
+      need: 4,
+      cards: [
+        { x: "血壓穩了就自己停藥", w: 1, why: "藥是把血壓壓住，不是治好。停了血壓會反彈。要停要減，都要先給醫師看紀錄再決定。" },
+        { x: "整碗湯汁全部喝光", w: 1, why: "湯汁、滷汁、沾醬是鈉的大宗。改成湯只喝幾口、菜稍微瀝一下再吃。" },
+        { x: "一進門就馬上量血壓", w: 1, why: "剛走動完血壓會偏高，量出來不準。先坐好、靜靜休息五分鐘再量。" },
+        { x: "血壓計壞了就不量", w: 1, why: "沒量就等於沒資料，醫師也難判斷。可以先去據點或藥局的血壓站量。" },
+        { x: "早晚各量一次血壓", d: 1, ok: "這正是722的「2」。早上起床後、晚上睡前各量一次，最能看出一天的變化。" },
+        { x: "把血壓數字記本子", d: 1, ok: "記下來最有價值。回診時醫師看的是一整排數字，不是當天那一次。" },
+        { x: "煮菜用蔥薑蒜代鹽", d: 1, ok: "用香氣取代鹹味，鈉減下來、味道還在，這是最實用的一招。" },
+        { x: "藥快吃完先去回診", d: 1, ok: "提早安排回診，就不會斷藥。斷藥那幾天血壓最容易亂。" }
+      ],
+      fb: "四張有問題的都跟「量」和「藥」有關。血壓的功課，說穿了就是量準、記好、照醫囑。",
+      note: "刻意留四張好習慣在裡面，長輩很容易全部都挑，這時候不要急著糾正，反問「這張哪裡不好？」讓同組的人互相講。挑到誘答卡時，一定要把它的好處唸出來。"
+    },
+    {
+      t: "stats",
+      tag: "【風險】",
+      h: "血壓一直高會怎樣",
+      items: [
+        { n: "2.8", u: "倍", d: "高血壓者中風的風險" },
+        { n: "1.9", u: "倍", d: "高血壓者心臟病的風險" },
+        { n: "1.7", u: "倍", d: "高血壓者腎臟病的風險" },
+        { n: "2、4", u: "名", d: "心臟病與中風的死因排名" }
+      ],
+      src: "衛福部「高血壓是無聲殺手」衛教資料（5年內罹病風險比）；衛福部113年（2024）國人死因統計",
+      note: "數字唸過就好，不要停在恐嚇。馬上補一句「這是不理它的情形，有在量、有在控制的人不算在裡面」。可以問問看有沒有人家裡有中風的長輩，接得住情緒再往下走。"
+    },
+    {
+      t: "sort",
+      tag: "分類看看",
+      h: "這九件事，各歸各位",
+      lead: "把每一張放進最合適的籃子。",
+      bins: [
+        { id: "a", t: "量血壓要做的" },
+        { id: "b", t: "日常要少的" },
+        { id: "c", t: "要找醫師的" }
+      ],
+      items: [
+        { x: "量前先坐著休息", b: "a" },
+        { x: "坐好靠背腳踏地", b: "a" },
+        { x: "連續七天早晚量", b: "a" },
+        { x: "醃漬品和罐頭湯", b: "b" },
+        { x: "沾醬和整碗湯汁", b: "b" },
+        { x: "菸和過量的酒", b: "b" },
+        { x: "血壓連幾天偏高", b: "c" },
+        { x: "藥快吃完要回診", b: "c" },
+        { x: "頭暈手麻說不清", b: "c" }
+      ],
+      fb: "三個籃子就是三個功課：量對、少踩、該找人就找人。最後一張如果出現，不要等，直接叫救護車。",
+      note: "邊分類邊問「這張為什麼放這裡」，讓長輩講理由比放對更重要。「頭暈手麻說不清」那張特別停一下，先預告下一頁的119。"
+    },
+    {
+      t: "section",
+      n: "提問②",
+      h: "血壓顧好，是顧到誰",
+      lead: "不是只有你自己受惠。我們一項一項算給你聽。",
+      note: "這裡換氣氛，語速放慢。可以先問一句「你覺得血壓顧好，最高興的會是誰？」等長輩自己講出「孩子」「孫子」，再翻下一頁。"
+    },
+    {
+      t: "points",
+      tag: "對自己",
+      h: "顧好血壓的四筆帳",
+      lead: "算算看，這四筆帳都是你自己的。",
+      cols: 2,
+      items: [
+        { k: "身體這筆", v: "中風、心臟病少一點，手腳還是自己的。" },
+        { k: "荷包這筆", v: "少住一次院、少請一次看護，省的不只<b>幾十個便當</b>。" },
+        { k: "自由這筆", v: "能自己走去買菜、自己上廁所，不用人扶。" },
+        { k: "心情這筆", v: "數字看得懂、心裡有底，就不會整天煩惱。" }
+      ],
+      note: "「自由這筆」通常最打動人。可以問「如果有一天要人扶才能上廁所，你會怎麼想」，但語氣要溫和，不是恐嚇，是讓他們自己算這筆帳。"
+    },
+    {
+      t: "points",
+      tag: "對別人",
+      h: "還有這些人會受惠",
+      lead: "你顧好自己，這些人都跟著輕鬆。",
+      cols: 3,
+      items: [
+        { k: "對家人", v: "孩子不用請假輪班顧，孫子也不用擔心。" },
+        { k: "對社區", v: "你會量、會記，就能帶隔壁的一起量，據點更熱鬧。" },
+        { k: "對國家", v: "少一個人中風住院，健保的錢就能用在更需要的地方。" }
+      ],
+      note: "講「對社區」時，可以現場找一位平常最熱心的長輩點名一下，直接邀請他當據點的量血壓小老師，這一頁的效果會延伸到課後。"
+    },
+    {
+      t: "order",
+      tag: "【怎麼辦】",
+      h: "血壓偏高怎麼辦",
+      lead: "把這五步排出正確順序。",
+      items: [
+        "先坐下休息，隔一下再量一遍確認",
+        "連續七天早晚量，把數字通通記下來",
+        "帶著血壓紀錄去看醫師",
+        "照醫囑吃藥，藥快沒了就先回診",
+        "繼續量繼續記，回診時再給醫師看"
+      ],
+      fb: "重點是「先有紀錄再看醫師」。但如果突然臉歪、手軟、話說不清，這五步都不用走，馬上打119，並記住開始的時間。",
+      note: "排完一定要把FAST唸一次：微笑看臉歪不歪、舉手看有沒有一邊掉下來、說一句話看清不清楚、記下時間快打119。請長輩跟著做一次動作，比用看的記得牢。"
+    },
+    {
+      t: "choice",
+      tag: "破迷思",
+      h: "血壓正常了，然後呢",
+      q: "量了幾天血壓都很漂亮，接下來最合適的做法是？",
+      opts: [
+        "先把藥停掉，觀察一段時間看看",
+        "繼續吃繼續量，回診讓醫師評估",
+        "自己把藥量減一半，比較安全",
+        "改用保健食品，慢慢取代藥物"
+      ],
+      ans: 1,
+      fb: "血壓漂亮，多半正是藥在幫忙。要不要減、要不要停，是醫師看過你的紀錄才能決定的事。至於「吃藥會洗腎」，反過來說，長期血壓不控制才是傷腎的主因之一。",
+      note: "這題一定要慢慢帶。先問「有人真的停過藥嗎？後來怎樣？」讓有經驗的長輩自己講。最後把話說清楚：這堂課從頭到尾不會叫任何人自己停藥或改藥。"
+    },
+    {
+      t: "points",
+      tag: "提問③",
+      h: "我做得到的六件事",
+      lead: "不用一次做完，先挑一件從今天開始。",
+      cols: 3,
+      core: true,
+      items: [
+        { k: "一、會量", v: "照<b>722</b>量：連七天、早晚各一次、每次兩遍。" },
+        { k: "二、會記", v: "準備一本小本子，寫上日期和數字，回診帶著。" },
+        { k: "三、減鹹", v: "湯汁少喝、沾醬少沾，用蔥薑蒜和檸檬提味。" },
+        { k: "四、動起來", v: "一週累積走一百五十分鐘，散步、太極都算。" },
+        { k: "五、按時吃", v: "藥照醫囑吃，快吃完先回診。不舒服跟醫師講。" },
+        { k: "六、傳下去", v: "把量血壓的習慣做給孩子孫子看，<b>只有你做得到</b>。" }
+      ],
+      src: "722原則出自2022年台灣高血壓治療指引；每週150分鐘運動建議出自國民健康署",
+      note: "最後一件要特別停住。長輩最常說「我講他們不聽」，你可以回：不是用講的，是用做的給他們看。請每個人指出一個要示範給誰看的對象，講出名字最有力。"
+    },
+    {
+      t: "points",
+      tag: "提問④",
+      h: "台灣給你的靠山",
+      lead: "這些是你的權益，不是給人添麻煩。",
+      cols: 2,
+      core: true,
+      items: [
+        { k: "免費健檢", v: "成人預防保健：<b>65歲以上每年一次</b>，驗血壓血糖。" },
+        { k: "慢性處方箋", v: "血壓穩可請醫師開<b>慢箋</b>，一次領久一點，少跑幾趟。" },
+        { k: "據點血壓站", v: "社區據點、藥局多半有血壓計，忘了帶就近量。" },
+        { k: "長照專線", v: "撥<b>1966</b>，問照顧、問服務、問補助都可以。" },
+        { k: "健保卡查得到", v: "回診時醫師看得到用藥紀錄，不怕重複拿藥。" },
+        { k: "緊急打119", v: "臉歪、手軟、話不清，不要等，直接叫救護車。" }
+      ],
+      src: "成人預防保健服務規定（國民健康署，2025年起30歲起適用）；長照專線1966（衛生福利部）",
+      note: "把1966和119寫在白板上，請長輩抄回去貼在電話旁邊。可以順便問據點的工作人員：這裡的血壓計放在哪、幾點開，講出具體位置比講制度有用。"
+    },
+    {
+      t: "spot",
+      tag: "大魔王",
+      h: "最後一關，看仔細",
+      lead: "這回有五張有問題，剩下的都是好習慣。",
+      need: 5,
+      cards: [
+        { x: "頭暈就自己多吃一顆", w: 1, why: "自己加藥很危險，血壓可能掉太低反而跌倒。要先量、記下來，打電話問醫師或藥師。" },
+        { x: "沒感覺就不看醫師", w: 1, why: "高血壓本來就多半沒感覺，等有感覺常常已經傷到器官。有數字就要給醫師看。" },
+        { x: "保健食品代替血壓藥", w: 1, why: "保健食品不能取代藥。想搭配什麼，先把品名拿去問醫師或藥師會不會衝突。" },
+        { x: "臉歪手軟先躺著等", w: 1, why: "這是中風徵兆，等待會錯過黃金時間。立刻打119，並記住症狀開始的時間。" },
+        { x: "洗完熱水澡馬上出門", w: 1, why: "溫差大血管急速收縮，血壓容易飆。先在室內緩一下、加件外套再出門。" },
+        { x: "隨身帶用藥紀錄卡", d: 1, ok: "萬一在外面不舒服，這張卡能讓救護人員和醫師馬上知道你在吃什麼藥。" },
+        { x: "回診拿血壓本給醫師", d: 1, ok: "醫師最想看的就是這個。一整排數字比當天量的那一次可靠太多。" },
+        { x: "天冷出門先加外套", d: 1, ok: "保暖是最省錢的血壓管理。頭、脖子、手腳顧好，血壓就不會突然衝高。" },
+        { x: "把119寫在電話旁", d: 1, ok: "緊急的時候人會慌，寫在看得到的地方，家人也找得到。" }
+      ],
+      fb: "五張有問題的，共同點都是「自己判斷、自己決定」。血壓的事，數字自己量、決定交給醫師。",
+      note: "這是綜合關，可以分兩組比賽。挑錯的時候請他們說出「要改成怎樣」，不只是指出哪裡錯。臉歪手軟那張如果沒被挑出來，一定要自己補上並重講一次119。"
+    },
+    {
+      t: "fill",
+      tag: "帶回去",
+      h: "把今天的重點填起來",
+      lead: "填完請大聲念一次，念出來才記得住。",
+      bank: ["722", "135", "130/80", "140/90", "119", "1966"],
+      lines: [
+        { pre: "在家量血壓要照", ans: "722", post: "，連七天、早晚各量、每次兩遍" },
+        { pre: "居家血壓如果超過", ans: "130/80", post: "，就要帶紀錄去跟醫師說" },
+        { pre: "看到臉歪手軟話不清，馬上打", ans: "119", post: "，並記下發作時間" }
+      ],
+      fb: "722是方法、130/80是標準、119是保命。這三個數字帶回家就夠了。",
+      note: "填完帶全班一起唸三次，第三次請他們閉上眼睛唸。可以發小卡讓他們寫下這三個數字，帶回家貼在血壓計旁邊。"
+    },
+    {
+      t: "reflect",
+      tag: "回頭想想",
+      h: "今天這一趟",
+      items: [
+        { k: "Facts 事實", v: "今天講到的數字和做法，你最記得哪一個？" },
+        { k: "Feelings 感受", v: "知道65歲以上每三人就有兩人，你心裡什麼感覺？" },
+        { k: "Findings 發現", v: "有沒有哪件事，是你以前做錯、今天才知道的？" },
+        { k: "Future 接下來", v: "回去以後，你打算先從哪一件開始做？" }
+      ],
+      note: "四題不用每題都問全班，一題找兩三位講就好。第三題如果有人願意承認自己曾經自行停藥，一定要大力肯定他的誠實，這是全場最有價值的分享。"
+    },
+    {
+      t: "pledge",
+      tag: "說出來",
+      h: "我要做的一件事",
+      lead: "選一項，說出來，讓大家做見證。",
+      items: [
+        "我今晚睡前就量一次血壓",
+        "我要買一本小本子記數字",
+        "我照722連量七天看看",
+        "我把湯汁改成只喝幾口",
+        "我煮菜改用蔥薑蒜提味",
+        "我下次回診帶血壓紀錄",
+        "我把119寫在電話旁邊",
+        "我做給我的孩子孫子看"
+      ],
+      note: "一人只選一項，選完請他站起來大聲講。可以請據點記下每個人選的項目，下次上課直接點名追蹤，承諾才不會停在嘴上。"
+    },
+    {
+      t: "section",
+      n: "結語",
+      h: "你本來就會的事",
+      lead: "煮飯懂得放多少鹽、天冷知道加外套、身體怪怪的自己會察覺——這些本事你早就有了。今天只是多給你一台血壓計和三個數字。",
+      note: "收尾語氣要慢、要正面。可以說：今天沒有人是來被教的，是來把本來就會的事，做得更有把握。最後謝謝大家願意坐到最後。"
+    },
+    {
+      t: "score",
+      h: "今天的成績單",
+      note: "唸分數時重點放在「哪一題全場都答對」，那就是今天最成功的部分。分數低的題目當場再講一次重點，不要留到下次。最後提醒把小卡和承諾帶回家。"
+    }
+  ]
+};
+
+/* ===================== engine ===================== */
+(function(){
+"use strict";
+var S = DECK.slides;
+var SCORED = ['fill','choice','order','spot','sort','movie'];
+var TOTAL = S.filter(function(s){return SCORED.indexOf(s.t)>=0;}).length;
+var cur = 0, score = 0, NOANIM = false;
+var stage = document.getElementById('stage');
+var els = [];
+var ORD = [2,4,0,3,1];
+
+document.documentElement.style.setProperty('--th', DECK.theme);
+document.documentElement.style.setProperty('--thd', shade(DECK.theme,-42));
+document.title = DECK.title + '｜長者慢性病互動教學簡報';
+
+function shade(hex,d){
+  var n=parseInt(hex.slice(1),16), r=(n>>16)+d, g=((n>>8)&255)+d, b=(n&255)+d;
+  function c(x){return Math.max(0,Math.min(255,x));}
+  return '#'+((1<<24)+(c(r)<<16)+(c(g)<<8)+c(b)).toString(16).slice(1);
+}
+function el(tag,cls,html){var e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e;}
+
+/* ---------- sound (WebAudio, no files, works offline) ---------- */
+var AC=null, SND=true;
+function actx(){
+  if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ AC=null; } }
+  if(AC && AC.state==='suspended'){ try{ AC.resume(); }catch(e){} }
+  return AC;
+}
+function tone(f,t0,dur,type,vol,to){
+  if(!SND) return; var c=actx(); if(!c) return;
+  var t=c.currentTime+t0;
+  var o=c.createOscillator(), g=c.createGain();
+  o.type=type||'sine'; o.frequency.setValueAtTime(f,t);
+  if(to) o.frequency.exponentialRampToValueAtTime(to,t+dur);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(vol||0.16,t+0.014);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g); g.connect(c.destination);
+  o.start(t); o.stop(t+dur+0.03);
+}
+var SFX={
+  click:function(){ tone(760,0,0.05,'triangle',0.08); },
+  page:function(){ tone(400,0,0.12,'sine',0.05,720); },
+  right:function(){ [523.25,659.25,783.99,1046.5].forEach(function(f,i){ tone(f,i*0.07,0.17,'sine',0.15); }); },
+  wrong:function(){ tone(300,0,0.13,'triangle',0.12,210); tone(232,0.15,0.19,'triangle',0.11,168); },
+  found:function(){ tone(700,0,0.09,'sine',0.12,1050); tone(1050,0.09,0.14,'sine',0.10); },
+  miss:function(){ tone(520,0,0.11,'sine',0.09,380); },
+  star:function(){ tone(1318.5,0,0.3,'sine',0.13); tone(1975.5,0.06,0.36,'sine',0.08); },
+  win:function(){ [523.25,659.25,783.99,1046.5,1318.5].forEach(function(f,i){ tone(f,i*0.11,0.34,'sine',0.14); }); }
+};
+['pointerdown','keydown'].forEach(function(ev){
+  document.addEventListener(ev,function(){ actx(); },{once:true});
+});
+var bsnd=document.getElementById('bsnd');
+function toggleSnd(){ SND=!SND; bsnd.textContent=(SND?'🔊':'🔇')+' 音效 S'; if(SND){ actx(); SFX.click(); } }
+bsnd.onclick=toggleSnd;
+
+/* ---------- flow layout helpers ---------- */
+function flow(nodes,extra){ var f=el('div','flow'+(extra?' '+extra:'')); f.dataset.n=nodes.length; f._items=nodes; layout(f,candidates(nodes.length)[0]); return f; }
+function layout(f,c){
+  f.innerHTML=''; f.style.setProperty('--c',c); f.dataset.c=c;
+  var it=f._items;
+  for(var i=0;i<it.length;i+=c){ var row=el('div','frow'); for(var j=i;j<Math.min(i+c,it.length);j++) row.appendChild(it[j]); f.appendChild(row); }
+}
+function candidates(n){ return ({3:[3,1],4:[2,4],6:[3,2],8:[4,2,3],9:[3,5]})[n]||[Math.min(n,3)]; }
+
+/* ---------- header helpers ---------- */
+function head(s){
+  var h=el('div','hd');
+  if(s.tag){var tr=el('div','tagrow'); tr.appendChild(el('span','tag',s.tag)); tr.appendChild(el('span','rule')); h.appendChild(tr);}
+  h.appendChild(el('h1','t',s.h||''));
+  if(s.lead) h.appendChild(el('p','lead',s.lead));
+  return h;
+}
+function addSrc(pad,s){ if(s.src) pad.appendChild(el('div','src','資料來源：'+s.src)); }
+
+/* ---------- answer modal ---------- */
+var ansv=document.getElementById('ansv');
+function modal(okFlag,title,body,icon){
+  setTimeout(function(){
+    if(modal._for!==cur) return;
+    document.getElementById('anic').textContent = icon || (okFlag?'🎉':'💡');
+    document.getElementById('anti').textContent = title;
+    document.getElementById('anfb').innerHTML = body;
+    ansv.classList.add('on');
+  },700);
+  modal._for = cur;
+}
+function closeModal(){ ansv.classList.remove('on'); }
+document.getElementById('anok').onclick=function(){ SFX.click(); closeModal(); };
+ansv.onclick=function(e){ if(e.target===ansv) closeModal(); };
+
+/* ---------- scoring ---------- */
+var sctr=document.getElementById('sctr');
+function star(){
+  score++;
+  sctr.textContent='⭐ '+score+' / '+TOTAL;
+  sctr.classList.remove('bump'); void sctr.offsetWidth; sctr.classList.add('bump');
+  SFX.star();
+  var r=sctr.getBoundingClientRect();
+  var f=el('div','fly','+1 ⭐');
+  f.style.left=(r.left+r.width/2-38)+'px'; f.style.top=(r.top-14)+'px';
+  document.body.appendChild(f);
+  setTimeout(function(){ f.remove(); },1150);
+}
+
+/* ---------- builders ---------- */
+function bCover(s){
+  var sl=el('section','slide cover'), pad=el('div','pad mid');
+  pad.appendChild(el('h1','ct',s.h));
+  if(s.sub) pad.appendChild(el('p','cs',s.sub));
+  pad.appendChild(el('div','cd'));
+  if(DECK.disease) pad.appendChild(el('div','cdis','主題疾病：'+DECK.disease));
+  pad.appendChild(el('div','cm',s.meta||'愛迪樂健康促進團隊'));
+  sl.appendChild(pad); return sl;
+}
+function bSection(s){
+  var sl=el('section','slide sect'), pad=el('div','pad mid');
+  if(s.n) pad.appendChild(el('div','sn',s.n));
+  pad.appendChild(el('div','sh',s.h));
+  if(s.lead) pad.appendChild(el('div','sl',s.lead));
+  sl.appendChild(pad); return sl;
+}
+function bPoints(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(it){
+    var c=el('div','card'); c.dataset.clip='1';
+    c.appendChild(el('div','k',it.k)); c.appendChild(el('div','v',it.v)); return c;
+  });
+  pad.appendChild(flow(cards,s.core?'core':'')); addSrc(pad,s); sl.appendChild(pad); return sl;
+}
+function bStats(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(it){
+    var c=el('div','stat'); c.dataset.clip='1';
+    c.appendChild(el('div','n',it.n)); if(it.u) c.appendChild(el('div','u',it.u));
+    c.appendChild(el('div','d',it.d)); return c;
+  });
+  pad.appendChild(flow(cards)); addSrc(pad,s); sl.appendChild(pad); return sl;
+}
+function bChoice(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  pad.appendChild(el('div','q',s.q));
+  var b=el('div','opts');
+  s.opts.forEach(function(o,i){
+    var btn=el('button','opt');
+    btn.appendChild(el('span','ch','ABCD'[i]));
+    btn.appendChild(el('span','tx',o));
+    btn.appendChild(el('span','mk',''));
+    btn.onclick=function(){
+      if(sl.dataset.done) return; sl.dataset.done='1'; b.classList.add('done');
+      var ok = (i===s.ans);
+      b.children[s.ans].classList.add('right'); b.children[s.ans].querySelector('.mk').textContent='○';
+      if(!ok){ btn.classList.add('wrong'); btn.querySelector('.mk').textContent='✕'; }
+      if(ok){ SFX.right(); star(); } else SFX.wrong();
+      modal(ok, ok?'答對了！':'再想看看', s.fb);
+    };
+    b.appendChild(btn);
+  });
+  pad.appendChild(b); addSrc(pad,s); sl.appendChild(pad); return sl;
+}
+function bFill(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var maxa=0; s.lines.forEach(function(l){ maxa=Math.max(maxa,l.ans.length); });
+  sl.style.setProperty('--bw', (maxa*1.06+0.95)+'em');
+  var bank=el('div','bank'), sel=null;
+  var chips=s.bank.map(function(w){
+    var c=el('button','word',w);
+    c.onclick=function(){
+      if(sl.dataset.done||c.classList.contains('used')) return;
+      SFX.click();
+      if(sel===c){ sel=null; c.classList.remove('sel'); return; }
+      if(sel) sel.classList.remove('sel');
+      sel=c; c.classList.add('sel');
+    };
+    bank.appendChild(c); return c;
+  });
+  pad.appendChild(bank);
+  var wrap=el('div','blanks'), slots=[];
+  s.lines.forEach(function(l,i){
+    var line=el('div','bl'), inn=el('div','in'); line.appendChild(inn);
+    inn.appendChild(el('span','',l.pre||''));
+    var sp=el('span','slot empty','？'); inn.appendChild(sp);
+    inn.appendChild(el('span','',l.post||''));
+    sp.onclick=function(){
+      if(sl.dataset.done) return;
+      if(sp.dataset.w){ chips[+sp.dataset.c].classList.remove('used'); sp.textContent='？';
+        sp.classList.add('empty'); delete sp.dataset.w; delete sp.dataset.c; SFX.click(); return; }
+      if(!sel) return;
+      sp.textContent=sel.textContent; sp.classList.remove('empty');
+      sp.dataset.w=sel.textContent; sp.dataset.c=chips.indexOf(sel);
+      sel.classList.add('used'); sel.classList.remove('sel'); sel=null;
+      SFX.found(); check();
+    };
+    slots.push({sp:sp,line:line,ans:l.ans});
+    wrap.appendChild(line);
+  });
+  function check(){
+    if(slots.some(function(o){return !o.sp.dataset.w;})) return;
+    sl.dataset.done='1';
+    var allok=true;
+    slots.forEach(function(o){
+      var ok=o.sp.dataset.w===o.ans;
+      o.line.classList.add(ok?'right':'wrong');
+      if(!ok){ allok=false; o.sp.textContent=o.ans; }
+    });
+    if(allok){ SFX.right(); star(); } else SFX.wrong();
+    modal(allok, allok?'三句都對！':'看一下正確的說法', s.fb);
+  }
+  pad.appendChild(wrap); sl.appendChild(pad); return sl;
+}
+function bOrder(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var b=el('div','ord'), picks=[], rows=[];
+  ORD.forEach(function(oi){
+    var row=el('button','oi');
+    var num=el('span','num','–'); row.appendChild(num);
+    row.appendChild(el('span','tx',s.items[oi]));
+    row.dataset.o=oi;
+    row.onclick=function(){
+      if(sl.dataset.done||row.classList.contains('picked')) return;
+      picks.push(oi); row.classList.add('picked'); num.textContent=picks.length;
+      SFX.click();
+      if(picks.length===s.items.length) check();
+    };
+    rows.push(row); b.appendChild(row);
+  });
+  function check(){
+    sl.dataset.done='1'; var allok=true;
+    rows.forEach(function(r){
+      var o=+r.dataset.o, ok=picks[o]===o;
+      r.classList.add(ok?'right':'wrong'); if(!ok) allok=false;
+    });
+    rows.forEach(function(r){ r.querySelector('.num').textContent = (+r.dataset.o)+1; });
+    if(allok){ SFX.right(); star(); } else SFX.wrong();
+    modal(allok, allok?'順序完全正確！':'正確的順序是這樣', s.fb);
+  }
+  pad.appendChild(b); sl.appendChild(pad); return sl;
+}
+function bSpot(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var found=0, tiles=[];
+  var longest=''; s.cards.forEach(function(c){ var t=(c.why||c.ok||''); if(t.length>longest.length) longest=t; });
+  s.cards.forEach(function(c,i){
+    var card=el('div','sc'); card.dataset.clip='1';
+    card.appendChild(el('span','no',(i+1)+''));
+    card.appendChild(el('span','tx',c.x));
+    card.appendChild(el('span','bd',''));
+    card.onclick=function(){
+      if(card.dataset.hit) return; card.dataset.hit='1';
+      if(c.w){ card.classList.add('bad'); card.querySelector('.bd').textContent='⚠ 有問題';
+        live.innerHTML='<b>'+(i+1)+'　⚠</b>　'+c.why; found++; SFX.found();
+        if(found===s.need && !sl.dataset.done){ sl.dataset.done='1'; star();
+          modal(true,'全部找出來了！',s.fb,'🔍'); }
+      } else { card.classList.add('shake'); SFX.miss();
+        setTimeout(function(){card.classList.remove('shake');card.classList.add('good');
+          card.querySelector('.bd').textContent='👍 做得很好';},380);
+        live.innerHTML='<b>'+(i+1)+'　👍</b>　'+c.ok;
+      }
+    };
+    tiles.push(card);
+  });
+  pad.appendChild(flow(tiles));
+  var bar=el('div','exbar');
+  bar.appendChild(el('div','exg','<b>00　⚠</b>　'+longest));
+  var live=el('div','exl','點卡片，一張一張問大家：「這樣做，可以嗎？」');
+  bar.appendChild(live); pad.appendChild(bar);
+  sl.appendChild(pad); return sl;
+}
+function bSort(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var sel=null, done=0, tiles=[];
+  s.items.forEach(function(it){
+    var t=el('div','pi'); t.dataset.clip='1';
+    t.appendChild(el('span','tx',it.x));
+    var bd=el('span','pb off','0'); t.appendChild(bd);
+    t.dataset.b=it.b;
+    t.onclick=function(){
+      if(sl.dataset.done||t.dataset.set) return;
+      SFX.click();
+      if(sel===t){ sel=null; t.classList.remove('sel'); return; }
+      if(sel) sel.classList.remove('sel'); sel=t; t.classList.add('sel');
+    };
+    tiles.push(t);
+  });
+  pad.appendChild(flow(tiles));
+  var bins=el('div','bins');
+  s.bins.forEach(function(bn,bi){
+    var btn=el('button','bin','①②③'[bi]+' '+bn.t);
+    btn.onclick=function(){
+      if(sl.dataset.done||!sel) return;
+      sel.dataset.set=bn.id;
+      var bd=sel.querySelector('.pb'); bd.textContent='①②③'[bi]; bd.classList.remove('off');
+      sel.classList.remove('sel'); sel=null; done++; SFX.found();
+      if(done===s.items.length) check();
+    };
+    bins.appendChild(btn);
+  });
+  function check(){
+    sl.dataset.done='1'; var allok=true;
+    tiles.forEach(function(t){
+      var ok=t.dataset.set===t.dataset.b;
+      t.classList.add(ok?'right':'wrong'); if(!ok) allok=false;
+    });
+    if(allok){ SFX.right(); star(); } else SFX.wrong();
+    modal(allok, allok?'分類完全正確！':'我們一起對一下', s.fb,'🗂️');
+  }
+  pad.appendChild(bins); sl.appendChild(pad); return sl;
+}
+function bMovie(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var b=el('div','mv'), L=el('div','mvL'), R=el('div','mvR');
+  (s.tasks||[]).forEach(function(t){
+    var c=el('div','task'); c.dataset.clip='1';
+    c.appendChild(el('div','k',t.k)); c.appendChild(el('div','v',t.v)); L.appendChild(c);
+  });
+  (s.clips||[]).forEach(function(c){
+    var btn=el('button','clip');
+    btn.appendChild(el('span','plyb','▶'));
+    btn.appendChild(el('span','tx',c.t));
+    btn.onclick=function(){ SFX.click(); openClip(c.id); };
+    R.appendChild(btn);
+  });
+  if(s.vote){
+    var v=el('div','vote'); v.appendChild(el('div','vq',s.vote.q));
+    s.vote.opts.forEach(function(o){
+      var row=el('button','vrow');
+      row.appendChild(el('span','tx',o));
+      var c=el('span','cnt','0'); row.appendChild(c);
+      row.onclick=function(){
+        c.textContent=(+c.textContent)+1; SFX.click();
+        if(!sl.dataset.done){ sl.dataset.done='1'; star(); }
+      };
+      v.appendChild(row);
+    });
+    R.appendChild(v);
+  }
+  b.appendChild(L); b.appendChild(R); pad.appendChild(b);
+  if(s.search) pad.appendChild(el('div','src','影片若無法播放，請用關鍵字現場搜尋：'+s.search));
+  sl.appendChild(pad); return sl;
+}
+function bReflect(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(it){
+    var c=el('div','rf'); c.dataset.clip='1';
+    c.appendChild(el('div','k',it.k)); c.appendChild(el('div','v',it.v)); return c;
+  });
+  pad.appendChild(flow(cards)); sl.appendChild(pad); return sl;
+}
+function bPledge(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(t){
+    var c=el('button','pl');
+    c.appendChild(el('span','bx','✓'));
+    c.appendChild(el('span','tx',t));
+    c.onclick=function(){ c.classList.toggle('on'); SFX.click(); };
+    return c;
+  });
+  pad.appendChild(flow(cards)); sl.appendChild(pad); return sl;
+}
+function bScore(s){
+  var sl=el('section','slide'), pad=el('div','pad mid');
+  var cv=el('canvas','','' ); cv.id='cfx';
+  var w=el('div','scw');
+  var big=el('div','big','0'); var stars=el('div','stars','');
+  w.appendChild(el('div','sub','今天的成績單'));
+  w.appendChild(big); w.appendChild(el('div','sub','／ '+TOTAL+' 顆星'));
+  w.appendChild(stars);
+  w.appendChild(el('div','msg','答對幾題不是重點——重點是今天帶回去的那一件事。<br>請每一位講一句：「我回去要開始做的是……」'));
+  sl.refresh=function(){
+    big.textContent=score;
+    var t=''; for(var i=0;i<TOTAL;i++) t += '<i style="animation-delay:'+(NOANIM?0:(i*90+300))+'ms">'+(i<score?'⭐':'☆')+'</i>';
+    stars.innerHTML=t;
+    if(!NOANIM){ SFX.win(); confetti(cv); }
+  };
+  pad.appendChild(cv); pad.appendChild(w); sl.appendChild(pad); return sl;
+}
+var B={cover:bCover,section:bSection,points:bPoints,stats:bStats,choice:bChoice,fill:bFill,
+  order:bOrder,spot:bSpot,sort:bSort,movie:bMovie,reflect:bReflect,pledge:bPledge,score:bScore};
+
+S.forEach(function(s,i){
+  var e=(B[s.t]||bPoints)(s,i);
+  e.dataset.i=i; els.push(e); stage.appendChild(e);
+});
+
+/* ---------- confetti ---------- */
+function confetti(cv){
+  var r=cv.parentNode.getBoundingClientRect();
+  cv.width=r.width; cv.height=r.height;
+  var g=cv.getContext('2d'), cols=['#E8552D','#F4A93C','#028090','#7B4EA3','#2E7D52'], ps=[];
+  for(var i=0;i<110;i++) ps.push({x:Math.random()*r.width,y:-Math.random()*r.height,
+    w:6+Math.random()*8,h:9+Math.random()*11,v:1.6+Math.random()*3.2,a:Math.random()*6.3,
+    s:(Math.random()-.5)*.22,c:cols[i%cols.length]});
+  var t0=Date.now();
+  (function loop(){
+    var el=Date.now()-t0;
+    g.clearRect(0,0,cv.width,cv.height);
+    ps.forEach(function(p){
+      p.y+=p.v; p.a+=p.s; p.x+=Math.sin(p.a)*.8;
+      g.save(); g.translate(p.x,p.y); g.rotate(p.a);
+      g.fillStyle=p.c; g.globalAlpha=Math.max(0,1-el/3400);
+      g.fillRect(-p.w/2,-p.h/2,p.w,p.h); g.restore();
+    });
+    if(el<3400) requestAnimationFrame(loop); else g.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+
+/* ---------- fit ---------- */
+/* Overflow is judged by geometry, not by scrollHeight: every child box must sit inside its parent's
+   box (the page's content box for the page itself). scrollHeight differs between browsers (Safari counts
+   glyph and letter-spacing overhang); getBoundingClientRect does not. scrollWidth is still used, with a
+   small font-relative tolerance, to catch a number or word too wide to wrap. */
+var ABS=(typeof WeakMap==='function')?new WeakMap():null;
+function isAbs(c){
+  var v=ABS?ABS.get(c):undefined;
+  if(v===undefined){ var p=getComputedStyle(c).position; v=(p==='absolute'||p==='fixed'); if(ABS) ABS.set(c,v); }
+  return v;
+}
+function hasBox(n){ return n.clientWidth>0||n.clientHeight>0; }
+var LASTBLOCK='';
+function badBox(n,contentBox){
+  if(n.scrollWidth>n.clientWidth+Math.max(4,0.06*(parseFloat(getComputedStyle(n).fontSize)||16))){
+    LASTBLOCK=n.className+' width '+n.scrollWidth+'/'+n.clientWidth; return true; }
+  var r=n.getBoundingClientRect(), t=r.top, b=r.bottom, l=r.left, rt=r.right;
+  var cs=getComputedStyle(n);
+  t+=parseFloat(cs.paddingTop)+parseFloat(cs.borderTopWidth); b-=parseFloat(cs.paddingBottom)+parseFloat(cs.borderBottomWidth);
+  l+=parseFloat(cs.paddingLeft)+parseFloat(cs.borderLeftWidth); rt-=parseFloat(cs.paddingRight)+parseFloat(cs.borderRightWidth);
+  var k=n.children;
+  for(var j=0;j<k.length;j++){
+    var c=k[j]; if(!hasBox(c)||isAbs(c)) continue;
+    var kr=c.getBoundingClientRect();
+    if(kr.top<t-3||kr.bottom>b+3||kr.left<l-3||kr.right>rt+3){
+      LASTBLOCK=(n.className||n.tagName)+' > '+(c.className||c.tagName)+' '+Math.round(kr.top-t)+'/'+Math.round(kr.bottom-b); return true; }
+  }
+  return false;
+}
+function overflow(root){
+  if(badBox(root,true)) return true;
+  var ns=root.querySelectorAll('*');
+  for(var i=0;i<ns.length;i++){ var n=ns[i]; if(!hasBox(n)) continue; if(badBox(n,false)) return true; }
+  return false;
+}
+var BOXSEL='.card,.stat,.sc,.pi,.opt,.oi,.rf,.pl,.task,.bl,.clip';
+function boxOver(n){
+  if(badBox(n,false)) return true;
+  var ds=n.querySelectorAll('*');
+  for(var j=0;j<ds.length;j++){ var d=ds[j]; if(!hasBox(d)) continue; if(badBox(d,false)) return true; }
+  return false;
+}
+/* each box is a fixed slot from the grid, so its own text can grow to fill it
+   without moving anything else — this is what kills the leftover white space */
+function fitBoxes(e){
+  var ns=e.querySelectorAll(BOXSEL);
+  Array.prototype.forEach.call(ns,function(n){
+    n.style.removeProperty('--cs');
+    var top=2.6, cs=top, best=0;
+    for(;cs>=1.0;cs-=0.15){                 /* coarse, from the top */
+      n.style.setProperty('--cs',cs.toFixed(3));
+      if(!boxOver(n)){ best=cs; break; }
+    }
+    if(!best){ n.style.removeProperty('--cs'); return; }
+    var probe=[best+0.1,best+0.05];          /* fine, just above the coarse hit */
+    for(var q=0;q<probe.length;q++){
+      if(probe[q]>top) continue;
+      n.style.setProperty('--cs',probe[q].toFixed(3));
+      if(!boxOver(n)){ best=probe[q]; break; }
+    }
+    n.style.setProperty('--cs',best.toFixed(3));
+  });
+}
+/* layout score: smallest text wins, but a layout that leaves the boxes half-empty loses points */
+function layoutScore(e){
+  var m=1e9, used=0, tot=0, maxLines=1;
+  Array.prototype.forEach.call(e.querySelectorAll(BOXSEL),function(n){
+    var tx=n.querySelector('.v,.d,.tx')||n;
+    var cs=getComputedStyle(tx), v=parseFloat(cs.fontSize); if(v<m) m=v;
+    var lh=parseFloat(cs.lineHeight)||v*1.3, ln=Math.round(tx.getBoundingClientRect().height/lh);
+    if(ln>maxLines) maxLines=ln;
+    var r=n.getBoundingClientRect(), top=1e9, bot=-1e9, k=n.children, any=false;
+    for(var j=0;j<k.length;j++){ if(getComputedStyle(k[j]).position==='absolute') continue;
+      var kr=k[j].getBoundingClientRect(); if(kr.top<top) top=kr.top; if(kr.bottom>bot) bot=kr.bottom; any=true; }
+    if(any){ used+=bot-top; tot+=r.height; }
+  });
+  if(m===1e9) return 0;
+  var fill=tot?used/tot:1;
+  var read = maxLines>=7 ? 0.62 : maxLines>=5 ? 0.8 : maxLines>=4 ? 0.78 : 1;   /* narrow columns read badly */
+  return m*(0.6+0.4*fill)*read;
+}
+/* headings scale with the screen too, but stay capped so they never starve the body text */
+function hsCap(){ return 1.16*Math.max(1, stage.clientHeight/720); }
+function setS(e,v){ e.style.setProperty('--s',String(v)); e.style.setProperty('--hs',String(Math.min(v,hsCap()))); }
+function gfit(e,pad){
+  var base=stage.clientHeight/720;                      /* 1.0 at a 720p projector */
+  function at(v){ setS(e,v); return !overflow(pad); }
+  var s=Math.min(4.0, 1.2+1.5*base), lo=0, floor=Math.max(0.6, 1.0*base);
+  for(;s>0.5;s-=0.1){ if(at(s)){ lo=s; break; } }         /* scan from the top: finds 2-line fits a binary search would skip */
+  if(lo && at(lo+0.05)) lo+=0.05;
+  if(!lo || lo<floor){ lo=Math.max(lo,floor); }          /* never show a page tiny because measuring failed */
+  setS(e,lo);
+}
+function fit(i){
+  var e=els[i], pad=e.querySelector('.pad');
+  Array.prototype.forEach.call(e.querySelectorAll('.rise'),function(n){ n.classList.remove('rise'); });
+  Array.prototype.forEach.call(e.querySelectorAll(BOXSEL),function(n){ n.style.removeProperty('--cs'); });
+  var f=e.querySelector('.flow');
+  if(f){
+    var cands=candidates(+f.dataset.n), best=-1, bestC=cands[0];
+    if(cands.length>1){
+      cands.forEach(function(c){ layout(f,c); gfit(e,pad); fitBoxes(e); var sc=layoutScore(e); if(sc>best){ best=sc; bestC=c; } });
+    }
+    layout(f,bestC);
+  }
+  gfit(e,pad);
+  fitBoxes(e);
+  e.dataset.fit='1';
+}
+
+/* ---------- entrance animation ---------- */
+var ANIM='.frow>*,.opts>*,.ord>*,.blanks>*,.bank>*,.mvL>*,.mvR>*,.q,.exbar,.bins>*,.scw>*';
+function animate(e){
+  if(NOANIM) return;
+  var ns=e.querySelectorAll(ANIM);
+  Array.prototype.forEach.call(ns,function(n,i){
+    n.classList.remove('rise');
+    n.style.setProperty('--d',(i*38)+'ms');
+  });
+  void e.offsetWidth;
+  Array.prototype.forEach.call(ns,function(n){ n.classList.add('rise'); });
+  clearTimeout(animate._t);
+  animate._t=setTimeout(function(){
+    Array.prototype.forEach.call(ns,function(n){ n.classList.remove('rise'); n.style.removeProperty('--d'); });
+  }, 420+ns.length*38+120);
+}
+
+/* ---------- navigation ---------- */
+var pg=document.getElementById('pg');
+function show(i){
+  i=Math.max(0,Math.min(S.length-1,i));
+  closeModal();
+  els[cur].classList.remove('on');
+  cur=i;
+  var e=els[cur];
+  e.classList.add('on');
+  if(e.refresh){ delete e.dataset.fit; e.refresh(); } else SFX.page();
+  if(!e.dataset.fit) fit(cur);
+  animate(e);
+  pg.textContent=(cur+1)+' / '+S.length;
+  document.getElementById('notep').innerHTML='<b>講師提示</b>　'+(S[cur].note||'');
+  Array.prototype.forEach.call(document.querySelectorAll('#tocg button'),function(b,k){
+    b.classList.toggle('cur',k===cur);
+  });
+}
+document.getElementById('bprev').onclick=function(){show(cur-1);};
+document.getElementById('bnext').onclick=function(){show(cur+1);};
+
+/* toc */
+var tocg=document.getElementById('tocg'), tocv=document.getElementById('tocv');
+S.forEach(function(s,i){
+  var b=el('button','','<span class="ix">'+(i+1)+'</span>'+(s.h||s.tag||''));
+  b.onclick=function(){ tocv.classList.remove('on'); show(i); };
+  tocg.appendChild(b);
+});
+document.getElementById('btoc').onclick=function(){ tocv.classList.toggle('on'); };
+tocv.onclick=function(e){ if(e.target===tocv) tocv.classList.remove('on'); };
+
+/* notes */
+function toggleNote(){ document.getElementById('notep').classList.toggle('on'); }
+document.getElementById('bnote').onclick=toggleNote;
+
+/* timer */
+var tmr=document.getElementById('tmr'), tid=null, left=20;
+function toggleTimer(){
+  if(tid){ clearInterval(tid); tid=null; tmr.classList.remove('on'); return; }
+  left=20; tmr.classList.add('on'); tmr.textContent='⏱ '+left;
+  tid=setInterval(function(){
+    left--; tmr.textContent = left>0 ? ('⏱ '+left) : '⏱ 時間到';
+    if(left<=3&&left>0) tone(880,0,0.07,'square',0.09);
+    if(left<=0){ clearInterval(tid); tid=null; tone(300,0,0.4,'sawtooth',0.12,180); }
+  },1000);
+}
+document.getElementById('btime').onclick=toggleTimer;
+
+/* fullscreen */
+function toggleFull(){
+  if(document.fullscreenElement) document.exitFullscreen();
+  else if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+}
+document.getElementById('bfull').onclick=toggleFull;
+
+/* lightbox */
+var lbv=document.getElementById('lbv'), lbf=document.getElementById('lbf'), lbo=document.getElementById('lbo');
+function openClip(id){
+  lbf.setAttribute('allow','autoplay; encrypted-media; fullscreen');
+  lbf.src='https://www.youtube-nocookie.com/embed/'+id+'?rel=0&autoplay=1';
+  lbo.href='https://www.youtube.com/watch?v='+id;
+  lbv.classList.add('on');
+}
+function closeClip(){ lbv.classList.remove('on'); lbf.removeAttribute('src'); lbf.removeAttribute('allow'); }
+document.getElementById('lbc').onclick=closeClip;
+lbv.onclick=function(e){ if(e.target===lbv) closeClip(); };
+
+/* keyboard */
+document.addEventListener('keydown',function(e){
+  var k=e.key;
+  if(lbv.classList.contains('on')){ if(k==='Escape') closeClip(); return; }
+  if(tocv.classList.contains('on')){ if(k==='Escape') tocv.classList.remove('on'); return; }
+  if(ansv.classList.contains('on')){
+    if(k==='Enter'||k===' '||k==='ArrowRight'||k==='Escape'){ e.preventDefault(); closeModal(); }
+    return;
+  }
+  if(k==='ArrowRight'||k===' '||k==='PageDown'){ e.preventDefault(); show(cur+1); }
+  else if(k==='ArrowLeft'||k==='PageUp'){ e.preventDefault(); show(cur-1); }
+  else if(k==='n'||k==='N'){ toggleNote(); }
+  else if(k==='t'||k==='T'){ toggleTimer(); }
+  else if(k==='f'||k==='F'){ toggleFull(); }
+  else if(k==='s'||k==='S'){ toggleSnd(); }
+  else if(k==='d'||k==='D'){ diag(); }
+  else if(k==='Home'){ show(0); }
+  else if(k==='End'){ show(S.length-1); }
+});
+
+/* diagnostics: press D to see why a page is the size it is */
+function diag(){
+  var e=els[cur], pad=e.querySelector('.pad');
+  var s=parseFloat(getComputedStyle(e).getPropertyValue('--s'))||0;
+  setS(e,s+0.2); var blocked=overflow(pad); var why=blocked?LASTBLOCK:'(nothing blocks at +0.2)'; setS(e,s);
+  var f=e.querySelector('.flow');
+  var txt='viewport '+window.innerWidth+'×'+window.innerHeight+'  dpr '+(window.devicePixelRatio||1)+'  stage '+stage.clientWidth+'×'+stage.clientHeight
+    +'\n--s '+s.toFixed(2)+(f?('  cols '+f.dataset.c):'')+'  UA '+navigator.userAgent.slice(0,80)
+    +'\nblocker @+0.2: '+why;
+  var d=document.getElementById('dbg');
+  if(!d){ d=el('pre','',''); d.id='dbg'; d.style.cssText='position:fixed;left:8px;top:8px;z-index:99;background:rgba(0,0,0,.85);color:#fff;font:14px/1.4 monospace;padding:10px 14px;border-radius:8px;white-space:pre-wrap;max-width:90vw'; document.body.appendChild(d); }
+  if(d.dataset.on==='1'){ d.remove(); return; }
+  d.dataset.on='1'; d.textContent=txt;
+}
+
+/* resize */
+var rt=null;
+window.addEventListener('resize',function(){
+  clearTimeout(rt);
+  rt=setTimeout(function(){
+    els.forEach(function(e){ delete e.dataset.fit; });
+    fit(cur); prefit();
+  },160);
+});
+
+var pre=null;
+function prefit(){
+  clearTimeout(pre);
+  var i=0;
+  (function step(){
+    while(i<els.length && els[i].dataset.fit) i++;
+    if(i>=els.length) return;
+    if(!els[i].refresh) fit(i);
+    else els[i].dataset.fit='1';
+    i++; pre=setTimeout(step,80);
+  })();
+}
+sctr.textContent='⭐ 0 / '+TOTAL;
+show(0);
+setTimeout(prefit,400);
+window.__deck={ check:function(i){ var e=els[i==null?cur:i]; var o=overflow(e.querySelector('.pad')); return o?LASTBLOCK:''; },
+  get cur(){return cur;}, get score(){return score;}, total:TOTAL, show:show, slides:S, els:els, fit:fit,
+  mute:function(){ SND=false; },
+  setAnim:function(v){ NOANIM=!v; document.documentElement.classList.toggle('noanim',NOANIM); if(NOANIM){ els.forEach(function(e){
+    Array.prototype.forEach.call(e.querySelectorAll('.rise'),function(n){ n.classList.remove('rise'); }); }); } } };
+})();
+</script>
+</body>
+</html>

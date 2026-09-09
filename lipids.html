@@ -1,0 +1,1340 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>血管順，人輕鬆｜長者慢性病互動教學簡報</title>
+<style>
+:root{
+  --orange:#E8552D; --amber:#F4A93C; --teal:#028090; --ink:#12343B;
+  --th:#028090; --thd:#12343B;
+  --bg:#FDFBF7; --card:#FFFFFF; --line:#E1D8CA;
+  --navh:48px; --s:1; --hs:1;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC","Heiti TC",sans-serif;}
+body{overflow:hidden}
+button{font-family:inherit;color:inherit}
+#stage{position:absolute;left:0;right:0;top:0;bottom:var(--navh);overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden}
+.slide.on{opacity:1;visibility:visible;animation:fadein .2s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.pad{position:absolute;inset:0;padding:1.6vh 2.2vw;display:flex;flex-direction:column;gap:.7vh;overflow:hidden}
+.pad.mid{justify-content:center;align-items:center;text-align:center}
+
+/* ---------- header ---------- */
+.hd{flex:0 0 auto}
+.tagrow{display:flex;align-items:center;gap:calc(11px*var(--hs));margin-bottom:calc(3px*var(--hs))}
+.tag{background:var(--th);color:#fff;border-radius:999px;padding:calc(4px*var(--hs)) calc(15px*var(--hs));
+  font-size:calc(17px*var(--hs));font-weight:800;letter-spacing:.06em;white-space:nowrap}
+.rule{flex:1;height:calc(4px*var(--hs));background:var(--th);opacity:.2;border-radius:99px}
+h1.t{margin:0;font-size:calc(43px*var(--hs));line-height:1.22;font-weight:900;letter-spacing:.01em}
+.lead{margin:calc(2px*var(--hs)) 0 0;font-size:calc(21px*var(--hs));line-height:1.25;color:#54666b;font-weight:700}
+.src{flex:0 0 auto;font-size:calc(13px*var(--s));color:#9aa3a6;line-height:1.25;padding-top:.1vh}
+
+/* ---------- flow layout: rows of equal tiles, column count chosen per slide ---------- */
+.flow{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.8vh;--g:.9vw;--c:2}
+.frow{flex:1 1 0;min-height:0;display:flex;justify-content:center;gap:var(--g)}
+.frow>*{flex:0 0 auto;width:calc((100% - (var(--c) - 1)*var(--g))/var(--c));min-width:0;min-height:0}
+.card .v,.stat .d,.sc .tx,.pi .tx,.pl .tx,.opt .tx,.oi .tx,.rf .v,.task .v{text-wrap:balance}
+
+/* ---------- generic body ---------- */
+.body{flex:1 1 auto;min-height:0;display:grid;gap:.8vh .9vw;grid-auto-rows:minmax(0,1fr)}
+.c2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.c22{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr)}
+.card{background:var(--card);border:calc(3px*var(--s)) solid var(--line);border-radius:calc(16px*var(--s));
+  padding:calc(9px*var(--s)) calc(15px*var(--s));display:flex;flex-direction:column;justify-content:center;
+  gap:calc(2px*var(--s));min-height:0;overflow:hidden}
+.card .k{font-size:calc(28px*var(--s)*var(--cs,1));font-weight:900;color:var(--th);line-height:1.22}
+.card .v{font-size:calc(33px*var(--s)*var(--cs,1));line-height:1.34;font-weight:700}
+.card .v b{color:var(--orange)}
+.core .card{border-color:var(--th);background:#fff}
+
+/* ---------- cover ---------- */
+.cover{background:linear-gradient(150deg,var(--th) 0%,var(--thd) 100%);color:#fff}
+.cover .ct{font-size:calc(90px*var(--s));font-weight:900;line-height:1.16;letter-spacing:.02em;margin:0}
+.cover .cs{font-size:calc(36px*var(--s));font-weight:700;margin:calc(20px*var(--s)) 0 0;opacity:.95;line-height:1.35}
+.cover .cd{width:calc(120px*var(--s));height:calc(8px*var(--s));background:var(--amber);border-radius:99px;margin:calc(26px*var(--s)) 0}
+.cover .cm{font-size:calc(25px*var(--s));font-weight:700;opacity:.88}
+.cover .cdis{font-size:calc(23px*var(--s));opacity:.78;margin-top:calc(6px*var(--s))}
+
+/* ---------- section ---------- */
+.sect{background:var(--th);color:#fff}
+.sect .sn{font-size:calc(31px*var(--s));font-weight:900;background:rgba(255,255,255,.2);
+  padding:calc(8px*var(--s)) calc(26px*var(--s));border-radius:99px;display:inline-block}
+.sect .sh{font-size:calc(72px*var(--s));font-weight:900;margin:calc(24px*var(--s)) 0 0;line-height:1.2}
+.sect .sl{font-size:calc(33px*var(--s));margin:calc(18px*var(--s)) 0 0;opacity:.95;line-height:1.35;font-weight:700;max-width:82%}
+
+/* ---------- stats ---------- */
+.stat{background:var(--card);border:calc(3px*var(--s)) solid var(--line);border-radius:calc(18px*var(--s));
+  padding:calc(10px*var(--s));display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:calc(2px*var(--s));text-align:center;min-height:0;overflow:hidden;border-top:calc(10px*var(--s)) solid var(--th)}
+.stat .n{font-size:calc(66px*var(--s)*var(--cs,1));font-weight:900;color:var(--th);line-height:1.18;letter-spacing:-.01em}
+.stat .u{font-size:calc(24px*var(--s)*var(--cs,1));font-weight:800;color:var(--orange)}
+.stat .d{font-size:calc(32px*var(--s)*var(--cs,1));font-weight:700;line-height:1.28;color:#2c3b40}
+
+/* ---------- choice ---------- */
+.q{flex:0 0 auto;background:#fff;border:calc(3px*var(--s)) dashed var(--th);border-radius:calc(14px*var(--s));
+  padding:calc(11px*var(--s)) calc(20px*var(--s));font-size:calc(34px*var(--s));font-weight:800;line-height:1.3}
+.opts{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.85vh}
+.opt{flex:1 1 0;min-height:0;display:flex;align-items:center;gap:calc(14px*var(--s));cursor:pointer;
+  background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(6px*var(--s)) calc(17px*var(--s));text-align:left;font-size:calc(36px*var(--s)*var(--cs,1));font-weight:700;line-height:1.25}
+.opt .ch{flex:0 0 auto;width:calc(50px*var(--s)*var(--cs,1));height:calc(50px*var(--s)*var(--cs,1));border-radius:50%;
+  background:var(--th);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:calc(28px*var(--s)*var(--cs,1));font-weight:900}
+.opt .mk{flex:0 0 auto;margin-left:auto;font-size:calc(36px*var(--s)*var(--cs,1));width:calc(46px*var(--s)*var(--cs,1));text-align:center;display:inline-block}
+.opt:hover{border-color:var(--th)}
+.opt.right{border-color:#1e8449;background:#eafaf1}
+.opt.wrong{border-color:#c0392b;background:#fdecea}
+.done .opt{cursor:default}
+
+/* ---------- fill ---------- */
+.bank{flex:0 0 auto;display:flex;flex-wrap:wrap;gap:calc(9px*var(--s));justify-content:center}
+.word{background:var(--amber);color:#3b2a10;border:none;border-radius:calc(12px*var(--s));
+  padding:calc(8px*var(--s)) calc(20px*var(--s));font-size:calc(31px*var(--s));font-weight:900;cursor:pointer}
+.word.sel{background:var(--orange);color:#fff;box-shadow:0 0 0 calc(4px*var(--s)) rgba(232,85,45,.3)}
+.word.used{opacity:.3;cursor:default}
+.blanks{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.9vh}
+.bl{flex:1 1 0;min-height:0;display:flex;align-items:center;overflow:hidden;font-size:calc(37px*var(--s)*var(--cs,1));font-weight:700;line-height:1.35;background:#fff;
+  border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(10px*var(--s)) calc(18px*var(--s))}
+.bl .in{width:100%}
+.slot{display:inline-block;white-space:nowrap;min-width:var(--bw);text-align:center;border-bottom:calc(4px*var(--s)) solid var(--th);
+  color:var(--orange);font-weight:900;cursor:pointer;padding:0 calc(6px*var(--s));margin:0 calc(3px*var(--s))}
+.slot.empty{color:#c8cfd1}
+.bl.right{border-color:#1e8449;background:#eafaf1}
+.bl.wrong{border-color:#c0392b;background:#fdecea}
+
+/* ---------- order ---------- */
+.ord{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.85vh}
+.oi{flex:1 1 0;min-height:0;display:flex;align-items:center;gap:calc(14px*var(--s));cursor:pointer;
+  background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(6px*var(--s)) calc(17px*var(--s));text-align:left;font-size:calc(34px*var(--s)*var(--cs,1));font-weight:700;line-height:1.25}
+.oi .num{flex:0 0 auto;width:calc(54px*var(--s)*var(--cs,1));height:calc(54px*var(--s)*var(--cs,1));border-radius:calc(12px*var(--s));
+  background:#EFEAE2;color:#9aa4a8;display:flex;align-items:center;justify-content:center;
+  font-size:calc(30px*var(--s)*var(--cs,1));font-weight:900}
+.oi.picked .num{background:var(--th);color:#fff}
+.oi.right{border-color:#1e8449;background:#eafaf1}
+.oi.wrong{border-color:#c0392b;background:#fdecea}
+
+/* ---------- spot ---------- */
+.cards{flex:1 1 auto;min-height:0;display:grid;gap:.9vh .85vw;grid-auto-rows:minmax(0,1fr)}
+.g8{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:minmax(0,1fr) minmax(0,1fr)}
+.g9{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+.sc{position:relative;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(16px*var(--s));
+  padding:calc(18px*var(--s)) calc(12px*var(--s));display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:calc(37px*var(--s)*var(--cs,1));font-weight:800;line-height:1.25;cursor:pointer;min-height:0;overflow:hidden}
+.sc .no{position:absolute;top:calc(4px*var(--s));left:calc(9px*var(--s));font-size:calc(18px*var(--s));
+  color:#b6bec1;font-weight:900}
+.sc .bd{position:absolute;bottom:calc(4px*var(--s));right:calc(9px*var(--s));font-size:calc(19px*var(--s));font-weight:900;display:inline-block}
+.sc.bad{border-color:#c0392b;background:#fdecea}
+.sc.bad .bd{color:#c0392b}
+.sc.good{border-color:#1b7fa8;background:#eaf4fb}
+.sc.good .bd{color:#1b7fa8}
+.shake{animation:sh .4s}
+@keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.exbar{position:relative;flex:0 0 auto;background:#fff;border:calc(3px*var(--s)) solid var(--th);
+  border-radius:calc(14px*var(--s));padding:calc(10px*var(--s)) calc(18px*var(--s))}
+.exg{visibility:hidden;font-size:calc(29px*var(--s));font-weight:700;line-height:1.3}
+.exl{position:absolute;inset:calc(10px*var(--s)) calc(18px*var(--s));display:flex;align-items:center;
+  font-size:calc(29px*var(--s));font-weight:700;line-height:1.3}
+
+/* ---------- sort ---------- */
+.pool{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:.85vh .85vw}
+.pi{position:relative;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(16px*var(--s)) calc(10px*var(--s));display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:calc(33px*var(--s)*var(--cs,1));font-weight:800;line-height:1.25;cursor:pointer;min-height:0;overflow:hidden}
+.pi.sel{border-color:var(--orange);box-shadow:0 0 0 calc(4px*var(--s)) rgba(232,85,45,.24)}
+.pi .pb{position:absolute;top:calc(4px*var(--s));right:calc(7px*var(--s));font-size:calc(19px*var(--s));
+  font-weight:900;color:#fff;background:var(--th);border-radius:99px;padding:calc(1px*var(--s)) calc(9px*var(--s));
+  min-width:calc(28px*var(--s));text-align:center}
+.pi .pb.off{background:transparent;color:transparent}
+.pi.right{border-color:#1e8449;background:#eafaf1}
+.pi.wrong{border-color:#c0392b;background:#fdecea}
+.bins{flex:0 0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.85vw}
+.bin{background:var(--th);color:#fff;border:none;border-radius:calc(14px*var(--s));
+  padding:calc(11px*var(--s));font-size:calc(30px*var(--s));font-weight:900;cursor:pointer;line-height:1.2}
+.bin.sel{outline:calc(5px*var(--s)) solid var(--amber)}
+
+/* ---------- movie ---------- */
+.mv{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:1vw}
+.mvL,.mvR{display:flex;flex-direction:column;gap:.85vh;min-height:0}
+.task{flex:1 1 0;min-height:0;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-left:calc(10px*var(--s)) solid var(--amber);
+  border-radius:calc(12px*var(--s));padding:calc(8px*var(--s)) calc(14px*var(--s));display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.task .k{font-size:calc(19px*var(--s)*var(--cs,1));font-weight:900;color:var(--orange)}
+.task .v{font-size:calc(30px*var(--s)*var(--cs,1));font-weight:700;line-height:1.3}
+.clip{flex:1 1 0;min-height:0;overflow:hidden;display:flex;align-items:center;gap:.5em;background:var(--ink);color:#fff;
+  border:none;border-radius:calc(12px*var(--s));padding:calc(6px*var(--s)) calc(12px*var(--s));
+  font-size:calc(23px*var(--s)*var(--cs,1));font-weight:800;cursor:pointer;text-align:left;line-height:1.2}
+.clip .plyb{flex:0 0 auto;width:1.5em;height:1.5em;border-radius:50%;background:#E62117;
+  display:flex;align-items:center;justify-content:center;font-size:.9em}
+.vote{flex:0 0 auto;display:flex;flex-direction:column;background:#fff;border:calc(3px*var(--s)) dashed var(--th);border-radius:calc(12px*var(--s));
+  padding:calc(7px*var(--s)) calc(14px*var(--s)) calc(9px*var(--s))}
+.vote .vq{flex:0 0 auto;font-size:calc(23px*var(--s));font-weight:900;margin-bottom:calc(4px*var(--s))}
+.vrow{flex:0 0 auto;display:flex;align-items:center;gap:.4em;width:100%;background:#F7F3EC;border:none;
+  border-radius:calc(9px*var(--s));padding:calc(6px*var(--s)) calc(13px*var(--s));margin-top:calc(5px*var(--s));
+  font-size:calc(28px*var(--s));font-weight:700;cursor:pointer;text-align:left;line-height:1.2}
+.vrow .cnt{margin-left:auto;background:var(--th);color:#fff;border-radius:99px;min-width:1.6em;
+  text-align:center;font-weight:900;padding:0 .3em;line-height:1.3}
+
+/* ---------- reflect / pledge ---------- */
+.rf{background:#fff;border:calc(3px*var(--s)) solid var(--line);border-left:calc(12px*var(--s)) solid var(--th);
+  border-radius:calc(14px*var(--s));padding:calc(12px*var(--s)) calc(18px*var(--s));display:flex;flex-direction:column;
+  justify-content:center;gap:calc(4px*var(--s));min-height:0;overflow:hidden}
+.rf .k{font-size:calc(28px*var(--s)*var(--cs,1));font-weight:900;color:var(--th)}
+.rf .v{font-size:calc(30px*var(--s)*var(--cs,1));font-weight:700;line-height:1.35}
+.pl{position:relative;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(8px*var(--s)) calc(16px*var(--s)) calc(8px*var(--s)) calc(56px*var(--s));
+  display:flex;align-items:center;font-size:calc(31px*var(--s)*var(--cs,1));font-weight:700;line-height:1.25;
+  cursor:pointer;min-height:0;overflow:hidden;text-align:left}
+.pl .bx{position:absolute;left:calc(13px*var(--s));width:calc(32px*var(--s));height:calc(32px*var(--s));
+  border:calc(3px*var(--s)) solid var(--th);border-radius:calc(7px*var(--s));display:flex;align-items:center;
+  justify-content:center;font-size:calc(22px*var(--s));line-height:1;overflow:hidden;color:#fff}
+.pl.on{border-color:var(--th);background:#f2fbfa}
+.pl.on .bx{background:var(--th)}
+
+/* ---------- score ---------- */
+.scw{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:calc(12px*var(--s))}
+.scw .big{font-size:calc(130px*var(--s));font-weight:900;color:var(--th);line-height:1.15}
+.scw .sub{font-size:calc(34px*var(--s));font-weight:800}
+.scw .stars{font-size:calc(46px*var(--s));letter-spacing:.06em;line-height:1.25;max-width:82vw}
+.scw .stars i{font-style:normal;display:inline-block;opacity:0;animation:pin .4s both}
+@keyframes pin{from{opacity:0;transform:scale(0) rotate(-40deg)}to{opacity:1;transform:none}}
+.scw .msg{font-size:calc(30px*var(--s));font-weight:700;color:#4a5b60;line-height:1.4;max-width:74vw}
+#cfx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:30}
+
+/* ---------- entrance animation ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+.rise{animation:rise .40s var(--d,0ms) both cubic-bezier(.2,.8,.3,1)}
+@keyframes popin{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.opt.right .mk,.opt.wrong .mk,.sc.bad .bd,.sc.good .bd{animation:popin .32s cubic-bezier(.2,.9,.3,1.5)}
+@keyframes gpulse{0%{transform:scale(1)}45%{transform:scale(1.03)}100%{transform:scale(1)}}
+.opt.right,.oi.right,.pi.right,.bl.right{animation:gpulse .5s}
+.opt.wrong{animation:sh .4s}
+
+html.noanim *{animation:none!important;transition:none!important}
+
+/* ---------- nav ---------- */
+#nav{position:absolute;left:0;right:0;bottom:0;height:var(--navh);background:var(--ink);color:#fff;
+  display:flex;align-items:center;gap:8px;padding:0 12px;font-size:15px;font-weight:700;z-index:40}
+#nav button,#nav a{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:8px;padding:7px 12px;
+  font-size:15px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block;line-height:1.2}
+#nav button:hover,#nav a:hover{background:rgba(255,255,255,.26)}
+#nav a#bhome{background:var(--amber);color:#3b2a10}
+#pg{font-size:16px;font-weight:900;min-width:80px;text-align:center}
+#sctr{background:var(--amber);color:#3b2a10;border-radius:99px;padding:4px 13px;font-weight:900}
+@keyframes bump{0%,100%{transform:scale(1)}40%{transform:scale(1.3)}}
+#sctr.bump{animation:bump .5s}
+.spacer{flex:1}
+#tmr{display:none;background:var(--orange);border-radius:99px;padding:4px 14px;font-weight:900}
+#tmr.on{display:block}
+.fly{position:fixed;z-index:70;font-size:38px;font-weight:900;color:#F4A93C;pointer-events:none;
+  text-shadow:0 2px 10px rgba(0,0,0,.4);animation:fly 1.1s ease-out forwards}
+@keyframes fly{0%{opacity:0;transform:translateY(0) scale(.5)}18%{opacity:1;transform:translateY(-16px) scale(1.2)}
+  100%{opacity:0;transform:translateY(-96px) scale(1)}}
+
+/* ---------- overlays ---------- */
+.ov{position:absolute;inset:0;background:rgba(18,52,59,.74);display:none;z-index:50;
+  align-items:center;justify-content:center;padding:4vh 4vw}
+.ov.on{display:flex}
+#ansv .box{background:#fff;border-radius:24px;max-width:min(900px,88vw);width:100%;padding:30px 38px;text-align:center;
+  box-shadow:0 24px 70px rgba(0,0,0,.34);animation:pop .34s cubic-bezier(.2,.9,.3,1.25)}
+@keyframes pop{0%{transform:scale(.85);opacity:0}62%{transform:scale(1.03)}100%{transform:scale(1);opacity:1}}
+#ansv .ic{font-size:74px;line-height:1}
+#ansv .ti{font-size:42px;font-weight:900;margin:4px 0 14px}
+#ansv .fb{border:3px dashed var(--th);border-radius:14px;padding:16px 20px;font-size:29px;font-weight:700;
+  line-height:1.45;text-align:left}
+#ansv .ok{margin-top:20px;background:var(--th);color:#fff;border:none;border-radius:12px;padding:13px 38px;
+  font-size:25px;font-weight:900;cursor:pointer}
+#tocv .box{background:#fff;border-radius:20px;max-width:min(1180px,92vw);width:100%;max-height:88vh;overflow:auto;padding:22px}
+#tocv h3{margin:0 0 12px;font-size:23px}
+#tocg{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+#tocg button{text-align:left;background:#F7F3EC;border:2px solid var(--line);border-radius:11px;padding:9px 11px;
+  font-size:16px;font-weight:700;cursor:pointer;line-height:1.3}
+#tocg button.cur{border-color:var(--th);background:#fff}
+#tocg .ix{color:var(--th);font-weight:900;margin-right:6px}
+#lbv .box{width:min(1180px,92vw)}
+#lbv .fr{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:12px;overflow:hidden}
+#lbv iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+#lbv .bar{display:flex;gap:10px;margin-top:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+#lbv a,#lbv button{background:#fff;color:var(--ink);border:none;border-radius:11px;padding:10px 18px;
+  font-size:18px;font-weight:800;cursor:pointer;text-decoration:none}
+#lbv .hint{color:#fff;font-size:16px;font-weight:600;opacity:.9}
+#notep{position:absolute;left:0;right:0;bottom:var(--navh);background:#12343B;color:#F4E9D8;
+  padding:15px 20px;font-size:20px;line-height:1.5;font-weight:600;display:none;z-index:45;
+  border-top:4px solid var(--amber);max-height:40vh;overflow:auto}
+#notep.on{display:block}
+#notep b{color:var(--amber)}
+@media (max-width:860px){ #nav{font-size:12px;gap:6px} #nav button,#nav a{padding:6px 8px;font-size:12px} }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div id="notep"></div>
+<div id="nav">
+  <button id="bprev">‹ 上一頁</button>
+  <span id="pg">1 / 24</span>
+  <button id="bnext">下一頁 ›</button>
+  <span id="sctr">⭐ 0 / 9</span>
+  <span id="tmr">⏱ 20</span>
+  <span class="spacer"></span>
+  <a id="bhome" href="index.html" title="回到 12 個主題的主選單">🏠 主選單</a>
+  <button id="btoc">目錄</button>
+  <button id="bnote">講師提示 N</button>
+  <button id="bsnd">🔊 音效 S</button>
+  <button id="btime">計時 T</button>
+  <button id="bfull">全螢幕 F</button>
+</div>
+<div class="ov" id="ansv"><div class="box">
+  <div class="ic" id="anic">✅</div><div class="ti" id="anti"></div>
+  <div class="fb" id="anfb"></div><button class="ok" id="anok">知道了，繼續</button>
+</div></div>
+<div class="ov" id="tocv"><div class="box"><h3>目錄｜點一下直接跳頁</h3><div id="tocg"></div></div></div>
+<div class="ov" id="lbv"><div class="box">
+  <div class="fr"><iframe id="lbf" allowfullscreen></iframe></div>
+  <div class="bar"><span class="hint">若出現「錯誤 153」代表該頻道不開放內嵌，請按右邊按鈕改用 YouTube 開啟。</span>
+  <span><a id="lbo" target="_blank" rel="noopener">在 YouTube 開啟大畫面</a> <button id="lbc">關閉</button></span></div>
+</div></div>
+<script>
+const DECK = {
+  title: "血管順，人輕鬆",
+  subtitle: "看懂膽固醇和三酸甘油酯，把血管裡的油垢顧好",
+  disease: "高血脂（血脂異常）",
+  theme: "#D9821B",
+  slides: [
+    {
+      t: "cover",
+      h: "血管順，人輕鬆",
+      sub: "抽血報告上的紅字，今天我們一起看清楚",
+      meta: "愛迪樂健康促進團隊",
+      note: "開場先別談病，先問一句：「有人抽血報告拿出來，看不懂的請舉手？」通常一半以上會笑出來。講清楚今天不是來考試，是來把自己的報告看明白，看完可以帶回去問醫師。"
+    },
+    {
+      t: "points",
+      tag: "開場",
+      h: "這個病，大家都怎麼說？",
+      lead: "這幾句話，你聽過嗎？聽過的請舉手，想到什麼都可以說。",
+      cols: 2,
+      items: [
+        { k: "血油太濃", v: "鄰居最常講的一句，說的就是血脂偏高" },
+        { k: "都沒感覺", v: "「我身體好好的，哪有病」，很多人這樣說" },
+        { k: "我這麼瘦", v: "「瘦的人不用擔心」，這個說法聽過的舉手" },
+        { k: "不能吃蛋", v: "「膽固醇高就別吃蛋」，流傳很久的說法" },
+        { k: "吃藥一輩子", v: "「藥吃下去就停不了」，很多人怕這一點" },
+        { k: "我都吃素", v: "「吃素就不用怕」，也有朋友這樣認為" }
+      ],
+      note: "這頁只收集、不糾正。一句一句唸出來，讓長輩舉手、講自己的經驗，講越多越好。心裡記住今天班上有幾位相信「瘦就不用怕」和「不能吃蛋」，後面破迷思那題會用到。"
+    },
+    {
+      t: "fill",
+      tag: "暖身",
+      h: "用家裡的事來理解",
+      lead: "這三句是生活話，大家一起念，把空格補起來。",
+      bank: ["油垢", "水垢", "順暢", "停擺", "變窄", "變寬"],
+      lines: [
+        { pre: "廚房的排油煙管用久了，內壁會積一層厚厚的", ans: "油垢", post: "。" },
+        { pre: "老一輩常說，血路著愛", ans: "順暢", post: "，手腳才會有力。" },
+        { pre: "吃太油、又很少活動，血管的通道就會一年一年", ans: "變窄", post: "。" }
+      ],
+      fb: "「血路著愛順暢」是老一輩的說法，意思就是血流要通、身體才有力。血管和排油煙管一樣，油垢是一天一天積起來的，不是一個晚上變這樣；還好，慢慢積的，也可以慢慢顧回來。",
+      note: "先不要講醫學名詞，讓長輩用廚房的經驗去想。有人答「水垢」也很好，順著問他：油垢和水垢有什麼不一樣？黏黏的、洗不掉的那種，才是我們血管裡的狀況。中間那句刻意留台語俗諺，唸出來長輩會很有共鳴，再用國語解釋一次意思。"
+    },
+    {
+      t: "points",
+      tag: "提問①",
+      core: true,
+      h: "血脂到底是什麼？",
+      lead: "抽血報告上面那四行數字，我們一項一項看。",
+      cols: 2,
+      items: [
+        { k: "總膽固醇", v: "全身油量的<b>總帳</b>，好壞看不出來" },
+        { k: "LDL 壞的", v: "<b>送貨車</b>，把油囤在血管壁，越高越不好" },
+        { k: "HDL 好的", v: "<b>回收車</b>，把油送回肝臟，越高反而好" },
+        { k: "三酸甘油酯", v: "甜食、酒、精白米麵變成的<b>存油</b>，拖累血管" },
+        { k: "什麼叫異常", v: "四項裡面<b>有一項</b>脫線，就算血脂異常" },
+        { k: "數字因人而異", v: "LDL 要降多少，<b>看你的心血管風險</b>，問醫師" }
+      ],
+      note: "送貨車和回收車這個比喻請講慢一點，講完停一下，問：「那 HDL 是越高好還是越低好？」讓長輩回答。最後一格最重要，要強調「沒有一個數字是大家都一樣的」，避免長輩互相比數字。"
+    },
+    {
+      t: "stats",
+      tag: "台灣現況",
+      h: "台灣現在是什麼情形？",
+      items: [
+        { n: "42.5", u: "%", d: "65歲以上高血脂盛行率" },
+        { n: "31", u: "%", d: "20歲以上國人高血脂比例" },
+        { n: "77", u: "%", d: "不知道自己血脂高的人" },
+        { n: "2", u: "名", d: "心臟疾病在十大死因的排名" }
+      ],
+      src: "國民健康署 2019–2023 年國民營養健康調查；不自知比例引自 2017–2020 年同調查；衛生福利部 113 年國人死因統計（114 年公布）",
+      note: "42.5% 換算給長輩聽：一桌坐十位，差不多就有四位。77% 那一格可以停久一點，問：「今天坐在這裡，有抽過血的請舉手？」通常會發現很多人只知道「有紅字」，不知道是哪一項。"
+    },
+    {
+      t: "choice",
+      tag: "動動腦",
+      h: "哪一項是「壞的膽固醇」？",
+      q: "抽血報告上面，大家在講的「壞的膽固醇」是哪一項？",
+      opts: [
+        "高密度脂蛋白 HDL",
+        "低密度脂蛋白 LDL",
+        "三酸甘油酯 TG",
+        "總膽固醇 TC"
+      ],
+      ans: 1,
+      fb: "LDL 是送貨車，把油送到血管壁囤起來；HDL 是回收車，那項數字高反而好。",
+      note: "先讓大家舉手表決，再公布答案。答錯很正常，因為兩個英文縮寫本來就難分。可以教一個記法：L 是「囉嗦愛囤」，H 是「好的回收」，讓長輩笑一下就會記牢。"
+    },
+    {
+      t: "points",
+      tag: "原因",
+      h: "血脂為什麼會變高？",
+      lead: "有的改不動，有的改得動。我們把力氣放在改得動的那一邊。",
+      cols: 2,
+      items: [
+        { k: "改不動·年紀", v: "年紀越大，肝臟處理油脂的速度越慢" },
+        { k: "改不動·體質", v: "家裡有人年輕就心臟病，自己也容易高" },
+        { k: "改不動·停經", v: "女性停經以後，好膽固醇的保護會變弱" },
+        { k: "改得動·吃法", v: "油炸、酥皮糕餅、含糖飲料、肥肉和酥油" },
+        { k: "改得動·活動", v: "整天坐著不動，HDL 就升不上來" },
+        { k: "改得動·菸酒", v: "菸把 HDL 拉低，酒把三酸甘油酯拉高" }
+      ],
+      note: "先唸「改不動」那三項，讓長輩安心——不是自己不認真才會這樣。再唸「改得動」那三項，問一句：「這三項裡面，你覺得自己最有機會改的是哪一項？」讓人自己挑，比我們指定更有效。"
+    },
+    {
+      t: "movie",
+      tag: "電影法",
+      h: "一起看一段影片",
+      lead: "我們來看一段醫師的說明。看的時候，請注意這三件事。",
+      tasks: [
+        { k: "任務一", v: "醫師講 LDL 和 HDL 的時候，用什麼比喻？" },
+        { k: "任務二", v: "影片裡提到哪一種食物，是你家常常有的？" },
+        { k: "任務三", v: "有沒有一句話，是你想講給自己子孫聽的？" }
+      ],
+      clips: [
+        { t: "一張圖看懂膽固醇、血糖和三酸甘油酯的關係", id: "kVGeL2otjYU" },
+        { t: "血脂異常全解析：吃清淡就夠了嗎？", id: "TijLxgMnKW0" },
+        { t: "高血脂是血管的隱形殺手：心臟科醫師的建議", id: "zc0gY3c1-w4" }
+      ],
+      search: "高血脂 膽固醇 LDL 三酸甘油酯 衛教 影片",
+      vote: {
+        q: "看完了，你最想先改變的是哪一項？",
+        opts: ["改吃法：少油炸、少甜", "多活動：每天出去走走", "先去抽血，把報告看清楚"]
+      },
+      note: "播放前先把三個任務唸一遍，播放中不要講話。播完先不要解說，直接開票——這題沒有標準答案，只算票數。票開出來以後問投最多的那一組：「你為什麼選這項？」讓長輩自己講理由，比我們講更有力。如果網路不順，用備援關鍵字現場找，或者直接跳過影片、只做投票。"
+    },
+    {
+      t: "spot",
+      tag: "找看看",
+      h: "找找看，哪張有問題",
+      lead: "每一張都是真的會遇到的情形。挑出有問題的四張。",
+      need: 4,
+      cards: [
+        { x: "紅字沒感覺就不看醫師", w: 1, why: "血脂高本來就很少有症狀，等到有感覺常常已經太慢。紅字要帶去給醫師看，一起評估心血管風險。" },
+        { x: "血脂藥吃到正常自己停", w: 1, why: "數字正常是藥在作用，停下去常常會再反彈。要調整或要停，都得由醫師評估以後再決定。" },
+        { x: "早餐豬油拌飯配醬瓜", w: 1, why: "豬油是飽和脂肪，對 LDL 的影響最大，又配上太鹹的醬菜。可以改成糙米飯配青菜、豆製品。" },
+        { x: "每天兩杯全糖手搖", w: 1, why: "糖和果糖會變成三酸甘油酯囤在身上。口渴喝白開水或無糖茶，比較解渴又沒有負擔。" },
+        { x: "煮菜改用橄欖油", d: 1, ok: "橄欖油、苦茶油是不飽和的好油，用來取代豬油、酥油，對 LDL 有幫助。記得不要用太高的火一直炸就好。" },
+        { x: "早餐燕麥配無糖豆漿", d: 1, ok: "燕麥的水溶性纖維會把膽固醇黏住，跟著糞便帶出去；無糖豆漿提供蛋白質又沒有飽和脂肪。很好的替換。" },
+        { x: "吃飽休息一下出去散步", d: 1, ok: "規律走動是拉高好膽固醇 HDL 最實在的方法，還可以順便降三酸甘油酯。休息一下再出門也比較安全。" },
+        { x: "抽血報告帶去給醫師看", d: 1, ok: "數字要讓醫師配上你的年紀、血壓、血糖、有沒有抽菸一起看，才算得出你的心血管風險。這是最關鍵的一步。" }
+      ],
+      fb: "有問題的四張都有一個共同點：自己做決定。好的四張也有一個共同點：換成比較好的做法，專業的部分交給醫師。",
+      note: "一張一張唸，讓長輩舉手表決「有問題」還是「沒問題」。誘答的那四張要特別停一下，問：「這張為什麼是好的？」讓長輩自己講出理由，記憶效果最好。豬油拌飯那張語氣要小心，很多長輩是吃這個長大的，不要講得像在責備。"
+    },
+    {
+      t: "stats",
+      tag: "風險",
+      h: "如果不顧，後面會怎樣？",
+      items: [
+        { n: "2萬3千", u: "人", d: "113年死於心臟疾病的人數" },
+        { n: "1萬2千", u: "人", d: "113年死於腦血管疾病的人數" },
+        { n: "3萬5千", u: "人", d: "這兩項一年合計帶走的人" },
+        { n: "70", u: "mg/dL", d: "已經中風、心肌梗塞者的目標" }
+      ],
+      src: "衛生福利部 113 年國人死因統計（114 年公布，心臟疾病 23,276 人居第2位、腦血管疾病 12,463 人居第4位）；LDL 目標值引自 2022 年台灣血脂治療指引",
+      note: "3萬5千人這個數字，換算給長輩比較有感：差不多是一整個鄉鎮的人口，一年就沒了。但語氣要穩，不是要嚇人。第四格特別講清楚：70 這個數字是給已經發生過中風、心肌梗塞的人，一般人不是這個標準，每個人的目標要問自己的醫師。"
+    },
+    {
+      t: "sort",
+      tag: "分類",
+      h: "廚房的食物，怎麼分？",
+      lead: "把這九項放進正確的籃子。",
+      bins: [
+        { id: "a", t: "紅燈：壞油少吃" },
+        { id: "b", t: "換成：好油" },
+        { id: "c", t: "增加：纖維" }
+      ],
+      items: [
+        { x: "酥皮蛋塔、鳳梨酥", b: "a" },
+        { x: "肥肉、五花肉、豬皮", b: "a" },
+        { x: "奶精、酥油泡的飲料", b: "a" },
+        { x: "橄欖油、苦茶油", b: "b" },
+        { x: "鯖魚、秋刀魚", b: "b" },
+        { x: "一小把無調味堅果", b: "b" },
+        { x: "燕麥、糙米飯", b: "c" },
+        { x: "菇類、海帶、黑木耳", b: "c" },
+        { x: "深綠色的青菜", b: "c" }
+      ],
+      fb: "順便講一個新觀念：蝦子、螃蟹、蚵仔的膽固醇雖然比較高，但油脂少，影響沒有想像中那麼大；影響 LDL 最大的，其實是飽和脂肪（肥肉、酥油、奶精）和反式脂肪（酥皮、油炸糕餅）。",
+      note: "分類做完再講 fb 那段觀念。這段是今天最容易顛覆長輩認知的地方，語氣要特別客氣：「這是這幾年新的研究，和我們以前學的有一點不一樣。」不要說「你想錯了」。內臟類（豬肝、粉腸）還是建議少吃，因為飽和脂肪也比較高，這點要補充。"
+    },
+    {
+      t: "section",
+      n: "提問②",
+      h: "控制好，是對誰有幫助？",
+      lead: "不是只為了那張報告好看。我們來算算看，這件事到底是在顧誰。",
+      note: "這頁不要趕，先問一句：「你覺得把血脂顧好，最大的受益者是誰？」聽三、四位長輩的答案，再翻頁。常常會有人講「子孫」，這就是後面兩頁最好的引子。"
+    },
+    {
+      t: "points",
+      tag: "對自己",
+      h: "四筆帳，算給你聽",
+      cols: 2,
+      items: [
+        { k: "身體帳", v: "血管比較有彈性，中風、心肌梗塞機會較低" },
+        { k: "荷包帳", v: "不掛急診、不住院、不請看護，錢留給自己用" },
+        { k: "自由帳", v: "手腳能動，想去哪就去哪，不用人載" },
+        { k: "心情帳", v: "不用每天煩惱數字，看報告比較不會緊張" }
+      ],
+      note: "四筆帳一筆一筆唸，唸完問：「你最在意的是哪一筆？」很多長輩會挑「自由帳」和「荷包帳」，而不是身體帳——這正是後面請他承諾的動力來源，聽到就把它記下來。"
+    },
+    {
+      t: "points",
+      tag: "對別人",
+      h: "顧好自己，就是在顧別人",
+      cols: 3,
+      items: [
+        { k: "對家裡", v: "子孫不用請假載你去醫院，媳婦也不用煩惱晚餐" },
+        { k: "對鄰居", v: "你的報告變好，據點的朋友也會跟著一起改" },
+        { k: "對國家", v: "少住院一次，健保的錢就留給更需要的人" }
+      ],
+      note: "「對家裡」那一格可以問：「你如果中風，是誰要請假來照顧？」但問完要馬上接一句「所以我們現在做的，就是把這件事避開」，不要把長輩留在不好的想像裡。這頁的目的是讓長輩覺得自己是在付出，不是在被照顧。"
+    },
+    {
+      t: "order",
+      tag: "怎麼辦",
+      h: "報告拿到，接下來怎麼做？",
+      lead: "這五步排排看，哪一步要排前面？",
+      items: [
+        "抽血報告拿到，先收好不要丟掉",
+        "看清楚是哪一項紅字",
+        "報告帶去問醫師，一起評估心血管風險",
+        "照醫師的建議，先調整吃法和活動",
+        "回診複檢，再決定要不要用藥"
+      ],
+      fb: "最要緊的是第三步：自己看一項數字看不出風險，要配上年紀、血壓、血糖、有沒有抽菸一起算，才知道你的目標要降到多少。",
+      note: "先讓長輩排，排完再對答案。很多人會把「用藥」排比較前面，這時要客氣地說明：醫師通常會先給一段生活調整的時間（一般約三個月），複檢以後才決定要不要用藥，不是紅字就馬上吃藥；但如果風險很高，醫師也可能一開始就建議用藥，這都是醫師的專業判斷。"
+    },
+    {
+      t: "choice",
+      tag: "破迷思",
+      h: "哪一句才是對的？",
+      q: "關於高血脂，下面這四句，哪一句才正確？",
+      opts: [
+        "人瘦的不用擔心，血脂一定正常",
+        "吃全素的人，血脂不會超標",
+        "血脂高低，要抽血才會知道",
+        "膽固醇高就一輩子不能吃蛋"
+      ],
+      ans: 2,
+      fb: "瘦的人、吃素的人也會血脂高；蛋也不用完全禁。影響最大的是飽和脂肪和反式脂肪，不是蛋。",
+      note: "這題就是在回應開場長輩講的那幾句，可以說：「剛才有人講『我這麼瘦』，我們現在來看這句。」吃素的人如果吃太多精白米麵、糕餅、含糖飲料，三酸甘油酯照樣會高。蛋的部分講清楚：多數人一天一顆是可以的，如果已經有心血管疾病，份量要問醫師。"
+    },
+    {
+      t: "points",
+      tag: "提問③",
+      core: true,
+      h: "我可以做的五件事",
+      lead: "五件做得到的，再加一項要注意的。每一項今天回去就做得到。",
+      cols: 3,
+      items: [
+        { k: "一 換油鍋", v: "少油炸、少酥皮糕餅；煮菜改用<b>橄欖油、苦茶油</b>" },
+        { k: "二 加纖維", v: "燕麥、糙米、菇類、青菜，把油<b>帶出身體</b>" },
+        { k: "三 動手腳", v: "每天出去走路、快走，把好膽固醇 <b>HDL</b> 顧起來" },
+        { k: "四 定期抽血", v: "65歲以上<b>每年一次</b>免費健檢，血脂看清楚" },
+        { k: "五 傳下去", v: "把報告和經驗<b>講給子孫聽</b>，他們會跟著做" },
+        { k: "要注意", v: "藥<b>不能自己停</b>；手腳痠痛先回診告訴醫師" }
+      ],
+      note: "第五件是這頁的重點，要講飽：年輕人的血脂問題比我們想的還嚴重，但年輕人不聽衛教，只聽阿公阿嬤的話。問一句：「你要跟哪一個孫子講？」讓他講出名字，比較會去做。最後一格的「要注意」特別停一下，尤其是在吃史他汀（statin）類藥物的長輩，手腳痠痛要告訴醫師，不是自己停藥。"
+    },
+    {
+      t: "points",
+      tag: "提問④",
+      core: true,
+      h: "台灣有什麼資源可以用？",
+      lead: "這些都是我們本來就有的權益，不用不好意思用。",
+      cols: 2,
+      items: [
+        { k: "免費健檢", v: "65歲以上<b>每年一次</b>成人預防保健，免費" },
+        { k: "血脂四項", v: "總膽固醇、三酸甘油酯、HDL、LDL <b>都會驗到</b>" },
+        { k: "慢箋領藥", v: "病情穩定，醫師可以開<b>慢性病連續處方箋</b>" },
+        { k: "社區藥局", v: "慢箋第二、第三次，可在<b>住家附近藥局</b>領" },
+        { k: "據點顧你", v: "關懷據點有<b>量血壓、共餐、健康講座</b>" },
+        { k: "長照1966", v: "打 <b>1966</b> 長照專線，問在地照顧和復能服務" }
+      ],
+      src: "國民健康署成人預防保健服務（114 年起 30–39 歲每5年1次、40–64 歲每3年1次、65 歲以上每年1次）；中央健康保險署慢性病連續處方箋規定；衛生福利部長照服務專線 1966",
+      note: "這頁是今天長輩最會記住的一頁，要慢慢講。1966 可以請大家一起唸三遍。順便提醒：慢箋可以找住家附近的藥局領，不必每次都跑去醫院排隊。如果據點有健檢車或合作診所的資訊，這時候直接講出來，長輩比較會去。"
+    },
+    {
+      t: "spot",
+      tag: "大魔王",
+      h: "最後一關：九張卡片",
+      lead: "這關比較難，有五張有問題。我們一起找找看。",
+      need: 5,
+      cards: [
+        { x: "健檢紅字先放著不管", w: 1, why: "放著不代表問題會消失。紅字是身體在提醒你，收好帶去給醫師看，才知道你的風險有多高。" },
+        { x: "血脂藥吃一陣自己減半", w: 1, why: "劑量是醫師照你的目標算出來的，自己減半數字就會反彈。覺得有問題，回診說出來讓醫師調整。" },
+        { x: "吃藥配柚子或葡萄柚汁", w: 1, why: "葡萄柚類會影響部分降血脂藥的代謝，讓藥效變得太強。要用白開水配藥，想吃柚子先問醫師或藥師。" },
+        { x: "數字正常就不用再抽血", w: 1, why: "血脂會隨季節、體重、吃法變化，正常是現在的狀況，不是永遠。65歲以上每年一次免費健檢，不要放掉。" },
+        { x: "覺得瘦的人不用驗血脂", w: 1, why: "體重和血脂不能畫等號，體質、年紀、吃法也都有關係。瘦的人三酸甘油酯高的也很多，抽血才準。" },
+        { x: "吃藥後手腳痠，回診說", d: 1, ok: "這是最正確的做法。史他汀類的藥有一部分人會手腳痠，告訴醫師，他可以換藥或調劑量，比自己停藥安全很多。" },
+        { x: "煮湯先把浮油撇掉", d: 1, ok: "那層浮油大部分是飽和脂肪，撇掉是很實在的小動作，一餐一餐累積起來就差很多。" },
+        { x: "報告收好，每年比一比", d: 1, ok: "看趨勢比看單一次的數字更有意義。醫師也最喜歡看到長期的變化，可以判斷得更準。" },
+        { x: "跟孫子說我在顧膽固醇", d: 1, ok: "講出來自己比較做得到，孫子也會跟著注意。長輩的示範對年輕一輩的影響力，比衛教單張大很多。" }
+      ],
+      fb: "五張有問題的都是「自己做主張」，四張好的都是「留紀錄、講出來、交給專業」。這就是今天最重要的一句話。",
+      note: "這關可以分組競賽，一組派一個人講理由。如果剩下的時間不多，重點放在葡萄柚那張和手腳痠那張——這兩張是實務上最常出事的地方。講完可以問：「有人在吃降血脂的藥嗎？」如果有人舉手，鼓勵他下次回診就把疑問寫下來問醫師。"
+    },
+    {
+      t: "fill",
+      tag: "行動句",
+      h: "三句話，帶回去",
+      lead: "這三句是今天的結論，我們一起把它補完整。",
+      bank: ["抽血", "量血壓", "纖維", "糖分", "回診", "忍耐"],
+      lines: [
+        { pre: "血脂高沒感覺，要靠", ans: "抽血", post: "才知道。" },
+        { pre: "煮飯少油炸，多吃", ans: "纖維", post: "把油帶出去。" },
+        { pre: "吃藥不舒服，先", ans: "回診", post: "問醫師，不要自己停。" }
+      ],
+      fb: "三句話總結：血脂靠抽血才看得到、靠吃和活動來顧、靠醫師來調整。都不是靠感覺，也不是靠忍耐。",
+      note: "補完以後，請大家一起唸三遍，聲音越大越好。最後那句要特別加強，順便問：「這句要講給家裡的誰聽？」讓長輩講出一個名字，帶回去實行的機會會比較大。"
+    },
+    {
+      t: "reflect",
+      tag: "回顧",
+      h: "今天，我們來聊聊",
+      items: [
+        { k: "Facts 發生什麼", v: "今天看到、聽到的裡面，哪一項是你第一次知道的？" },
+        { k: "Feelings 感受", v: "看到那些數字的時候，你心裡是什麼感覺？" },
+        { k: "Findings 發現", v: "有沒有哪一個原本的想法，今天換掉了？" },
+        { k: "Future 接下來", v: "回去以後，你要先改的是哪一項？" }
+      ],
+      note: "四題不必每題都問到每個人，一題找兩、三位講就好。第三題最有價值，如果有長輩說「原來瘦的也會」或「原來蛋可以吃」，就順勢帶大家給他拍拍手。要讓講話的人講完，不要替他總結。"
+    },
+    {
+      t: "pledge",
+      tag: "承諾牆",
+      h: "挑一項，今天就開始",
+      lead: "不必每項都做，挑一項你真的做得到的，講出來就算數。",
+      items: [
+        "我會把抽血報告收好",
+        "煮菜改用橄欖油或苦茶油",
+        "每天多吃一份青菜或菇類",
+        "含糖飲料一週最多一杯",
+        "吃飽出去走走，不整天坐",
+        "藥照醫師說的吃，不自己停",
+        "手腳如果痠痛，回診告訴醫師",
+        "把我的經驗講給子孫聽"
+      ],
+      note: "一個人挑一項就好，貪多反而做不到。挑完請他講給旁邊的人聽，兩個人互相見證。如果據點有承諾牆或白板，順便寫上去，下週再拿出來問進度，效果會更好。"
+    },
+    {
+      t: "section",
+      n: "結語",
+      h: "你本來就很會顧自己",
+      lead: "煮湯撇浮油、菜買新鮮一點的、有事先問醫師——這些本來就是你的功夫。今天我們做的，只是把這些功夫，用在那張報告上面。",
+      note: "這頁講慢一點，語氣要穩、要溫。重點是讓長輩覺得自己不是「被人教」，而是「本來就會，今天更清楚」。可以指名感謝剛才講經驗講最多的那幾位。"
+    },
+    {
+      t: "score",
+      h: "今天的成績單",
+      note: "分數唸出來，但重點放在「大家一起答對的那幾題」，不是個人排名。最後再講一次三個數字：65歲以上每年一次免費健檢、長照專線 1966、報告要帶去問醫師。"
+    }
+  ]
+};
+
+/* ===================== engine ===================== */
+(function(){
+"use strict";
+var S = DECK.slides;
+var SCORED = ['fill','choice','order','spot','sort','movie'];
+var TOTAL = S.filter(function(s){return SCORED.indexOf(s.t)>=0;}).length;
+var cur = 0, score = 0, NOANIM = false;
+var stage = document.getElementById('stage');
+var els = [];
+var ORD = [2,4,0,3,1];
+
+document.documentElement.style.setProperty('--th', DECK.theme);
+document.documentElement.style.setProperty('--thd', shade(DECK.theme,-42));
+document.title = DECK.title + '｜長者慢性病互動教學簡報';
+
+function shade(hex,d){
+  var n=parseInt(hex.slice(1),16), r=(n>>16)+d, g=((n>>8)&255)+d, b=(n&255)+d;
+  function c(x){return Math.max(0,Math.min(255,x));}
+  return '#'+((1<<24)+(c(r)<<16)+(c(g)<<8)+c(b)).toString(16).slice(1);
+}
+function el(tag,cls,html){var e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e;}
+
+/* ---------- sound (WebAudio, no files, works offline) ---------- */
+var AC=null, SND=true;
+function actx(){
+  if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ AC=null; } }
+  if(AC && AC.state==='suspended'){ try{ AC.resume(); }catch(e){} }
+  return AC;
+}
+function tone(f,t0,dur,type,vol,to){
+  if(!SND) return; var c=actx(); if(!c) return;
+  var t=c.currentTime+t0;
+  var o=c.createOscillator(), g=c.createGain();
+  o.type=type||'sine'; o.frequency.setValueAtTime(f,t);
+  if(to) o.frequency.exponentialRampToValueAtTime(to,t+dur);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(vol||0.16,t+0.014);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g); g.connect(c.destination);
+  o.start(t); o.stop(t+dur+0.03);
+}
+var SFX={
+  click:function(){ tone(760,0,0.05,'triangle',0.08); },
+  page:function(){ tone(400,0,0.12,'sine',0.05,720); },
+  right:function(){ [523.25,659.25,783.99,1046.5].forEach(function(f,i){ tone(f,i*0.07,0.17,'sine',0.15); }); },
+  wrong:function(){ tone(300,0,0.13,'triangle',0.12,210); tone(232,0.15,0.19,'triangle',0.11,168); },
+  found:function(){ tone(700,0,0.09,'sine',0.12,1050); tone(1050,0.09,0.14,'sine',0.10); },
+  miss:function(){ tone(520,0,0.11,'sine',0.09,380); },
+  star:function(){ tone(1318.5,0,0.3,'sine',0.13); tone(1975.5,0.06,0.36,'sine',0.08); },
+  win:function(){ [523.25,659.25,783.99,1046.5,1318.5].forEach(function(f,i){ tone(f,i*0.11,0.34,'sine',0.14); }); }
+};
+['pointerdown','keydown'].forEach(function(ev){
+  document.addEventListener(ev,function(){ actx(); },{once:true});
+});
+var bsnd=document.getElementById('bsnd');
+function toggleSnd(){ SND=!SND; bsnd.textContent=(SND?'🔊':'🔇')+' 音效 S'; if(SND){ actx(); SFX.click(); } }
+bsnd.onclick=toggleSnd;
+
+/* ---------- flow layout helpers ---------- */
+function flow(nodes,extra){ var f=el('div','flow'+(extra?' '+extra:'')); f.dataset.n=nodes.length; f._items=nodes; layout(f,candidates(nodes.length)[0]); return f; }
+function layout(f,c){
+  f.innerHTML=''; f.style.setProperty('--c',c); f.dataset.c=c;
+  var it=f._items;
+  for(var i=0;i<it.length;i+=c){ var row=el('div','frow'); for(var j=i;j<Math.min(i+c,it.length);j++) row.appendChild(it[j]); f.appendChild(row); }
+}
+function candidates(n){ return ({3:[3,1],4:[2,4],6:[3,2],8:[4,2,3],9:[3,5]})[n]||[Math.min(n,3)]; }
+
+/* ---------- header helpers ---------- */
+function head(s){
+  var h=el('div','hd');
+  if(s.tag){var tr=el('div','tagrow'); tr.appendChild(el('span','tag',s.tag)); tr.appendChild(el('span','rule')); h.appendChild(tr);}
+  h.appendChild(el('h1','t',s.h||''));
+  if(s.lead) h.appendChild(el('p','lead',s.lead));
+  return h;
+}
+function addSrc(pad,s){ if(s.src) pad.appendChild(el('div','src','資料來源：'+s.src)); }
+
+/* ---------- answer modal ---------- */
+var ansv=document.getElementById('ansv');
+function modal(okFlag,title,body,icon){
+  setTimeout(function(){
+    if(modal._for!==cur) return;
+    document.getElementById('anic').textContent = icon || (okFlag?'🎉':'💡');
+    document.getElementById('anti').textContent = title;
+    document.getElementById('anfb').innerHTML = body;
+    ansv.classList.add('on');
+  },700);
+  modal._for = cur;
+}
+function closeModal(){ ansv.classList.remove('on'); }
+document.getElementById('anok').onclick=function(){ SFX.click(); closeModal(); };
+ansv.onclick=function(e){ if(e.target===ansv) closeModal(); };
+
+/* ---------- scoring ---------- */
+var sctr=document.getElementById('sctr');
+function star(){
+  score++;
+  sctr.textContent='⭐ '+score+' / '+TOTAL;
+  sctr.classList.remove('bump'); void sctr.offsetWidth; sctr.classList.add('bump');
+  SFX.star();
+  var r=sctr.getBoundingClientRect();
+  var f=el('div','fly','+1 ⭐');
+  f.style.left=(r.left+r.width/2-38)+'px'; f.style.top=(r.top-14)+'px';
+  document.body.appendChild(f);
+  setTimeout(function(){ f.remove(); },1150);
+}
+
+/* ---------- builders ---------- */
+function bCover(s){
+  var sl=el('section','slide cover'), pad=el('div','pad mid');
+  pad.appendChild(el('h1','ct',s.h));
+  if(s.sub) pad.appendChild(el('p','cs',s.sub));
+  pad.appendChild(el('div','cd'));
+  if(DECK.disease) pad.appendChild(el('div','cdis','主題疾病：'+DECK.disease));
+  pad.appendChild(el('div','cm',s.meta||'愛迪樂健康促進團隊'));
+  sl.appendChild(pad); return sl;
+}
+function bSection(s){
+  var sl=el('section','slide sect'), pad=el('div','pad mid');
+  if(s.n) pad.appendChild(el('div','sn',s.n));
+  pad.appendChild(el('div','sh',s.h));
+  if(s.lead) pad.appendChild(el('div','sl',s.lead));
+  sl.appendChild(pad); return sl;
+}
+function bPoints(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(it){
+    var c=el('div','card'); c.dataset.clip='1';
+    c.appendChild(el('div','k',it.k)); c.appendChild(el('div','v',it.v)); return c;
+  });
+  pad.appendChild(flow(cards,s.core?'core':'')); addSrc(pad,s); sl.appendChild(pad); return sl;
+}
+function bStats(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(it){
+    var c=el('div','stat'); c.dataset.clip='1';
+    c.appendChild(el('div','n',it.n)); if(it.u) c.appendChild(el('div','u',it.u));
+    c.appendChild(el('div','d',it.d)); return c;
+  });
+  pad.appendChild(flow(cards)); addSrc(pad,s); sl.appendChild(pad); return sl;
+}
+function bChoice(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  pad.appendChild(el('div','q',s.q));
+  var b=el('div','opts');
+  s.opts.forEach(function(o,i){
+    var btn=el('button','opt');
+    btn.appendChild(el('span','ch','ABCD'[i]));
+    btn.appendChild(el('span','tx',o));
+    btn.appendChild(el('span','mk',''));
+    btn.onclick=function(){
+      if(sl.dataset.done) return; sl.dataset.done='1'; b.classList.add('done');
+      var ok = (i===s.ans);
+      b.children[s.ans].classList.add('right'); b.children[s.ans].querySelector('.mk').textContent='○';
+      if(!ok){ btn.classList.add('wrong'); btn.querySelector('.mk').textContent='✕'; }
+      if(ok){ SFX.right(); star(); } else SFX.wrong();
+      modal(ok, ok?'答對了！':'再想看看', s.fb);
+    };
+    b.appendChild(btn);
+  });
+  pad.appendChild(b); addSrc(pad,s); sl.appendChild(pad); return sl;
+}
+function bFill(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var maxa=0; s.lines.forEach(function(l){ maxa=Math.max(maxa,l.ans.length); });
+  sl.style.setProperty('--bw', (maxa*1.06+0.95)+'em');
+  var bank=el('div','bank'), sel=null;
+  var chips=s.bank.map(function(w){
+    var c=el('button','word',w);
+    c.onclick=function(){
+      if(sl.dataset.done||c.classList.contains('used')) return;
+      SFX.click();
+      if(sel===c){ sel=null; c.classList.remove('sel'); return; }
+      if(sel) sel.classList.remove('sel');
+      sel=c; c.classList.add('sel');
+    };
+    bank.appendChild(c); return c;
+  });
+  pad.appendChild(bank);
+  var wrap=el('div','blanks'), slots=[];
+  s.lines.forEach(function(l,i){
+    var line=el('div','bl'), inn=el('div','in'); line.appendChild(inn);
+    inn.appendChild(el('span','',l.pre||''));
+    var sp=el('span','slot empty','？'); inn.appendChild(sp);
+    inn.appendChild(el('span','',l.post||''));
+    sp.onclick=function(){
+      if(sl.dataset.done) return;
+      if(sp.dataset.w){ chips[+sp.dataset.c].classList.remove('used'); sp.textContent='？';
+        sp.classList.add('empty'); delete sp.dataset.w; delete sp.dataset.c; SFX.click(); return; }
+      if(!sel) return;
+      sp.textContent=sel.textContent; sp.classList.remove('empty');
+      sp.dataset.w=sel.textContent; sp.dataset.c=chips.indexOf(sel);
+      sel.classList.add('used'); sel.classList.remove('sel'); sel=null;
+      SFX.found(); check();
+    };
+    slots.push({sp:sp,line:line,ans:l.ans});
+    wrap.appendChild(line);
+  });
+  function check(){
+    if(slots.some(function(o){return !o.sp.dataset.w;})) return;
+    sl.dataset.done='1';
+    var allok=true;
+    slots.forEach(function(o){
+      var ok=o.sp.dataset.w===o.ans;
+      o.line.classList.add(ok?'right':'wrong');
+      if(!ok){ allok=false; o.sp.textContent=o.ans; }
+    });
+    if(allok){ SFX.right(); star(); } else SFX.wrong();
+    modal(allok, allok?'三句都對！':'看一下正確的說法', s.fb);
+  }
+  pad.appendChild(wrap); sl.appendChild(pad); return sl;
+}
+function bOrder(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var b=el('div','ord'), picks=[], rows=[];
+  ORD.forEach(function(oi){
+    var row=el('button','oi');
+    var num=el('span','num','–'); row.appendChild(num);
+    row.appendChild(el('span','tx',s.items[oi]));
+    row.dataset.o=oi;
+    row.onclick=function(){
+      if(sl.dataset.done||row.classList.contains('picked')) return;
+      picks.push(oi); row.classList.add('picked'); num.textContent=picks.length;
+      SFX.click();
+      if(picks.length===s.items.length) check();
+    };
+    rows.push(row); b.appendChild(row);
+  });
+  function check(){
+    sl.dataset.done='1'; var allok=true;
+    rows.forEach(function(r){
+      var o=+r.dataset.o, ok=picks[o]===o;
+      r.classList.add(ok?'right':'wrong'); if(!ok) allok=false;
+    });
+    rows.forEach(function(r){ r.querySelector('.num').textContent = (+r.dataset.o)+1; });
+    if(allok){ SFX.right(); star(); } else SFX.wrong();
+    modal(allok, allok?'順序完全正確！':'正確的順序是這樣', s.fb);
+  }
+  pad.appendChild(b); sl.appendChild(pad); return sl;
+}
+function bSpot(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var found=0, tiles=[];
+  var longest=''; s.cards.forEach(function(c){ var t=(c.why||c.ok||''); if(t.length>longest.length) longest=t; });
+  s.cards.forEach(function(c,i){
+    var card=el('div','sc'); card.dataset.clip='1';
+    card.appendChild(el('span','no',(i+1)+''));
+    card.appendChild(el('span','tx',c.x));
+    card.appendChild(el('span','bd',''));
+    card.onclick=function(){
+      if(card.dataset.hit) return; card.dataset.hit='1';
+      if(c.w){ card.classList.add('bad'); card.querySelector('.bd').textContent='⚠ 有問題';
+        live.innerHTML='<b>'+(i+1)+'　⚠</b>　'+c.why; found++; SFX.found();
+        if(found===s.need && !sl.dataset.done){ sl.dataset.done='1'; star();
+          modal(true,'全部找出來了！',s.fb,'🔍'); }
+      } else { card.classList.add('shake'); SFX.miss();
+        setTimeout(function(){card.classList.remove('shake');card.classList.add('good');
+          card.querySelector('.bd').textContent='👍 做得很好';},380);
+        live.innerHTML='<b>'+(i+1)+'　👍</b>　'+c.ok;
+      }
+    };
+    tiles.push(card);
+  });
+  pad.appendChild(flow(tiles));
+  var bar=el('div','exbar');
+  bar.appendChild(el('div','exg','<b>00　⚠</b>　'+longest));
+  var live=el('div','exl','點卡片，一張一張問大家：「這樣做，可以嗎？」');
+  bar.appendChild(live); pad.appendChild(bar);
+  sl.appendChild(pad); return sl;
+}
+function bSort(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var sel=null, done=0, tiles=[];
+  s.items.forEach(function(it){
+    var t=el('div','pi'); t.dataset.clip='1';
+    t.appendChild(el('span','tx',it.x));
+    var bd=el('span','pb off','0'); t.appendChild(bd);
+    t.dataset.b=it.b;
+    t.onclick=function(){
+      if(sl.dataset.done||t.dataset.set) return;
+      SFX.click();
+      if(sel===t){ sel=null; t.classList.remove('sel'); return; }
+      if(sel) sel.classList.remove('sel'); sel=t; t.classList.add('sel');
+    };
+    tiles.push(t);
+  });
+  pad.appendChild(flow(tiles));
+  var bins=el('div','bins');
+  s.bins.forEach(function(bn,bi){
+    var btn=el('button','bin','①②③'[bi]+' '+bn.t);
+    btn.onclick=function(){
+      if(sl.dataset.done||!sel) return;
+      sel.dataset.set=bn.id;
+      var bd=sel.querySelector('.pb'); bd.textContent='①②③'[bi]; bd.classList.remove('off');
+      sel.classList.remove('sel'); sel=null; done++; SFX.found();
+      if(done===s.items.length) check();
+    };
+    bins.appendChild(btn);
+  });
+  function check(){
+    sl.dataset.done='1'; var allok=true;
+    tiles.forEach(function(t){
+      var ok=t.dataset.set===t.dataset.b;
+      t.classList.add(ok?'right':'wrong'); if(!ok) allok=false;
+    });
+    if(allok){ SFX.right(); star(); } else SFX.wrong();
+    modal(allok, allok?'分類完全正確！':'我們一起對一下', s.fb,'🗂️');
+  }
+  pad.appendChild(bins); sl.appendChild(pad); return sl;
+}
+function bMovie(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var b=el('div','mv'), L=el('div','mvL'), R=el('div','mvR');
+  (s.tasks||[]).forEach(function(t){
+    var c=el('div','task'); c.dataset.clip='1';
+    c.appendChild(el('div','k',t.k)); c.appendChild(el('div','v',t.v)); L.appendChild(c);
+  });
+  (s.clips||[]).forEach(function(c){
+    var btn=el('button','clip');
+    btn.appendChild(el('span','plyb','▶'));
+    btn.appendChild(el('span','tx',c.t));
+    btn.onclick=function(){ SFX.click(); openClip(c.id); };
+    R.appendChild(btn);
+  });
+  if(s.vote){
+    var v=el('div','vote'); v.appendChild(el('div','vq',s.vote.q));
+    s.vote.opts.forEach(function(o){
+      var row=el('button','vrow');
+      row.appendChild(el('span','tx',o));
+      var c=el('span','cnt','0'); row.appendChild(c);
+      row.onclick=function(){
+        c.textContent=(+c.textContent)+1; SFX.click();
+        if(!sl.dataset.done){ sl.dataset.done='1'; star(); }
+      };
+      v.appendChild(row);
+    });
+    R.appendChild(v);
+  }
+  b.appendChild(L); b.appendChild(R); pad.appendChild(b);
+  if(s.search) pad.appendChild(el('div','src','影片若無法播放，請用關鍵字現場搜尋：'+s.search));
+  sl.appendChild(pad); return sl;
+}
+function bReflect(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(it){
+    var c=el('div','rf'); c.dataset.clip='1';
+    c.appendChild(el('div','k',it.k)); c.appendChild(el('div','v',it.v)); return c;
+  });
+  pad.appendChild(flow(cards)); sl.appendChild(pad); return sl;
+}
+function bPledge(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(t){
+    var c=el('button','pl');
+    c.appendChild(el('span','bx','✓'));
+    c.appendChild(el('span','tx',t));
+    c.onclick=function(){ c.classList.toggle('on'); SFX.click(); };
+    return c;
+  });
+  pad.appendChild(flow(cards)); sl.appendChild(pad); return sl;
+}
+function bScore(s){
+  var sl=el('section','slide'), pad=el('div','pad mid');
+  var cv=el('canvas','','' ); cv.id='cfx';
+  var w=el('div','scw');
+  var big=el('div','big','0'); var stars=el('div','stars','');
+  w.appendChild(el('div','sub','今天的成績單'));
+  w.appendChild(big); w.appendChild(el('div','sub','／ '+TOTAL+' 顆星'));
+  w.appendChild(stars);
+  w.appendChild(el('div','msg','答對幾題不是重點——重點是今天帶回去的那一件事。<br>請每一位講一句：「我回去要開始做的是……」'));
+  sl.refresh=function(){
+    big.textContent=score;
+    var t=''; for(var i=0;i<TOTAL;i++) t += '<i style="animation-delay:'+(NOANIM?0:(i*90+300))+'ms">'+(i<score?'⭐':'☆')+'</i>';
+    stars.innerHTML=t;
+    if(!NOANIM){ SFX.win(); confetti(cv); }
+  };
+  pad.appendChild(cv); pad.appendChild(w); sl.appendChild(pad); return sl;
+}
+var B={cover:bCover,section:bSection,points:bPoints,stats:bStats,choice:bChoice,fill:bFill,
+  order:bOrder,spot:bSpot,sort:bSort,movie:bMovie,reflect:bReflect,pledge:bPledge,score:bScore};
+
+S.forEach(function(s,i){
+  var e=(B[s.t]||bPoints)(s,i);
+  e.dataset.i=i; els.push(e); stage.appendChild(e);
+});
+
+/* ---------- confetti ---------- */
+function confetti(cv){
+  var r=cv.parentNode.getBoundingClientRect();
+  cv.width=r.width; cv.height=r.height;
+  var g=cv.getContext('2d'), cols=['#E8552D','#F4A93C','#028090','#7B4EA3','#2E7D52'], ps=[];
+  for(var i=0;i<110;i++) ps.push({x:Math.random()*r.width,y:-Math.random()*r.height,
+    w:6+Math.random()*8,h:9+Math.random()*11,v:1.6+Math.random()*3.2,a:Math.random()*6.3,
+    s:(Math.random()-.5)*.22,c:cols[i%cols.length]});
+  var t0=Date.now();
+  (function loop(){
+    var el=Date.now()-t0;
+    g.clearRect(0,0,cv.width,cv.height);
+    ps.forEach(function(p){
+      p.y+=p.v; p.a+=p.s; p.x+=Math.sin(p.a)*.8;
+      g.save(); g.translate(p.x,p.y); g.rotate(p.a);
+      g.fillStyle=p.c; g.globalAlpha=Math.max(0,1-el/3400);
+      g.fillRect(-p.w/2,-p.h/2,p.w,p.h); g.restore();
+    });
+    if(el<3400) requestAnimationFrame(loop); else g.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+
+/* ---------- fit ---------- */
+/* Overflow is judged by geometry, not by scrollHeight: every child box must sit inside its parent's
+   box (the page's content box for the page itself). scrollHeight differs between browsers (Safari counts
+   glyph and letter-spacing overhang); getBoundingClientRect does not. scrollWidth is still used, with a
+   small font-relative tolerance, to catch a number or word too wide to wrap. */
+var ABS=(typeof WeakMap==='function')?new WeakMap():null;
+function isAbs(c){
+  var v=ABS?ABS.get(c):undefined;
+  if(v===undefined){ var p=getComputedStyle(c).position; v=(p==='absolute'||p==='fixed'); if(ABS) ABS.set(c,v); }
+  return v;
+}
+function hasBox(n){ return n.clientWidth>0||n.clientHeight>0; }
+var LASTBLOCK='';
+function badBox(n,contentBox){
+  if(n.scrollWidth>n.clientWidth+Math.max(4,0.06*(parseFloat(getComputedStyle(n).fontSize)||16))){
+    LASTBLOCK=n.className+' width '+n.scrollWidth+'/'+n.clientWidth; return true; }
+  var r=n.getBoundingClientRect(), t=r.top, b=r.bottom, l=r.left, rt=r.right;
+  var cs=getComputedStyle(n);
+  t+=parseFloat(cs.paddingTop)+parseFloat(cs.borderTopWidth); b-=parseFloat(cs.paddingBottom)+parseFloat(cs.borderBottomWidth);
+  l+=parseFloat(cs.paddingLeft)+parseFloat(cs.borderLeftWidth); rt-=parseFloat(cs.paddingRight)+parseFloat(cs.borderRightWidth);
+  var k=n.children;
+  for(var j=0;j<k.length;j++){
+    var c=k[j]; if(!hasBox(c)||isAbs(c)) continue;
+    var kr=c.getBoundingClientRect();
+    if(kr.top<t-3||kr.bottom>b+3||kr.left<l-3||kr.right>rt+3){
+      LASTBLOCK=(n.className||n.tagName)+' > '+(c.className||c.tagName)+' '+Math.round(kr.top-t)+'/'+Math.round(kr.bottom-b); return true; }
+  }
+  return false;
+}
+function overflow(root){
+  if(badBox(root,true)) return true;
+  var ns=root.querySelectorAll('*');
+  for(var i=0;i<ns.length;i++){ var n=ns[i]; if(!hasBox(n)) continue; if(badBox(n,false)) return true; }
+  return false;
+}
+var BOXSEL='.card,.stat,.sc,.pi,.opt,.oi,.rf,.pl,.task,.bl,.clip';
+function boxOver(n){
+  if(badBox(n,false)) return true;
+  var ds=n.querySelectorAll('*');
+  for(var j=0;j<ds.length;j++){ var d=ds[j]; if(!hasBox(d)) continue; if(badBox(d,false)) return true; }
+  return false;
+}
+/* each box is a fixed slot from the grid, so its own text can grow to fill it
+   without moving anything else — this is what kills the leftover white space */
+function fitBoxes(e){
+  var ns=e.querySelectorAll(BOXSEL);
+  Array.prototype.forEach.call(ns,function(n){
+    n.style.removeProperty('--cs');
+    var top=2.6, cs=top, best=0;
+    for(;cs>=1.0;cs-=0.15){                 /* coarse, from the top */
+      n.style.setProperty('--cs',cs.toFixed(3));
+      if(!boxOver(n)){ best=cs; break; }
+    }
+    if(!best){ n.style.removeProperty('--cs'); return; }
+    var probe=[best+0.1,best+0.05];          /* fine, just above the coarse hit */
+    for(var q=0;q<probe.length;q++){
+      if(probe[q]>top) continue;
+      n.style.setProperty('--cs',probe[q].toFixed(3));
+      if(!boxOver(n)){ best=probe[q]; break; }
+    }
+    n.style.setProperty('--cs',best.toFixed(3));
+  });
+}
+/* layout score: smallest text wins, but a layout that leaves the boxes half-empty loses points */
+function layoutScore(e){
+  var m=1e9, used=0, tot=0, maxLines=1;
+  Array.prototype.forEach.call(e.querySelectorAll(BOXSEL),function(n){
+    var tx=n.querySelector('.v,.d,.tx')||n;
+    var cs=getComputedStyle(tx), v=parseFloat(cs.fontSize); if(v<m) m=v;
+    var lh=parseFloat(cs.lineHeight)||v*1.3, ln=Math.round(tx.getBoundingClientRect().height/lh);
+    if(ln>maxLines) maxLines=ln;
+    var r=n.getBoundingClientRect(), top=1e9, bot=-1e9, k=n.children, any=false;
+    for(var j=0;j<k.length;j++){ if(getComputedStyle(k[j]).position==='absolute') continue;
+      var kr=k[j].getBoundingClientRect(); if(kr.top<top) top=kr.top; if(kr.bottom>bot) bot=kr.bottom; any=true; }
+    if(any){ used+=bot-top; tot+=r.height; }
+  });
+  if(m===1e9) return 0;
+  var fill=tot?used/tot:1;
+  var read = maxLines>=7 ? 0.62 : maxLines>=5 ? 0.8 : maxLines>=4 ? 0.78 : 1;   /* narrow columns read badly */
+  return m*(0.6+0.4*fill)*read;
+}
+/* headings scale with the screen too, but stay capped so they never starve the body text */
+function hsCap(){ return 1.16*Math.max(1, stage.clientHeight/720); }
+function setS(e,v){ e.style.setProperty('--s',String(v)); e.style.setProperty('--hs',String(Math.min(v,hsCap()))); }
+function gfit(e,pad){
+  var base=stage.clientHeight/720;                      /* 1.0 at a 720p projector */
+  function at(v){ setS(e,v); return !overflow(pad); }
+  var s=Math.min(4.0, 1.2+1.5*base), lo=0, floor=Math.max(0.6, 1.0*base);
+  for(;s>0.5;s-=0.1){ if(at(s)){ lo=s; break; } }         /* scan from the top: finds 2-line fits a binary search would skip */
+  if(lo && at(lo+0.05)) lo+=0.05;
+  if(!lo || lo<floor){ lo=Math.max(lo,floor); }          /* never show a page tiny because measuring failed */
+  setS(e,lo);
+}
+function fit(i){
+  var e=els[i], pad=e.querySelector('.pad');
+  Array.prototype.forEach.call(e.querySelectorAll('.rise'),function(n){ n.classList.remove('rise'); });
+  Array.prototype.forEach.call(e.querySelectorAll(BOXSEL),function(n){ n.style.removeProperty('--cs'); });
+  var f=e.querySelector('.flow');
+  if(f){
+    var cands=candidates(+f.dataset.n), best=-1, bestC=cands[0];
+    if(cands.length>1){
+      cands.forEach(function(c){ layout(f,c); gfit(e,pad); fitBoxes(e); var sc=layoutScore(e); if(sc>best){ best=sc; bestC=c; } });
+    }
+    layout(f,bestC);
+  }
+  gfit(e,pad);
+  fitBoxes(e);
+  e.dataset.fit='1';
+}
+
+/* ---------- entrance animation ---------- */
+var ANIM='.frow>*,.opts>*,.ord>*,.blanks>*,.bank>*,.mvL>*,.mvR>*,.q,.exbar,.bins>*,.scw>*';
+function animate(e){
+  if(NOANIM) return;
+  var ns=e.querySelectorAll(ANIM);
+  Array.prototype.forEach.call(ns,function(n,i){
+    n.classList.remove('rise');
+    n.style.setProperty('--d',(i*38)+'ms');
+  });
+  void e.offsetWidth;
+  Array.prototype.forEach.call(ns,function(n){ n.classList.add('rise'); });
+  clearTimeout(animate._t);
+  animate._t=setTimeout(function(){
+    Array.prototype.forEach.call(ns,function(n){ n.classList.remove('rise'); n.style.removeProperty('--d'); });
+  }, 420+ns.length*38+120);
+}
+
+/* ---------- navigation ---------- */
+var pg=document.getElementById('pg');
+function show(i){
+  i=Math.max(0,Math.min(S.length-1,i));
+  closeModal();
+  els[cur].classList.remove('on');
+  cur=i;
+  var e=els[cur];
+  e.classList.add('on');
+  if(e.refresh){ delete e.dataset.fit; e.refresh(); } else SFX.page();
+  if(!e.dataset.fit) fit(cur);
+  animate(e);
+  pg.textContent=(cur+1)+' / '+S.length;
+  document.getElementById('notep').innerHTML='<b>講師提示</b>　'+(S[cur].note||'');
+  Array.prototype.forEach.call(document.querySelectorAll('#tocg button'),function(b,k){
+    b.classList.toggle('cur',k===cur);
+  });
+}
+document.getElementById('bprev').onclick=function(){show(cur-1);};
+document.getElementById('bnext').onclick=function(){show(cur+1);};
+
+/* toc */
+var tocg=document.getElementById('tocg'), tocv=document.getElementById('tocv');
+S.forEach(function(s,i){
+  var b=el('button','','<span class="ix">'+(i+1)+'</span>'+(s.h||s.tag||''));
+  b.onclick=function(){ tocv.classList.remove('on'); show(i); };
+  tocg.appendChild(b);
+});
+document.getElementById('btoc').onclick=function(){ tocv.classList.toggle('on'); };
+tocv.onclick=function(e){ if(e.target===tocv) tocv.classList.remove('on'); };
+
+/* notes */
+function toggleNote(){ document.getElementById('notep').classList.toggle('on'); }
+document.getElementById('bnote').onclick=toggleNote;
+
+/* timer */
+var tmr=document.getElementById('tmr'), tid=null, left=20;
+function toggleTimer(){
+  if(tid){ clearInterval(tid); tid=null; tmr.classList.remove('on'); return; }
+  left=20; tmr.classList.add('on'); tmr.textContent='⏱ '+left;
+  tid=setInterval(function(){
+    left--; tmr.textContent = left>0 ? ('⏱ '+left) : '⏱ 時間到';
+    if(left<=3&&left>0) tone(880,0,0.07,'square',0.09);
+    if(left<=0){ clearInterval(tid); tid=null; tone(300,0,0.4,'sawtooth',0.12,180); }
+  },1000);
+}
+document.getElementById('btime').onclick=toggleTimer;
+
+/* fullscreen */
+function toggleFull(){
+  if(document.fullscreenElement) document.exitFullscreen();
+  else if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+}
+document.getElementById('bfull').onclick=toggleFull;
+
+/* lightbox */
+var lbv=document.getElementById('lbv'), lbf=document.getElementById('lbf'), lbo=document.getElementById('lbo');
+function openClip(id){
+  lbf.setAttribute('allow','autoplay; encrypted-media; fullscreen');
+  lbf.src='https://www.youtube-nocookie.com/embed/'+id+'?rel=0&autoplay=1';
+  lbo.href='https://www.youtube.com/watch?v='+id;
+  lbv.classList.add('on');
+}
+function closeClip(){ lbv.classList.remove('on'); lbf.removeAttribute('src'); lbf.removeAttribute('allow'); }
+document.getElementById('lbc').onclick=closeClip;
+lbv.onclick=function(e){ if(e.target===lbv) closeClip(); };
+
+/* keyboard */
+document.addEventListener('keydown',function(e){
+  var k=e.key;
+  if(lbv.classList.contains('on')){ if(k==='Escape') closeClip(); return; }
+  if(tocv.classList.contains('on')){ if(k==='Escape') tocv.classList.remove('on'); return; }
+  if(ansv.classList.contains('on')){
+    if(k==='Enter'||k===' '||k==='ArrowRight'||k==='Escape'){ e.preventDefault(); closeModal(); }
+    return;
+  }
+  if(k==='ArrowRight'||k===' '||k==='PageDown'){ e.preventDefault(); show(cur+1); }
+  else if(k==='ArrowLeft'||k==='PageUp'){ e.preventDefault(); show(cur-1); }
+  else if(k==='n'||k==='N'){ toggleNote(); }
+  else if(k==='t'||k==='T'){ toggleTimer(); }
+  else if(k==='f'||k==='F'){ toggleFull(); }
+  else if(k==='s'||k==='S'){ toggleSnd(); }
+  else if(k==='d'||k==='D'){ diag(); }
+  else if(k==='Home'){ show(0); }
+  else if(k==='End'){ show(S.length-1); }
+});
+
+/* diagnostics: press D to see why a page is the size it is */
+function diag(){
+  var e=els[cur], pad=e.querySelector('.pad');
+  var s=parseFloat(getComputedStyle(e).getPropertyValue('--s'))||0;
+  setS(e,s+0.2); var blocked=overflow(pad); var why=blocked?LASTBLOCK:'(nothing blocks at +0.2)'; setS(e,s);
+  var f=e.querySelector('.flow');
+  var txt='viewport '+window.innerWidth+'×'+window.innerHeight+'  dpr '+(window.devicePixelRatio||1)+'  stage '+stage.clientWidth+'×'+stage.clientHeight
+    +'\n--s '+s.toFixed(2)+(f?('  cols '+f.dataset.c):'')+'  UA '+navigator.userAgent.slice(0,80)
+    +'\nblocker @+0.2: '+why;
+  var d=document.getElementById('dbg');
+  if(!d){ d=el('pre','',''); d.id='dbg'; d.style.cssText='position:fixed;left:8px;top:8px;z-index:99;background:rgba(0,0,0,.85);color:#fff;font:14px/1.4 monospace;padding:10px 14px;border-radius:8px;white-space:pre-wrap;max-width:90vw'; document.body.appendChild(d); }
+  if(d.dataset.on==='1'){ d.remove(); return; }
+  d.dataset.on='1'; d.textContent=txt;
+}
+
+/* resize */
+var rt=null;
+window.addEventListener('resize',function(){
+  clearTimeout(rt);
+  rt=setTimeout(function(){
+    els.forEach(function(e){ delete e.dataset.fit; });
+    fit(cur); prefit();
+  },160);
+});
+
+var pre=null;
+function prefit(){
+  clearTimeout(pre);
+  var i=0;
+  (function step(){
+    while(i<els.length && els[i].dataset.fit) i++;
+    if(i>=els.length) return;
+    if(!els[i].refresh) fit(i);
+    else els[i].dataset.fit='1';
+    i++; pre=setTimeout(step,80);
+  })();
+}
+sctr.textContent='⭐ 0 / '+TOTAL;
+show(0);
+setTimeout(prefit,400);
+window.__deck={ check:function(i){ var e=els[i==null?cur:i]; var o=overflow(e.querySelector('.pad')); return o?LASTBLOCK:''; },
+  get cur(){return cur;}, get score(){return score;}, total:TOTAL, show:show, slides:S, els:els, fit:fit,
+  mute:function(){ SND=false; },
+  setAnim:function(v){ NOANIM=!v; document.documentElement.classList.toggle('noanim',NOANIM); if(NOANIM){ els.forEach(function(e){
+    Array.prototype.forEach.call(e.querySelectorAll('.rise'),function(n){ n.classList.remove('rise'); }); }); } } };
+})();
+</script>
+</body>
+</html>

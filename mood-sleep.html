@@ -1,0 +1,1341 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>好眠好心情班｜長者慢性病互動教學簡報</title>
+<style>
+:root{
+  --orange:#E8552D; --amber:#F4A93C; --teal:#028090; --ink:#12343B;
+  --th:#028090; --thd:#12343B;
+  --bg:#FDFBF7; --card:#FFFFFF; --line:#E1D8CA;
+  --navh:48px; --s:1; --hs:1;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC","Heiti TC",sans-serif;}
+body{overflow:hidden}
+button{font-family:inherit;color:inherit}
+#stage{position:absolute;left:0;right:0;top:0;bottom:var(--navh);overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden}
+.slide.on{opacity:1;visibility:visible;animation:fadein .2s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.pad{position:absolute;inset:0;padding:1.6vh 2.2vw;display:flex;flex-direction:column;gap:.7vh;overflow:hidden}
+.pad.mid{justify-content:center;align-items:center;text-align:center}
+
+/* ---------- header ---------- */
+.hd{flex:0 0 auto}
+.tagrow{display:flex;align-items:center;gap:calc(11px*var(--hs));margin-bottom:calc(3px*var(--hs))}
+.tag{background:var(--th);color:#fff;border-radius:999px;padding:calc(4px*var(--hs)) calc(15px*var(--hs));
+  font-size:calc(17px*var(--hs));font-weight:800;letter-spacing:.06em;white-space:nowrap}
+.rule{flex:1;height:calc(4px*var(--hs));background:var(--th);opacity:.2;border-radius:99px}
+h1.t{margin:0;font-size:calc(43px*var(--hs));line-height:1.22;font-weight:900;letter-spacing:.01em}
+.lead{margin:calc(2px*var(--hs)) 0 0;font-size:calc(21px*var(--hs));line-height:1.25;color:#54666b;font-weight:700}
+.src{flex:0 0 auto;font-size:calc(13px*var(--s));color:#9aa3a6;line-height:1.25;padding-top:.1vh}
+
+/* ---------- flow layout: rows of equal tiles, column count chosen per slide ---------- */
+.flow{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.8vh;--g:.9vw;--c:2}
+.frow{flex:1 1 0;min-height:0;display:flex;justify-content:center;gap:var(--g)}
+.frow>*{flex:0 0 auto;width:calc((100% - (var(--c) - 1)*var(--g))/var(--c));min-width:0;min-height:0}
+.card .v,.stat .d,.sc .tx,.pi .tx,.pl .tx,.opt .tx,.oi .tx,.rf .v,.task .v{text-wrap:balance}
+
+/* ---------- generic body ---------- */
+.body{flex:1 1 auto;min-height:0;display:grid;gap:.8vh .9vw;grid-auto-rows:minmax(0,1fr)}
+.c2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.c22{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr)}
+.card{background:var(--card);border:calc(3px*var(--s)) solid var(--line);border-radius:calc(16px*var(--s));
+  padding:calc(9px*var(--s)) calc(15px*var(--s));display:flex;flex-direction:column;justify-content:center;
+  gap:calc(2px*var(--s));min-height:0;overflow:hidden}
+.card .k{font-size:calc(28px*var(--s)*var(--cs,1));font-weight:900;color:var(--th);line-height:1.22}
+.card .v{font-size:calc(33px*var(--s)*var(--cs,1));line-height:1.34;font-weight:700}
+.card .v b{color:var(--orange)}
+.core .card{border-color:var(--th);background:#fff}
+
+/* ---------- cover ---------- */
+.cover{background:linear-gradient(150deg,var(--th) 0%,var(--thd) 100%);color:#fff}
+.cover .ct{font-size:calc(90px*var(--s));font-weight:900;line-height:1.16;letter-spacing:.02em;margin:0}
+.cover .cs{font-size:calc(36px*var(--s));font-weight:700;margin:calc(20px*var(--s)) 0 0;opacity:.95;line-height:1.35}
+.cover .cd{width:calc(120px*var(--s));height:calc(8px*var(--s));background:var(--amber);border-radius:99px;margin:calc(26px*var(--s)) 0}
+.cover .cm{font-size:calc(25px*var(--s));font-weight:700;opacity:.88}
+.cover .cdis{font-size:calc(23px*var(--s));opacity:.78;margin-top:calc(6px*var(--s))}
+
+/* ---------- section ---------- */
+.sect{background:var(--th);color:#fff}
+.sect .sn{font-size:calc(31px*var(--s));font-weight:900;background:rgba(255,255,255,.2);
+  padding:calc(8px*var(--s)) calc(26px*var(--s));border-radius:99px;display:inline-block}
+.sect .sh{font-size:calc(72px*var(--s));font-weight:900;margin:calc(24px*var(--s)) 0 0;line-height:1.2}
+.sect .sl{font-size:calc(33px*var(--s));margin:calc(18px*var(--s)) 0 0;opacity:.95;line-height:1.35;font-weight:700;max-width:82%}
+
+/* ---------- stats ---------- */
+.stat{background:var(--card);border:calc(3px*var(--s)) solid var(--line);border-radius:calc(18px*var(--s));
+  padding:calc(10px*var(--s));display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:calc(2px*var(--s));text-align:center;min-height:0;overflow:hidden;border-top:calc(10px*var(--s)) solid var(--th)}
+.stat .n{font-size:calc(66px*var(--s)*var(--cs,1));font-weight:900;color:var(--th);line-height:1.18;letter-spacing:-.01em}
+.stat .u{font-size:calc(24px*var(--s)*var(--cs,1));font-weight:800;color:var(--orange)}
+.stat .d{font-size:calc(32px*var(--s)*var(--cs,1));font-weight:700;line-height:1.28;color:#2c3b40}
+
+/* ---------- choice ---------- */
+.q{flex:0 0 auto;background:#fff;border:calc(3px*var(--s)) dashed var(--th);border-radius:calc(14px*var(--s));
+  padding:calc(11px*var(--s)) calc(20px*var(--s));font-size:calc(34px*var(--s));font-weight:800;line-height:1.3}
+.opts{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.85vh}
+.opt{flex:1 1 0;min-height:0;display:flex;align-items:center;gap:calc(14px*var(--s));cursor:pointer;
+  background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(6px*var(--s)) calc(17px*var(--s));text-align:left;font-size:calc(36px*var(--s)*var(--cs,1));font-weight:700;line-height:1.25}
+.opt .ch{flex:0 0 auto;width:calc(50px*var(--s)*var(--cs,1));height:calc(50px*var(--s)*var(--cs,1));border-radius:50%;
+  background:var(--th);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:calc(28px*var(--s)*var(--cs,1));font-weight:900}
+.opt .mk{flex:0 0 auto;margin-left:auto;font-size:calc(36px*var(--s)*var(--cs,1));width:calc(46px*var(--s)*var(--cs,1));text-align:center;display:inline-block}
+.opt:hover{border-color:var(--th)}
+.opt.right{border-color:#1e8449;background:#eafaf1}
+.opt.wrong{border-color:#c0392b;background:#fdecea}
+.done .opt{cursor:default}
+
+/* ---------- fill ---------- */
+.bank{flex:0 0 auto;display:flex;flex-wrap:wrap;gap:calc(9px*var(--s));justify-content:center}
+.word{background:var(--amber);color:#3b2a10;border:none;border-radius:calc(12px*var(--s));
+  padding:calc(8px*var(--s)) calc(20px*var(--s));font-size:calc(31px*var(--s));font-weight:900;cursor:pointer}
+.word.sel{background:var(--orange);color:#fff;box-shadow:0 0 0 calc(4px*var(--s)) rgba(232,85,45,.3)}
+.word.used{opacity:.3;cursor:default}
+.blanks{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.9vh}
+.bl{flex:1 1 0;min-height:0;display:flex;align-items:center;overflow:hidden;font-size:calc(37px*var(--s)*var(--cs,1));font-weight:700;line-height:1.35;background:#fff;
+  border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(10px*var(--s)) calc(18px*var(--s))}
+.bl .in{width:100%}
+.slot{display:inline-block;white-space:nowrap;min-width:var(--bw);text-align:center;border-bottom:calc(4px*var(--s)) solid var(--th);
+  color:var(--orange);font-weight:900;cursor:pointer;padding:0 calc(6px*var(--s));margin:0 calc(3px*var(--s))}
+.slot.empty{color:#c8cfd1}
+.bl.right{border-color:#1e8449;background:#eafaf1}
+.bl.wrong{border-color:#c0392b;background:#fdecea}
+
+/* ---------- order ---------- */
+.ord{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:.85vh}
+.oi{flex:1 1 0;min-height:0;display:flex;align-items:center;gap:calc(14px*var(--s));cursor:pointer;
+  background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(6px*var(--s)) calc(17px*var(--s));text-align:left;font-size:calc(34px*var(--s)*var(--cs,1));font-weight:700;line-height:1.25}
+.oi .num{flex:0 0 auto;width:calc(54px*var(--s)*var(--cs,1));height:calc(54px*var(--s)*var(--cs,1));border-radius:calc(12px*var(--s));
+  background:#EFEAE2;color:#9aa4a8;display:flex;align-items:center;justify-content:center;
+  font-size:calc(30px*var(--s)*var(--cs,1));font-weight:900}
+.oi.picked .num{background:var(--th);color:#fff}
+.oi.right{border-color:#1e8449;background:#eafaf1}
+.oi.wrong{border-color:#c0392b;background:#fdecea}
+
+/* ---------- spot ---------- */
+.cards{flex:1 1 auto;min-height:0;display:grid;gap:.9vh .85vw;grid-auto-rows:minmax(0,1fr)}
+.g8{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:minmax(0,1fr) minmax(0,1fr)}
+.g9{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+.sc{position:relative;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(16px*var(--s));
+  padding:calc(18px*var(--s)) calc(12px*var(--s));display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:calc(37px*var(--s)*var(--cs,1));font-weight:800;line-height:1.25;cursor:pointer;min-height:0;overflow:hidden}
+.sc .no{position:absolute;top:calc(4px*var(--s));left:calc(9px*var(--s));font-size:calc(18px*var(--s));
+  color:#b6bec1;font-weight:900}
+.sc .bd{position:absolute;bottom:calc(4px*var(--s));right:calc(9px*var(--s));font-size:calc(19px*var(--s));font-weight:900;display:inline-block}
+.sc.bad{border-color:#c0392b;background:#fdecea}
+.sc.bad .bd{color:#c0392b}
+.sc.good{border-color:#1b7fa8;background:#eaf4fb}
+.sc.good .bd{color:#1b7fa8}
+.shake{animation:sh .4s}
+@keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.exbar{position:relative;flex:0 0 auto;background:#fff;border:calc(3px*var(--s)) solid var(--th);
+  border-radius:calc(14px*var(--s));padding:calc(10px*var(--s)) calc(18px*var(--s))}
+.exg{visibility:hidden;font-size:calc(29px*var(--s));font-weight:700;line-height:1.3}
+.exl{position:absolute;inset:calc(10px*var(--s)) calc(18px*var(--s));display:flex;align-items:center;
+  font-size:calc(29px*var(--s));font-weight:700;line-height:1.3}
+
+/* ---------- sort ---------- */
+.pool{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:.85vh .85vw}
+.pi{position:relative;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(16px*var(--s)) calc(10px*var(--s));display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:calc(33px*var(--s)*var(--cs,1));font-weight:800;line-height:1.25;cursor:pointer;min-height:0;overflow:hidden}
+.pi.sel{border-color:var(--orange);box-shadow:0 0 0 calc(4px*var(--s)) rgba(232,85,45,.24)}
+.pi .pb{position:absolute;top:calc(4px*var(--s));right:calc(7px*var(--s));font-size:calc(19px*var(--s));
+  font-weight:900;color:#fff;background:var(--th);border-radius:99px;padding:calc(1px*var(--s)) calc(9px*var(--s));
+  min-width:calc(28px*var(--s));text-align:center}
+.pi .pb.off{background:transparent;color:transparent}
+.pi.right{border-color:#1e8449;background:#eafaf1}
+.pi.wrong{border-color:#c0392b;background:#fdecea}
+.bins{flex:0 0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.85vw}
+.bin{background:var(--th);color:#fff;border:none;border-radius:calc(14px*var(--s));
+  padding:calc(11px*var(--s));font-size:calc(30px*var(--s));font-weight:900;cursor:pointer;line-height:1.2}
+.bin.sel{outline:calc(5px*var(--s)) solid var(--amber)}
+
+/* ---------- movie ---------- */
+.mv{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:1vw}
+.mvL,.mvR{display:flex;flex-direction:column;gap:.85vh;min-height:0}
+.task{flex:1 1 0;min-height:0;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-left:calc(10px*var(--s)) solid var(--amber);
+  border-radius:calc(12px*var(--s));padding:calc(8px*var(--s)) calc(14px*var(--s));display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.task .k{font-size:calc(19px*var(--s)*var(--cs,1));font-weight:900;color:var(--orange)}
+.task .v{font-size:calc(30px*var(--s)*var(--cs,1));font-weight:700;line-height:1.3}
+.clip{flex:1 1 0;min-height:0;overflow:hidden;display:flex;align-items:center;gap:.5em;background:var(--ink);color:#fff;
+  border:none;border-radius:calc(12px*var(--s));padding:calc(6px*var(--s)) calc(12px*var(--s));
+  font-size:calc(23px*var(--s)*var(--cs,1));font-weight:800;cursor:pointer;text-align:left;line-height:1.2}
+.clip .plyb{flex:0 0 auto;width:1.5em;height:1.5em;border-radius:50%;background:#E62117;
+  display:flex;align-items:center;justify-content:center;font-size:.9em}
+.vote{flex:0 0 auto;display:flex;flex-direction:column;background:#fff;border:calc(3px*var(--s)) dashed var(--th);border-radius:calc(12px*var(--s));
+  padding:calc(7px*var(--s)) calc(14px*var(--s)) calc(9px*var(--s))}
+.vote .vq{flex:0 0 auto;font-size:calc(23px*var(--s));font-weight:900;margin-bottom:calc(4px*var(--s))}
+.vrow{flex:0 0 auto;display:flex;align-items:center;gap:.4em;width:100%;background:#F7F3EC;border:none;
+  border-radius:calc(9px*var(--s));padding:calc(6px*var(--s)) calc(13px*var(--s));margin-top:calc(5px*var(--s));
+  font-size:calc(28px*var(--s));font-weight:700;cursor:pointer;text-align:left;line-height:1.2}
+.vrow .cnt{margin-left:auto;background:var(--th);color:#fff;border-radius:99px;min-width:1.6em;
+  text-align:center;font-weight:900;padding:0 .3em;line-height:1.3}
+
+/* ---------- reflect / pledge ---------- */
+.rf{background:#fff;border:calc(3px*var(--s)) solid var(--line);border-left:calc(12px*var(--s)) solid var(--th);
+  border-radius:calc(14px*var(--s));padding:calc(12px*var(--s)) calc(18px*var(--s));display:flex;flex-direction:column;
+  justify-content:center;gap:calc(4px*var(--s));min-height:0;overflow:hidden}
+.rf .k{font-size:calc(28px*var(--s)*var(--cs,1));font-weight:900;color:var(--th)}
+.rf .v{font-size:calc(30px*var(--s)*var(--cs,1));font-weight:700;line-height:1.35}
+.pl{position:relative;background:#fff;border:calc(3px*var(--s)) solid var(--line);border-radius:calc(14px*var(--s));
+  padding:calc(8px*var(--s)) calc(16px*var(--s)) calc(8px*var(--s)) calc(56px*var(--s));
+  display:flex;align-items:center;font-size:calc(31px*var(--s)*var(--cs,1));font-weight:700;line-height:1.25;
+  cursor:pointer;min-height:0;overflow:hidden;text-align:left}
+.pl .bx{position:absolute;left:calc(13px*var(--s));width:calc(32px*var(--s));height:calc(32px*var(--s));
+  border:calc(3px*var(--s)) solid var(--th);border-radius:calc(7px*var(--s));display:flex;align-items:center;
+  justify-content:center;font-size:calc(22px*var(--s));line-height:1;overflow:hidden;color:#fff}
+.pl.on{border-color:var(--th);background:#f2fbfa}
+.pl.on .bx{background:var(--th)}
+
+/* ---------- score ---------- */
+.scw{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:calc(12px*var(--s))}
+.scw .big{font-size:calc(130px*var(--s));font-weight:900;color:var(--th);line-height:1.15}
+.scw .sub{font-size:calc(34px*var(--s));font-weight:800}
+.scw .stars{font-size:calc(46px*var(--s));letter-spacing:.06em;line-height:1.25;max-width:82vw}
+.scw .stars i{font-style:normal;display:inline-block;opacity:0;animation:pin .4s both}
+@keyframes pin{from{opacity:0;transform:scale(0) rotate(-40deg)}to{opacity:1;transform:none}}
+.scw .msg{font-size:calc(30px*var(--s));font-weight:700;color:#4a5b60;line-height:1.4;max-width:74vw}
+#cfx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:30}
+
+/* ---------- entrance animation ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+.rise{animation:rise .40s var(--d,0ms) both cubic-bezier(.2,.8,.3,1)}
+@keyframes popin{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.opt.right .mk,.opt.wrong .mk,.sc.bad .bd,.sc.good .bd{animation:popin .32s cubic-bezier(.2,.9,.3,1.5)}
+@keyframes gpulse{0%{transform:scale(1)}45%{transform:scale(1.03)}100%{transform:scale(1)}}
+.opt.right,.oi.right,.pi.right,.bl.right{animation:gpulse .5s}
+.opt.wrong{animation:sh .4s}
+
+html.noanim *{animation:none!important;transition:none!important}
+
+/* ---------- nav ---------- */
+#nav{position:absolute;left:0;right:0;bottom:0;height:var(--navh);background:var(--ink);color:#fff;
+  display:flex;align-items:center;gap:8px;padding:0 12px;font-size:15px;font-weight:700;z-index:40}
+#nav button,#nav a{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:8px;padding:7px 12px;
+  font-size:15px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block;line-height:1.2}
+#nav button:hover,#nav a:hover{background:rgba(255,255,255,.26)}
+#nav a#bhome{background:var(--amber);color:#3b2a10}
+#pg{font-size:16px;font-weight:900;min-width:80px;text-align:center}
+#sctr{background:var(--amber);color:#3b2a10;border-radius:99px;padding:4px 13px;font-weight:900}
+@keyframes bump{0%,100%{transform:scale(1)}40%{transform:scale(1.3)}}
+#sctr.bump{animation:bump .5s}
+.spacer{flex:1}
+#tmr{display:none;background:var(--orange);border-radius:99px;padding:4px 14px;font-weight:900}
+#tmr.on{display:block}
+.fly{position:fixed;z-index:70;font-size:38px;font-weight:900;color:#F4A93C;pointer-events:none;
+  text-shadow:0 2px 10px rgba(0,0,0,.4);animation:fly 1.1s ease-out forwards}
+@keyframes fly{0%{opacity:0;transform:translateY(0) scale(.5)}18%{opacity:1;transform:translateY(-16px) scale(1.2)}
+  100%{opacity:0;transform:translateY(-96px) scale(1)}}
+
+/* ---------- overlays ---------- */
+.ov{position:absolute;inset:0;background:rgba(18,52,59,.74);display:none;z-index:50;
+  align-items:center;justify-content:center;padding:4vh 4vw}
+.ov.on{display:flex}
+#ansv .box{background:#fff;border-radius:24px;max-width:min(900px,88vw);width:100%;padding:30px 38px;text-align:center;
+  box-shadow:0 24px 70px rgba(0,0,0,.34);animation:pop .34s cubic-bezier(.2,.9,.3,1.25)}
+@keyframes pop{0%{transform:scale(.85);opacity:0}62%{transform:scale(1.03)}100%{transform:scale(1);opacity:1}}
+#ansv .ic{font-size:74px;line-height:1}
+#ansv .ti{font-size:42px;font-weight:900;margin:4px 0 14px}
+#ansv .fb{border:3px dashed var(--th);border-radius:14px;padding:16px 20px;font-size:29px;font-weight:700;
+  line-height:1.45;text-align:left}
+#ansv .ok{margin-top:20px;background:var(--th);color:#fff;border:none;border-radius:12px;padding:13px 38px;
+  font-size:25px;font-weight:900;cursor:pointer}
+#tocv .box{background:#fff;border-radius:20px;max-width:min(1180px,92vw);width:100%;max-height:88vh;overflow:auto;padding:22px}
+#tocv h3{margin:0 0 12px;font-size:23px}
+#tocg{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+#tocg button{text-align:left;background:#F7F3EC;border:2px solid var(--line);border-radius:11px;padding:9px 11px;
+  font-size:16px;font-weight:700;cursor:pointer;line-height:1.3}
+#tocg button.cur{border-color:var(--th);background:#fff}
+#tocg .ix{color:var(--th);font-weight:900;margin-right:6px}
+#lbv .box{width:min(1180px,92vw)}
+#lbv .fr{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:12px;overflow:hidden}
+#lbv iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+#lbv .bar{display:flex;gap:10px;margin-top:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+#lbv a,#lbv button{background:#fff;color:var(--ink);border:none;border-radius:11px;padding:10px 18px;
+  font-size:18px;font-weight:800;cursor:pointer;text-decoration:none}
+#lbv .hint{color:#fff;font-size:16px;font-weight:600;opacity:.9}
+#notep{position:absolute;left:0;right:0;bottom:var(--navh);background:#12343B;color:#F4E9D8;
+  padding:15px 20px;font-size:20px;line-height:1.5;font-weight:600;display:none;z-index:45;
+  border-top:4px solid var(--amber);max-height:40vh;overflow:auto}
+#notep.on{display:block}
+#notep b{color:var(--amber)}
+@media (max-width:860px){ #nav{font-size:12px;gap:6px} #nav button,#nav a{padding:6px 8px;font-size:12px} }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div id="notep"></div>
+<div id="nav">
+  <button id="bprev">‹ 上一頁</button>
+  <span id="pg">1 / 24</span>
+  <button id="bnext">下一頁 ›</button>
+  <span id="sctr">⭐ 0 / 9</span>
+  <span id="tmr">⏱ 20</span>
+  <span class="spacer"></span>
+  <a id="bhome" href="index.html" title="回到 12 個主題的主選單">🏠 主選單</a>
+  <button id="btoc">目錄</button>
+  <button id="bnote">講師提示 N</button>
+  <button id="bsnd">🔊 音效 S</button>
+  <button id="btime">計時 T</button>
+  <button id="bfull">全螢幕 F</button>
+</div>
+<div class="ov" id="ansv"><div class="box">
+  <div class="ic" id="anic">✅</div><div class="ti" id="anti"></div>
+  <div class="fb" id="anfb"></div><button class="ok" id="anok">知道了，繼續</button>
+</div></div>
+<div class="ov" id="tocv"><div class="box"><h3>目錄｜點一下直接跳頁</h3><div id="tocg"></div></div></div>
+<div class="ov" id="lbv"><div class="box">
+  <div class="fr"><iframe id="lbf" allowfullscreen></iframe></div>
+  <div class="bar"><span class="hint">若出現「錯誤 153」代表該頻道不開放內嵌，請按右邊按鈕改用 YouTube 開啟。</span>
+  <span><a id="lbo" target="_blank" rel="noopener">在 YouTube 開啟大畫面</a> <button id="lbc">關閉</button></span></div>
+</div></div>
+<script>
+const DECK = {
+  title: "好眠好心情班",
+  subtitle: "睡不著、心情悶，不是老了本來就這樣",
+  disease: "老年憂鬱與失眠（Late-life Depression and Insomnia）",
+  theme: "#4C5CA6",
+  slides: [
+    {
+      t: "cover",
+      h: "好眠好心情班",
+      sub: "睡不著、心情悶，不是老了本來就這樣",
+      meta: "愛迪樂健康促進團隊",
+      note: "開場先不要提「憂鬱」兩個字，先問一句「昨天晚上睡得好嗎？」讓大家從睡眠聊起，心情的話題自然會被帶出來。台下很可能就坐著正在吃安眠藥、或心情正低落的長輩，全程用「我們一起保養心情」的口氣，不要用「病人」「患者」。"
+    },
+    {
+      t: "points",
+      tag: "開場",
+      h: "這幾句話，您聽過嗎？",
+      lead: "先不急著分對錯，這些話我們都聽了幾十年。",
+      cols: 2,
+      items: [
+        { k: "老了就這樣", v: "「老了心情本來就較差」——很多人這樣講" },
+        { k: "想開就好", v: "「想開一點就好」——聽起來<b>像是自己的問題</b>" },
+        { k: "吃顆藥就好", v: "「睡不著，吃一顆就過去」——很方便，也很危險" },
+        { k: "說出來歹勢", v: "「家裡的事說出去會被笑」——所以<b>都放在心裡</b>" }
+      ],
+      note: "這頁只做一件事：接住。每念一句就停下來問「有沒有人也這樣講過？」請兩三位分享，聽完只回一句「對，大家都這樣講」，千萬不要糾正。第四句念完可以多停一下，這是整堂課最需要鬆動的一句話。"
+    },
+    {
+      t: "fill",
+      tag: "動動腦",
+      h: "先來填三句話",
+      lead: "從詞庫挑一個詞，把句子補完整。",
+      bank: ["兩禮拜", "身體", "老化", "三工", "運動", "藥仔"],
+      lines: [
+        { pre: "人講「心事無人知」，鬱卒的時陣，長輩較常講的是", ans: "身體", post: "無爽快。" },
+        { pre: "提不起勁、睏袂去，連續超過", ans: "兩禮拜", post: "，就值得找人講講看。" },
+        { pre: "睏袂去，先從生活調整開始，不是先加", ans: "藥仔", post: "。" }
+      ],
+      fb: "這三句就是今天的重點：長輩的「鬱卒」（心情悶）常常先從身體不舒服講起；要看的是「連續兩個禮拜」；睡不著先調整生活，藥的加減由醫師決定。",
+      note: "這一頁保留台語的講法，念起來才有味道。先請長輩自己念一次題目，再一起選詞，選完用國語把意思說一遍。第一句是全課最重要的觀念，請大家跟著念。第三句念完不要急著翻頁，問一句「您有聽過人家自己加藥的嗎？」通常會有故事出來，先聽，不要評論。"
+    },
+    {
+      t: "points",
+      tag: "提問①",
+      h: "老年憂鬱是什麼",
+      lead: "不是想不開，也不是老了自然就這樣——是可以處理的一種狀況。",
+      cols: 2,
+      core: true,
+      items: [
+        { k: "不是想不開", v: "是<b>腦部和身體</b>一起出狀況，不是意志力不夠" },
+        { k: "不是老化", v: "老了會比較慢，但<b>不會理所當然心情悶</b>" },
+        { k: "常說身體", v: "很少說「心情不好」，都說<b>頭痛、沒力、沒胃口</b>" },
+        { k: "睡眠先出聲", v: "失眠常是<b>最早出現的訊號</b>，比情緒還早被發現" },
+        { k: "看的是連續", v: "什麼都不想做、什麼都沒興趣，<b>連續兩週要留意</b>" },
+        { k: "會好起來", v: "找對方法，多數人<b>會明顯改善</b>，不是沒藥醫" }
+      ],
+      src: "國家衛生研究院國家高齡醫學暨健康福祉研究中心〈老年憂鬱症別忌諱就醫〉（情緒低落超過兩週且影響生活，常伴隨疲憊、胃口改變、睡不好等身體症狀）",
+      note: "第三項「常說身體」是本課最好用的一句，請講慢、舉例：隔壁阿嬤一直說頭痛、胃不好，檢查都正常，這時就要想到心情。第六項一定要講到，很多長輩不去看是因為覺得「看了也沒用」。「兩個禮拜」這把尺請重複兩次，等一下的排序題還會用到。"
+    },
+    {
+      t: "stats",
+      tag: "台灣現況",
+      h: "台灣現在的四個數字",
+      items: [
+        { n: "16.7", u: "%", d: "65歲以上有憂鬱情形" },
+        { n: "22.7", u: "%", d: "60到69歲有慢性失眠" },
+        { n: "4.77", u: "億顆", d: "健保一年的安眠藥用量" },
+        { n: "4", u: "成", d: "用安眠藥的人是65歲以上" }
+      ],
+      src: "衛福部2015-2017年老人心理健康調查（臺北醫學大學團隊分析，中央社2024年5月31日報導）；台灣睡眠醫學學會2017年全國睡眠調查（全體慢性失眠盛行率11.3%）；健保署統計112年鎮靜安眠藥用量4.77億顆（中央社2024年11月13日）；健保署統計全台約190萬人使用鎮靜安眠藥、65歲以上約76萬人（2026年媒體報導）",
+      note: "第一個數字換算成現場最有感：現場若坐十八位，大約就有三位。講完立刻補一句「所以這不是誰的錯，也不是自己軟弱」。第三、四個數字不要用來罵人，是要說明「藥很容易拿到，但要拿得對」，順勢帶到後面的用藥安全。"
+    },
+    {
+      t: "choice",
+      tag: "認識題",
+      h: "哪一個比較像訊號？",
+      q: "下面哪一種情形，比較像是老年憂鬱要多留意的訊號？",
+      opts: [
+        "親人過世那幾天，一直掉眼淚",
+        "本來愛去的據點，兩個月沒去",
+        "天氣變冷，早上比較不想起床",
+        "看歌仔戲看到一半，就打瞌睡"
+      ],
+      ans: 1,
+      fb: "難過一陣子是人之常情；本來高興的事連續好幾個禮拜都提不起勁，才是值得多留意的訊號。",
+      src: "國家衛生研究院國家高齡醫學暨健康福祉研究中心；社團法人臺灣憂鬱症防治協會衛教資料",
+      note: "先舉手表決再公布答案。公布後把第一個選項好好講一次：喪親後的難過是正常的，不要急著把它當成病；但如果過了好幾個月還完全走不出來，就值得請人幫忙看看。若有長輩剛好在服喪，這一段要放輕，課後再個別關心。"
+    },
+    {
+      t: "points",
+      tag: "為什麼",
+      h: "改得動的比想像多",
+      lead: "老年憂鬱和失眠，多半不是單一原因，是好幾條線纏在一起。",
+      cols: 2,
+      core: true,
+      items: [
+        { k: "改不動：失落", v: "老伴、老友離開，<b>一輩子的角色</b>也在改變" },
+        { k: "改不動：年紀", v: "腦部和荷爾蒙變化，<b>睡眠本來就較淺</b>、較早醒" },
+        { k: "改得動：身體", v: "甲狀腺、貧血、疼痛、中風後，<b>都會影響心情</b>" },
+        { k: "改得動：藥物", v: "有些藥會影響情緒和睡眠，<b>回診要跟醫師講</b>" },
+        { k: "改得動：睡眠", v: "失眠和心情互相拖累，<b>顧好一邊另一邊就輕鬆</b>" },
+        { k: "改得動：孤單", v: "少出門、少講話、<b>沒人可以聊</b>，是很大的風險" }
+      ],
+      src: "國家衛生研究院國家高齡醫學暨健康福祉研究中心：高齡憂鬱四大危險因子（生理變化與慢性病用藥、社會孤立、認知退化、睡眠障礙）",
+      note: "「改得動：藥物」這項一定要停：請長輩回想有沒有換藥之後心情或睡眠變差，並提醒回診時把藥袋帶去問醫師，不要自己停藥。第五項是本課的主軸——失眠和心情低落互為因果，兩邊都要顧。「改不動」兩項輕輕帶過就好，重點放在改得動的四項。"
+    },
+    {
+      t: "movie",
+      tag: "看影片",
+      h: "我們來看一段",
+      lead: "看的時候，帶著這三個任務。",
+      tasks: [
+        { k: "任務一", v: "影片裡的長輩，最先出現的是什麼樣的變化？" },
+        { k: "任務二", v: "身邊的人講了哪一句話，讓他願意開口？" },
+        { k: "任務三", v: "影片提到安眠藥有哪些一定不能做的事？" }
+      ],
+      clips: [
+        { t: "《你說，我想聽》老年憂鬱防治微電影（釋懷篇）", id: "mPgc3tdPzU0" },
+        { t: "《正確使用安眠藥》心理健康知能衛教微電影", id: "-M_bOlzxdW4" },
+        { t: "全台190萬人用安眠藥 健保署將納管3類高風險者（公視新聞）", id: "WjcXwRlq9FM" }
+      ],
+      search: "老年憂鬱防治微電影 正確使用安眠藥 衛教",
+      vote: { q: "看完之後，您最想先做的是哪一件？", opts: ["先固定每天的起床時間", "先把藥的問題問清楚醫師", "先找一個人講心裡話"] },
+      note: "播放前把三個任務念一遍，請大家邊看邊記。影片結束先不要講解，直接問任務二，讓長輩自己說出那句關鍵的話。投票沒有標準答案，三個都是好選擇，統計完只講一句「每一票都是行動」。現場網路若不順，用備援關鍵字現場搜尋；建議課前先試播一次確認影片還在。"
+    },
+    {
+      t: "spot",
+      tag: "找看看",
+      h: "這幾張，哪裡怪怪的？",
+      lead: "八張卡片，有四張的做法要調整，找找看是哪幾張。",
+      need: 4,
+      cards: [
+        { x: "睡不著就吃鄰居的藥", w: 1, why: "每個人的身體和用藥不同，別人的安眠藥可能太強、也可能和您的藥相沖。睡不好請找醫師評估，不要拿別人的藥吃。" },
+        { x: "配酒吃藥比較好睡", w: 1, why: "安眠藥配酒會讓呼吸和意識受到更強的抑制，很危險。要用開水吞服，睡前也不要靠酒助眠。" },
+        { x: "整天坐在家裡看電視", w: 1, why: "白天不動、不曬太陽，晚上就更睡不著，心情也更悶。早上出門走一走、曬到太陽，是最省錢的一招。" },
+        { x: "心情悶怕人笑不敢講", w: 1, why: "越不講拖越久。心情的病是可以治療的，跟醫師、護理師或家人講一句，就是最省力的第一步。" },
+        { x: "每天同一時間起床", d: 1, ok: "固定起床時間是穩定生理時鐘最有效的一招，比早早上床躺著更有用。" },
+        { x: "睡不著就起來坐坐", d: 1, ok: "躺著硬撐會讓床和焦慮綁在一起。起來做點安靜的事，有睡意再回床上。" },
+        { x: "下午咖啡改喝溫水", d: 1, ok: "咖啡因在身體裡留得比想像久，下午改喝溫水，晚上比較容易入睡。" },
+        { x: "找鄰居一起去據點", d: 1, ok: "有伴、有話講、有走動，對心情和睡眠都有幫助，這是最實在的保養。" }
+      ],
+      fb: "四張要改的，都是「靠藥、靠酒、靠忍耐」；四張好的，都是「靠生活、靠太陽、靠人」。",
+      note: "讓長輩一張一張點，點錯不要馬上說錯，先問「您覺得這樣哪裡怪？」第一、二張要嚴肅講一次，這是本課的安全底線。四張誘答卡公布時要大聲稱讚，讓大家知道自己本來就做對很多事，等一下才願意承諾。"
+    },
+    {
+      t: "stats",
+      tag: "拖著的差別",
+      h: "不處理，差在哪裡",
+      items: [
+        { n: "27", u: "%", d: "中高齡憂鬱者有去就醫" },
+        { n: "11", u: "%", d: "真正得到有效的治療" },
+        { n: "4", u: "成以上", d: "歐美日本的就醫比率" },
+        { n: "3", u: "種", d: "併用安眠藥就要特別留意" }
+      ],
+      src: "衛福部委託研究，發表於 Lancet Regional Health - Western Pacific（國家衛生研究院國家高齡醫學暨健康福祉研究中心報導：87%覺得就醫方便，僅27%就醫、11%得到有效治療）；健保署2026年鎮靜安眠藥納管新制（65歲以上、同時使用3種以上、一年用超過6個月者列為關注對象）",
+      note: "這頁要先講一句「這些數字不是要嚇大家」。重點是第一、二個數字：不是台灣人看醫生不方便，是大家不知道這可以看、也不好意思看。第四個數字帶到用藥安全：吃越多種越要請醫師整體看一次，不是自己減。錢和病名的話題快速帶過。"
+    },
+    {
+      t: "sort",
+      tag: "分分看",
+      h: "幫睡眠分三籃",
+      lead: "九張卡片，請幫它們找到自己的籃子。",
+      bins: [
+        { id: "a", t: "幫助睡眠的做法" },
+        { id: "b", t: "破壞睡眠的做法" },
+        { id: "c", t: "要找醫師談的情形" }
+      ],
+      items: [
+        { x: "固定時間起床曬太陽", b: "a" },
+        { x: "睡前一小時放下手機", b: "a" },
+        { x: "午睡三十分鐘就好", b: "a" },
+        { x: "晚上靠喝酒來助眠", b: "b" },
+        { x: "躺在床上滑手機看片", b: "b" },
+        { x: "睡不著還一直躺著", b: "b" },
+        { x: "連續兩週提不起勁", b: "c" },
+        { x: "吃藥後白天暈沉沉", b: "c" },
+        { x: "打鼾又常停止呼吸", b: "c" }
+      ],
+      fb: "分辨的關鍵：讓身體「知道現在是白天還是晚上」的都是好的；把床變成煩惱的地方都是壞的；影響到白天生活的，就交給醫師。",
+      note: "先讓長輩念出卡片再決定籃子，念出來比較容易判斷。若有人把「睡不著還一直躺著」放進好習慣，不要急著改，反問「躺兩個小時睡不著，心裡在想什麼？」讓他們自己說出焦慮。第三籃要強調：這不是嚇人，是告訴大家什麼時候該找人幫忙。"
+    },
+    {
+      t: "section",
+      n: "提問②",
+      h: "心情顧好，是顧著誰？",
+      lead: "答案不是只有自己一個人。",
+      note: "轉場頁，停久一點。問一句「您覺得心情顧好，最先得利的是誰？」先聽兩三個答案再翻頁。多數長輩會說「我自己」，可以笑著回「等一下我們來看看還有誰」。"
+    },
+    {
+      t: "points",
+      tag: "對自己",
+      h: "顧好，自己賺四筆",
+      cols: 2,
+      items: [
+        { k: "身體這筆", v: "睡得著，<b>血壓、血糖、免疫力</b>都比較穩" },
+        { k: "荷包這筆", v: "少跑幾趟門診和急診，<b>用藥也比較單純</b>" },
+        { k: "自由這筆", v: "有精神自己出門、自己買菜，<b>不用人跟</b>" },
+        { k: "心情這筆", v: "知道自己是怎麼回事，就<b>不用整天煩惱</b>" }
+      ],
+      note: "四筆帳裡「自由」這一筆最打動長輩，多停一下：睡得飽、心情有力氣，才有辦法自己坐公車去哪裡。「心情」這筆要輕輕講——很多長輩其實暗暗擔心自己是不是要失智了，說出來反而放鬆。"
+    },
+    {
+      t: "points",
+      tag: "對大家",
+      h: "顧好，全家都輕鬆",
+      cols: 3,
+      items: [
+        { k: "對家人", v: "家裡少一份煩惱，子孫也<b>不用整晚掛心</b>" },
+        { k: "對鄰居", v: "有人願意先開口，<b>鄰居也比較敢講</b>自己的心事" },
+        { k: "對國家", v: "早一點接住，醫療和長照的資源<b>用在刀口上</b>" }
+      ],
+      note: "「對鄰居」這項最值得停：現場只要有一位長輩願意說「我也睡不著」，其他人就敢講了。可以問一句「我們這個社區，有人心情不好的時候，會找誰講？」通常會引出很好的討論，也順便盤點社區既有的支持網。"
+    },
+    {
+      t: "order",
+      tag: "怎麼辦",
+      h: "發現不對勁，先做什麼？",
+      lead: "把這五步排出正確的順序。",
+      items: [
+        "發現自己或鄰居連續兩週提不起勁",
+        "先坐下來陪他聽他說，不急著勸他想開",
+        "一起檢查是不是身體或藥物引起的",
+        "陪他去看醫師，家醫科、精神科、身心科都可以",
+        "繼續關心，帶他到據點和社區資源"
+      ],
+      fb: "最重要的是第二步：先聽。急著說「你想開一點就好」，往往會讓對方就此閉嘴。社區常用的「心情溫度計（BSRS-5）」五題、「長者憂鬱量表（GDS-15）」十五題，都只是幫忙看看要不要找人談談的工具，不是診斷。",
+      note: "排完之後把第二步再示範一次：坐下來、看著對方、只說「你說，我聽」。第三步要提醒把藥袋帶去給醫師看。量表的部分請說清楚：這是篩檢不是診斷，分數高只代表「該找人談談」，不同單位使用的版本和切分點略有不同，請依當地衛生局提供的版本說明。"
+    },
+    {
+      t: "choice",
+      tag: "破迷思",
+      h: "哪一句才是對的？",
+      q: "關於心情和安眠藥，下面哪一句話是正確的？",
+      opts: [
+        "人老了心情差，本來就正常",
+        "怕安眠藥失智，先自己減半",
+        "找人講心事，是自己軟弱",
+        "睡不著找醫師，藥量醫師調"
+      ],
+      ans: 3,
+      fb: "老了不等於該心情差；藥要加要減都由醫師決定，自己亂調反而更難睡、還可能不舒服；找人講是聰明，不是軟弱。",
+      src: "衛生福利部〈正確使用鎮靜安眠藥〉五不四要；國家衛生研究院國家高齡醫學暨健康福祉研究中心",
+      note: "三個錯的選項都要一一破解，這頁的價值就在這裡。第二句要講得最仔細：擔心藥吃久了不好是很合理的，但正確做法是「把擔心講給醫師聽，請醫師幫忙慢慢調」，不是自己減半，也不是自己突然停藥。第三句可以問一句「您上一次跟人講心事是什麼時候？」"
+    },
+    {
+      t: "points",
+      tag: "提問③",
+      h: "我做得到的六件事",
+      lead: "不用一次全做，先挑一件，做給自己看。",
+      cols: 2,
+      core: true,
+      items: [
+        { k: "固定起床", v: "每天同一時間起床，<b>起床時間比睡著時間更要緊</b>" },
+        { k: "太陽要曬", v: "早上出門走一走曬太陽，<b>晚上才睡得著</b>" },
+        { k: "床只睡覺", v: "不在床上看電視滑手機，<b>睡不著就起來坐</b>" },
+        { k: "咖啡酒要減", v: "下午不喝咖啡濃茶，<b>睡前不靠酒助眠</b>" },
+        { k: "藥聽醫師的", v: "固定回診，<b>不加量、不配酒、不吃別人的</b>" },
+        { k: "講給年輕人", v: "把「心情不好可以看醫生」<b>講給子孫聽</b>" }
+      ],
+      src: "衛生福利部〈正確使用鎮靜安眠藥〉五不四要（不自行購買、不自行調整或停藥、不與酒併用、不開車操作機械、不轉售分享他人）；台灣睡眠醫學學會睡眠衛生建議",
+      note: "第六件是今天最重要的一件，只有長輩做得到：年輕人最聽的就是阿公阿嬤的話。長輩若肯講一句「心情不好去看醫生，沒什麼好丟臉」，這句話對子孫的影響比任何衛教單張都大。可以現場請一位長輩說說看，通常會很動人。前五件請大家只圈一件。"
+    },
+    {
+      t: "points",
+      tag: "提問④",
+      h: "台灣有這些後盾",
+      lead: "這些都不用自己摸索，一通電話就有人接。",
+      cols: 2,
+      core: true,
+      items: [
+        { k: "安心專線", v: "心情難過想找人講，撥 <b>1925</b>，24小時免付費" },
+        { k: "心衛中心", v: "各縣市<b>社區心理衛生中心</b>，諮詢、轉介都可以問" },
+        { k: "長照專線", v: "撥 <b>1966</b>，問照顧、喘息、交通接送和居家服務" },
+        { k: "看哪一科", v: "<b>家醫科、精神科、身心科</b>都可以，健保有給付" },
+        { k: "社區據點", v: "共餐、課程、志工，<b>有伴就是最好的保養</b>" },
+        { k: "免費健檢", v: "65歲以上<b>每年一次成人預防保健</b>，含憂鬱檢測" }
+      ],
+      src: "衛生福利部心理健康司1925安心專線（24小時免付費）；衛福部長照專線1966；國民健康署成人預防保健服務（65歲以上每年1次，服務項目含憂鬱檢測與健康諮詢）",
+      note: "把 1925 和 1966 寫在白板上，請大家拿手機當場存起來，等他們存完再繼續。第四項要特別講：不一定要去精神科，家醫科也會看、也會幫忙轉介，這句話能拆掉很多人的心防。最後一項提醒大家健檢時憂鬱檢測那幾題要照實回答，不要為了好看亂勾。"
+    },
+    {
+      t: "spot",
+      tag: "大魔王",
+      h: "最後一關，找出五張",
+      lead: "九張卡片，五張的做法要調整，來，一起找。",
+      need: 5,
+      cards: [
+        { x: "藥吃了有效自己加一顆", w: 1, why: "自行加量容易越吃越重、白天暈沉沉，還會增加跌倒的機會。覺得效果不夠請回診跟醫師講，由醫師調整。" },
+        { x: "安眠藥分給鄰居一起吃", w: 1, why: "鎮靜安眠藥是管制藥品，分給別人不但違法，也可能害到對方。每個人的身體和其他用藥都不同。" },
+        { x: "他說什麼都沒趣就隨他", w: 1, why: "什麼都提不起勁常常是憂鬱的訊號，不是懶。多陪、多問一句，並請醫師看看是不是身體或藥物引起的。" },
+        { x: "怕他煩惱，事情都不說", w: 1, why: "被排除在外會讓長輩覺得自己沒用。用他聽得懂的方式讓他參與決定，被需要的感覺是很好的保護。" },
+        { x: "白天補睡三四個小時", w: 1, why: "白天睡太久，晚上的睡意就被用光了。午睡控制在半小時左右，其餘時間出門活動比較有幫助。" },
+        { x: "陪他看醫師，藥袋帶去", d: 1, ok: "醫師看到全部的藥才有辦法判斷，是不是某一種藥影響了心情和睡眠，一次就問清楚。" },
+        { x: "先聽他說，不急著勸", d: 1, ok: "先被聽見的人才願意繼續講。急著勸「想開一點」，常常會讓對方就此閉嘴。" },
+        { x: "把 1925 存進手機", d: 1, ok: "電話存好，需要的時候才找得到。24小時免付費，心情難過隨時都有人接。" },
+        { x: "邀他一起去據點共餐", d: 1, ok: "有伴、有話講、有規律的作息，對心情和睡眠都是實實在在的幫助。" }
+      ],
+      fb: "五張要改的，共同點是「把人留給他自己一個」；四張好的，共同點是「有人陪、有人聽、有人帶」。",
+      note: "這是綜合關，讓長輩分組討論後再點。第一、二張要嚴肅講一次：藥量只有醫師可以決定，管制藥品不可以分給別人。第四張常常會讓現場的家屬安靜下來，停一下，問一句「您有沒有想過長輩也想幫忙？」四張好卡公布時一張一張稱讚，讓大家帶著被肯定的感覺進入回顧。"
+    },
+    {
+      t: "fill",
+      tag: "行動句",
+      h: "把今天的話說出口",
+      lead: "從詞庫挑一個詞，把三句行動填完。",
+      bank: ["起床", "1925", "加量", "睡覺", "1919", "太陽"],
+      lines: [
+        { pre: "我可以先固定每天的", ans: "起床", post: "時間，先顧這一項就好。" },
+        { pre: "早上出門走一走，讓", ans: "太陽", post: "曬得到，晚上比較好睡。" },
+        { pre: "心情悶想找人講，我可以撥", ans: "1925", post: "安心專線。" }
+      ],
+      fb: "固定起床、出門曬太陽、記牢一支電話——這三件今天回去就用得到，一件都不困難。",
+      note: "填完請全班一起把三句念出聲，念出來的比看過的記得久。第三句念完加一句：這支電話不是「出事」才可以打，心情難過、睡不著、想找人講話都可以打。請據點工作人員把號碼寫在公布欄。"
+    },
+    {
+      t: "reflect",
+      tag: "回顧",
+      h: "我們一起來回想",
+      items: [
+        { k: "Facts 發生什麼", v: "今天講到心情和睡眠，您記得最清楚的是哪一句話或哪一張卡片？" },
+        { k: "Feelings 感受", v: "聽到「老了不等於該心情差」的時候，心裡是什麼感覺？" },
+        { k: "Findings 發現", v: "有沒有哪一件事，和您本來想的不一樣？" },
+        { k: "Future 接下來", v: "回去以後，您想先關心家裡或鄰居的哪一個人？" }
+      ],
+      note: "四題不用每題都問，挑兩題請三四位長輩分享就夠。第二題可能會有人講出自己的低落，這時不要急著安慰，先說「您願意講出來，這就是最好的第一步」，並記下這位長輩，課後單獨關心。第四題的答案往往就是他們回家真的會做的事。"
+    },
+    {
+      t: "pledge",
+      tag: "承諾牆",
+      h: "我今天要帶走一件事",
+      lead: "挑一件做得到的，說出來，大家見證。",
+      items: [
+        "我每天同一時間起床",
+        "我早上出門走路曬太陽",
+        "我下午不喝咖啡濃茶",
+        "我睡前一小時放下手機",
+        "我的藥都照醫師說的吃",
+        "我一週去據點兩次",
+        "我把 1925 存進手機",
+        "我要關心一個鄰居的心情"
+      ],
+      note: "請長輩用手指出自己選的那一句，並大聲念出來，講師帶頭鼓掌。只挑一件就好，貪多會全部落空。可以請據點工作人員記下大家選的項目，下次上課回頭問一句「有做到嗎？」第八句若有人選，請他當場說出那個人的名字。"
+    },
+    {
+      t: "section",
+      n: "結語",
+      h: "您的耳朵，是社區的寶",
+      lead: "藥醫身體，人醫心情。您肯聽一句，就可能接住一個人。",
+      note: "這頁慢慢講、真心講。可以說：今天講了這麼多數字和方法，但最有效的一項是各位本來就會的——坐下來，聽人講話。年輕人沒有那個時間，只有你們有。講完停三秒再翻頁。若現場氣氛比較沉，可以請大家互相跟旁邊的人說一句「有事情可以找我講」。"
+    },
+    {
+      t: "score",
+      h: "今天的成績單",
+      note: "念分數的時候重點放在「大家一起答對的題目」，不要點名誰答錯。可以說一句：分數是玩的，真正的成績單是你們剛才承諾的那一件事。最後把 1925 和 1966 再念一次。重要提醒：課後若有長輩表達強烈的負面情緒或無望感，請個別、私下關心，陪他聯繫衛生所、社區心理衛生中心或身心科，不要在團體中公開討論這位長輩的狀況。"
+    }
+  ]
+};
+
+/* ===================== engine ===================== */
+(function(){
+"use strict";
+var S = DECK.slides;
+var SCORED = ['fill','choice','order','spot','sort','movie'];
+var TOTAL = S.filter(function(s){return SCORED.indexOf(s.t)>=0;}).length;
+var cur = 0, score = 0, NOANIM = false;
+var stage = document.getElementById('stage');
+var els = [];
+var ORD = [2,4,0,3,1];
+
+document.documentElement.style.setProperty('--th', DECK.theme);
+document.documentElement.style.setProperty('--thd', shade(DECK.theme,-42));
+document.title = DECK.title + '｜長者慢性病互動教學簡報';
+
+function shade(hex,d){
+  var n=parseInt(hex.slice(1),16), r=(n>>16)+d, g=((n>>8)&255)+d, b=(n&255)+d;
+  function c(x){return Math.max(0,Math.min(255,x));}
+  return '#'+((1<<24)+(c(r)<<16)+(c(g)<<8)+c(b)).toString(16).slice(1);
+}
+function el(tag,cls,html){var e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e;}
+
+/* ---------- sound (WebAudio, no files, works offline) ---------- */
+var AC=null, SND=true;
+function actx(){
+  if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ AC=null; } }
+  if(AC && AC.state==='suspended'){ try{ AC.resume(); }catch(e){} }
+  return AC;
+}
+function tone(f,t0,dur,type,vol,to){
+  if(!SND) return; var c=actx(); if(!c) return;
+  var t=c.currentTime+t0;
+  var o=c.createOscillator(), g=c.createGain();
+  o.type=type||'sine'; o.frequency.setValueAtTime(f,t);
+  if(to) o.frequency.exponentialRampToValueAtTime(to,t+dur);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(vol||0.16,t+0.014);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g); g.connect(c.destination);
+  o.start(t); o.stop(t+dur+0.03);
+}
+var SFX={
+  click:function(){ tone(760,0,0.05,'triangle',0.08); },
+  page:function(){ tone(400,0,0.12,'sine',0.05,720); },
+  right:function(){ [523.25,659.25,783.99,1046.5].forEach(function(f,i){ tone(f,i*0.07,0.17,'sine',0.15); }); },
+  wrong:function(){ tone(300,0,0.13,'triangle',0.12,210); tone(232,0.15,0.19,'triangle',0.11,168); },
+  found:function(){ tone(700,0,0.09,'sine',0.12,1050); tone(1050,0.09,0.14,'sine',0.10); },
+  miss:function(){ tone(520,0,0.11,'sine',0.09,380); },
+  star:function(){ tone(1318.5,0,0.3,'sine',0.13); tone(1975.5,0.06,0.36,'sine',0.08); },
+  win:function(){ [523.25,659.25,783.99,1046.5,1318.5].forEach(function(f,i){ tone(f,i*0.11,0.34,'sine',0.14); }); }
+};
+['pointerdown','keydown'].forEach(function(ev){
+  document.addEventListener(ev,function(){ actx(); },{once:true});
+});
+var bsnd=document.getElementById('bsnd');
+function toggleSnd(){ SND=!SND; bsnd.textContent=(SND?'🔊':'🔇')+' 音效 S'; if(SND){ actx(); SFX.click(); } }
+bsnd.onclick=toggleSnd;
+
+/* ---------- flow layout helpers ---------- */
+function flow(nodes,extra){ var f=el('div','flow'+(extra?' '+extra:'')); f.dataset.n=nodes.length; f._items=nodes; layout(f,candidates(nodes.length)[0]); return f; }
+function layout(f,c){
+  f.innerHTML=''; f.style.setProperty('--c',c); f.dataset.c=c;
+  var it=f._items;
+  for(var i=0;i<it.length;i+=c){ var row=el('div','frow'); for(var j=i;j<Math.min(i+c,it.length);j++) row.appendChild(it[j]); f.appendChild(row); }
+}
+function candidates(n){ return ({3:[3,1],4:[2,4],6:[3,2],8:[4,2,3],9:[3,5]})[n]||[Math.min(n,3)]; }
+
+/* ---------- header helpers ---------- */
+function head(s){
+  var h=el('div','hd');
+  if(s.tag){var tr=el('div','tagrow'); tr.appendChild(el('span','tag',s.tag)); tr.appendChild(el('span','rule')); h.appendChild(tr);}
+  h.appendChild(el('h1','t',s.h||''));
+  if(s.lead) h.appendChild(el('p','lead',s.lead));
+  return h;
+}
+function addSrc(pad,s){ if(s.src) pad.appendChild(el('div','src','資料來源：'+s.src)); }
+
+/* ---------- answer modal ---------- */
+var ansv=document.getElementById('ansv');
+function modal(okFlag,title,body,icon){
+  setTimeout(function(){
+    if(modal._for!==cur) return;
+    document.getElementById('anic').textContent = icon || (okFlag?'🎉':'💡');
+    document.getElementById('anti').textContent = title;
+    document.getElementById('anfb').innerHTML = body;
+    ansv.classList.add('on');
+  },700);
+  modal._for = cur;
+}
+function closeModal(){ ansv.classList.remove('on'); }
+document.getElementById('anok').onclick=function(){ SFX.click(); closeModal(); };
+ansv.onclick=function(e){ if(e.target===ansv) closeModal(); };
+
+/* ---------- scoring ---------- */
+var sctr=document.getElementById('sctr');
+function star(){
+  score++;
+  sctr.textContent='⭐ '+score+' / '+TOTAL;
+  sctr.classList.remove('bump'); void sctr.offsetWidth; sctr.classList.add('bump');
+  SFX.star();
+  var r=sctr.getBoundingClientRect();
+  var f=el('div','fly','+1 ⭐');
+  f.style.left=(r.left+r.width/2-38)+'px'; f.style.top=(r.top-14)+'px';
+  document.body.appendChild(f);
+  setTimeout(function(){ f.remove(); },1150);
+}
+
+/* ---------- builders ---------- */
+function bCover(s){
+  var sl=el('section','slide cover'), pad=el('div','pad mid');
+  pad.appendChild(el('h1','ct',s.h));
+  if(s.sub) pad.appendChild(el('p','cs',s.sub));
+  pad.appendChild(el('div','cd'));
+  if(DECK.disease) pad.appendChild(el('div','cdis','主題疾病：'+DECK.disease));
+  pad.appendChild(el('div','cm',s.meta||'愛迪樂健康促進團隊'));
+  sl.appendChild(pad); return sl;
+}
+function bSection(s){
+  var sl=el('section','slide sect'), pad=el('div','pad mid');
+  if(s.n) pad.appendChild(el('div','sn',s.n));
+  pad.appendChild(el('div','sh',s.h));
+  if(s.lead) pad.appendChild(el('div','sl',s.lead));
+  sl.appendChild(pad); return sl;
+}
+function bPoints(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(it){
+    var c=el('div','card'); c.dataset.clip='1';
+    c.appendChild(el('div','k',it.k)); c.appendChild(el('div','v',it.v)); return c;
+  });
+  pad.appendChild(flow(cards,s.core?'core':'')); addSrc(pad,s); sl.appendChild(pad); return sl;
+}
+function bStats(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(it){
+    var c=el('div','stat'); c.dataset.clip='1';
+    c.appendChild(el('div','n',it.n)); if(it.u) c.appendChild(el('div','u',it.u));
+    c.appendChild(el('div','d',it.d)); return c;
+  });
+  pad.appendChild(flow(cards)); addSrc(pad,s); sl.appendChild(pad); return sl;
+}
+function bChoice(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  pad.appendChild(el('div','q',s.q));
+  var b=el('div','opts');
+  s.opts.forEach(function(o,i){
+    var btn=el('button','opt');
+    btn.appendChild(el('span','ch','ABCD'[i]));
+    btn.appendChild(el('span','tx',o));
+    btn.appendChild(el('span','mk',''));
+    btn.onclick=function(){
+      if(sl.dataset.done) return; sl.dataset.done='1'; b.classList.add('done');
+      var ok = (i===s.ans);
+      b.children[s.ans].classList.add('right'); b.children[s.ans].querySelector('.mk').textContent='○';
+      if(!ok){ btn.classList.add('wrong'); btn.querySelector('.mk').textContent='✕'; }
+      if(ok){ SFX.right(); star(); } else SFX.wrong();
+      modal(ok, ok?'答對了！':'再想看看', s.fb);
+    };
+    b.appendChild(btn);
+  });
+  pad.appendChild(b); addSrc(pad,s); sl.appendChild(pad); return sl;
+}
+function bFill(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var maxa=0; s.lines.forEach(function(l){ maxa=Math.max(maxa,l.ans.length); });
+  sl.style.setProperty('--bw', (maxa*1.06+0.95)+'em');
+  var bank=el('div','bank'), sel=null;
+  var chips=s.bank.map(function(w){
+    var c=el('button','word',w);
+    c.onclick=function(){
+      if(sl.dataset.done||c.classList.contains('used')) return;
+      SFX.click();
+      if(sel===c){ sel=null; c.classList.remove('sel'); return; }
+      if(sel) sel.classList.remove('sel');
+      sel=c; c.classList.add('sel');
+    };
+    bank.appendChild(c); return c;
+  });
+  pad.appendChild(bank);
+  var wrap=el('div','blanks'), slots=[];
+  s.lines.forEach(function(l,i){
+    var line=el('div','bl'), inn=el('div','in'); line.appendChild(inn);
+    inn.appendChild(el('span','',l.pre||''));
+    var sp=el('span','slot empty','？'); inn.appendChild(sp);
+    inn.appendChild(el('span','',l.post||''));
+    sp.onclick=function(){
+      if(sl.dataset.done) return;
+      if(sp.dataset.w){ chips[+sp.dataset.c].classList.remove('used'); sp.textContent='？';
+        sp.classList.add('empty'); delete sp.dataset.w; delete sp.dataset.c; SFX.click(); return; }
+      if(!sel) return;
+      sp.textContent=sel.textContent; sp.classList.remove('empty');
+      sp.dataset.w=sel.textContent; sp.dataset.c=chips.indexOf(sel);
+      sel.classList.add('used'); sel.classList.remove('sel'); sel=null;
+      SFX.found(); check();
+    };
+    slots.push({sp:sp,line:line,ans:l.ans});
+    wrap.appendChild(line);
+  });
+  function check(){
+    if(slots.some(function(o){return !o.sp.dataset.w;})) return;
+    sl.dataset.done='1';
+    var allok=true;
+    slots.forEach(function(o){
+      var ok=o.sp.dataset.w===o.ans;
+      o.line.classList.add(ok?'right':'wrong');
+      if(!ok){ allok=false; o.sp.textContent=o.ans; }
+    });
+    if(allok){ SFX.right(); star(); } else SFX.wrong();
+    modal(allok, allok?'三句都對！':'看一下正確的說法', s.fb);
+  }
+  pad.appendChild(wrap); sl.appendChild(pad); return sl;
+}
+function bOrder(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var b=el('div','ord'), picks=[], rows=[];
+  ORD.forEach(function(oi){
+    var row=el('button','oi');
+    var num=el('span','num','–'); row.appendChild(num);
+    row.appendChild(el('span','tx',s.items[oi]));
+    row.dataset.o=oi;
+    row.onclick=function(){
+      if(sl.dataset.done||row.classList.contains('picked')) return;
+      picks.push(oi); row.classList.add('picked'); num.textContent=picks.length;
+      SFX.click();
+      if(picks.length===s.items.length) check();
+    };
+    rows.push(row); b.appendChild(row);
+  });
+  function check(){
+    sl.dataset.done='1'; var allok=true;
+    rows.forEach(function(r){
+      var o=+r.dataset.o, ok=picks[o]===o;
+      r.classList.add(ok?'right':'wrong'); if(!ok) allok=false;
+    });
+    rows.forEach(function(r){ r.querySelector('.num').textContent = (+r.dataset.o)+1; });
+    if(allok){ SFX.right(); star(); } else SFX.wrong();
+    modal(allok, allok?'順序完全正確！':'正確的順序是這樣', s.fb);
+  }
+  pad.appendChild(b); sl.appendChild(pad); return sl;
+}
+function bSpot(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var found=0, tiles=[];
+  var longest=''; s.cards.forEach(function(c){ var t=(c.why||c.ok||''); if(t.length>longest.length) longest=t; });
+  s.cards.forEach(function(c,i){
+    var card=el('div','sc'); card.dataset.clip='1';
+    card.appendChild(el('span','no',(i+1)+''));
+    card.appendChild(el('span','tx',c.x));
+    card.appendChild(el('span','bd',''));
+    card.onclick=function(){
+      if(card.dataset.hit) return; card.dataset.hit='1';
+      if(c.w){ card.classList.add('bad'); card.querySelector('.bd').textContent='⚠ 有問題';
+        live.innerHTML='<b>'+(i+1)+'　⚠</b>　'+c.why; found++; SFX.found();
+        if(found===s.need && !sl.dataset.done){ sl.dataset.done='1'; star();
+          modal(true,'全部找出來了！',s.fb,'🔍'); }
+      } else { card.classList.add('shake'); SFX.miss();
+        setTimeout(function(){card.classList.remove('shake');card.classList.add('good');
+          card.querySelector('.bd').textContent='👍 做得很好';},380);
+        live.innerHTML='<b>'+(i+1)+'　👍</b>　'+c.ok;
+      }
+    };
+    tiles.push(card);
+  });
+  pad.appendChild(flow(tiles));
+  var bar=el('div','exbar');
+  bar.appendChild(el('div','exg','<b>00　⚠</b>　'+longest));
+  var live=el('div','exl','點卡片，一張一張問大家：「這樣做，可以嗎？」');
+  bar.appendChild(live); pad.appendChild(bar);
+  sl.appendChild(pad); return sl;
+}
+function bSort(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var sel=null, done=0, tiles=[];
+  s.items.forEach(function(it){
+    var t=el('div','pi'); t.dataset.clip='1';
+    t.appendChild(el('span','tx',it.x));
+    var bd=el('span','pb off','0'); t.appendChild(bd);
+    t.dataset.b=it.b;
+    t.onclick=function(){
+      if(sl.dataset.done||t.dataset.set) return;
+      SFX.click();
+      if(sel===t){ sel=null; t.classList.remove('sel'); return; }
+      if(sel) sel.classList.remove('sel'); sel=t; t.classList.add('sel');
+    };
+    tiles.push(t);
+  });
+  pad.appendChild(flow(tiles));
+  var bins=el('div','bins');
+  s.bins.forEach(function(bn,bi){
+    var btn=el('button','bin','①②③'[bi]+' '+bn.t);
+    btn.onclick=function(){
+      if(sl.dataset.done||!sel) return;
+      sel.dataset.set=bn.id;
+      var bd=sel.querySelector('.pb'); bd.textContent='①②③'[bi]; bd.classList.remove('off');
+      sel.classList.remove('sel'); sel=null; done++; SFX.found();
+      if(done===s.items.length) check();
+    };
+    bins.appendChild(btn);
+  });
+  function check(){
+    sl.dataset.done='1'; var allok=true;
+    tiles.forEach(function(t){
+      var ok=t.dataset.set===t.dataset.b;
+      t.classList.add(ok?'right':'wrong'); if(!ok) allok=false;
+    });
+    if(allok){ SFX.right(); star(); } else SFX.wrong();
+    modal(allok, allok?'分類完全正確！':'我們一起對一下', s.fb,'🗂️');
+  }
+  pad.appendChild(bins); sl.appendChild(pad); return sl;
+}
+function bMovie(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var b=el('div','mv'), L=el('div','mvL'), R=el('div','mvR');
+  (s.tasks||[]).forEach(function(t){
+    var c=el('div','task'); c.dataset.clip='1';
+    c.appendChild(el('div','k',t.k)); c.appendChild(el('div','v',t.v)); L.appendChild(c);
+  });
+  (s.clips||[]).forEach(function(c){
+    var btn=el('button','clip');
+    btn.appendChild(el('span','plyb','▶'));
+    btn.appendChild(el('span','tx',c.t));
+    btn.onclick=function(){ SFX.click(); openClip(c.id); };
+    R.appendChild(btn);
+  });
+  if(s.vote){
+    var v=el('div','vote'); v.appendChild(el('div','vq',s.vote.q));
+    s.vote.opts.forEach(function(o){
+      var row=el('button','vrow');
+      row.appendChild(el('span','tx',o));
+      var c=el('span','cnt','0'); row.appendChild(c);
+      row.onclick=function(){
+        c.textContent=(+c.textContent)+1; SFX.click();
+        if(!sl.dataset.done){ sl.dataset.done='1'; star(); }
+      };
+      v.appendChild(row);
+    });
+    R.appendChild(v);
+  }
+  b.appendChild(L); b.appendChild(R); pad.appendChild(b);
+  if(s.search) pad.appendChild(el('div','src','影片若無法播放，請用關鍵字現場搜尋：'+s.search));
+  sl.appendChild(pad); return sl;
+}
+function bReflect(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(it){
+    var c=el('div','rf'); c.dataset.clip='1';
+    c.appendChild(el('div','k',it.k)); c.appendChild(el('div','v',it.v)); return c;
+  });
+  pad.appendChild(flow(cards)); sl.appendChild(pad); return sl;
+}
+function bPledge(s){
+  var sl=el('section','slide'), pad=el('div','pad');
+  pad.appendChild(head(s));
+  var cards=(s.items||[]).map(function(t){
+    var c=el('button','pl');
+    c.appendChild(el('span','bx','✓'));
+    c.appendChild(el('span','tx',t));
+    c.onclick=function(){ c.classList.toggle('on'); SFX.click(); };
+    return c;
+  });
+  pad.appendChild(flow(cards)); sl.appendChild(pad); return sl;
+}
+function bScore(s){
+  var sl=el('section','slide'), pad=el('div','pad mid');
+  var cv=el('canvas','','' ); cv.id='cfx';
+  var w=el('div','scw');
+  var big=el('div','big','0'); var stars=el('div','stars','');
+  w.appendChild(el('div','sub','今天的成績單'));
+  w.appendChild(big); w.appendChild(el('div','sub','／ '+TOTAL+' 顆星'));
+  w.appendChild(stars);
+  w.appendChild(el('div','msg','答對幾題不是重點——重點是今天帶回去的那一件事。<br>請每一位講一句：「我回去要開始做的是……」'));
+  sl.refresh=function(){
+    big.textContent=score;
+    var t=''; for(var i=0;i<TOTAL;i++) t += '<i style="animation-delay:'+(NOANIM?0:(i*90+300))+'ms">'+(i<score?'⭐':'☆')+'</i>';
+    stars.innerHTML=t;
+    if(!NOANIM){ SFX.win(); confetti(cv); }
+  };
+  pad.appendChild(cv); pad.appendChild(w); sl.appendChild(pad); return sl;
+}
+var B={cover:bCover,section:bSection,points:bPoints,stats:bStats,choice:bChoice,fill:bFill,
+  order:bOrder,spot:bSpot,sort:bSort,movie:bMovie,reflect:bReflect,pledge:bPledge,score:bScore};
+
+S.forEach(function(s,i){
+  var e=(B[s.t]||bPoints)(s,i);
+  e.dataset.i=i; els.push(e); stage.appendChild(e);
+});
+
+/* ---------- confetti ---------- */
+function confetti(cv){
+  var r=cv.parentNode.getBoundingClientRect();
+  cv.width=r.width; cv.height=r.height;
+  var g=cv.getContext('2d'), cols=['#E8552D','#F4A93C','#028090','#7B4EA3','#2E7D52'], ps=[];
+  for(var i=0;i<110;i++) ps.push({x:Math.random()*r.width,y:-Math.random()*r.height,
+    w:6+Math.random()*8,h:9+Math.random()*11,v:1.6+Math.random()*3.2,a:Math.random()*6.3,
+    s:(Math.random()-.5)*.22,c:cols[i%cols.length]});
+  var t0=Date.now();
+  (function loop(){
+    var el=Date.now()-t0;
+    g.clearRect(0,0,cv.width,cv.height);
+    ps.forEach(function(p){
+      p.y+=p.v; p.a+=p.s; p.x+=Math.sin(p.a)*.8;
+      g.save(); g.translate(p.x,p.y); g.rotate(p.a);
+      g.fillStyle=p.c; g.globalAlpha=Math.max(0,1-el/3400);
+      g.fillRect(-p.w/2,-p.h/2,p.w,p.h); g.restore();
+    });
+    if(el<3400) requestAnimationFrame(loop); else g.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+
+/* ---------- fit ---------- */
+/* Overflow is judged by geometry, not by scrollHeight: every child box must sit inside its parent's
+   box (the page's content box for the page itself). scrollHeight differs between browsers (Safari counts
+   glyph and letter-spacing overhang); getBoundingClientRect does not. scrollWidth is still used, with a
+   small font-relative tolerance, to catch a number or word too wide to wrap. */
+var ABS=(typeof WeakMap==='function')?new WeakMap():null;
+function isAbs(c){
+  var v=ABS?ABS.get(c):undefined;
+  if(v===undefined){ var p=getComputedStyle(c).position; v=(p==='absolute'||p==='fixed'); if(ABS) ABS.set(c,v); }
+  return v;
+}
+function hasBox(n){ return n.clientWidth>0||n.clientHeight>0; }
+var LASTBLOCK='';
+function badBox(n,contentBox){
+  if(n.scrollWidth>n.clientWidth+Math.max(4,0.06*(parseFloat(getComputedStyle(n).fontSize)||16))){
+    LASTBLOCK=n.className+' width '+n.scrollWidth+'/'+n.clientWidth; return true; }
+  var r=n.getBoundingClientRect(), t=r.top, b=r.bottom, l=r.left, rt=r.right;
+  var cs=getComputedStyle(n);
+  t+=parseFloat(cs.paddingTop)+parseFloat(cs.borderTopWidth); b-=parseFloat(cs.paddingBottom)+parseFloat(cs.borderBottomWidth);
+  l+=parseFloat(cs.paddingLeft)+parseFloat(cs.borderLeftWidth); rt-=parseFloat(cs.paddingRight)+parseFloat(cs.borderRightWidth);
+  var k=n.children;
+  for(var j=0;j<k.length;j++){
+    var c=k[j]; if(!hasBox(c)||isAbs(c)) continue;
+    var kr=c.getBoundingClientRect();
+    if(kr.top<t-3||kr.bottom>b+3||kr.left<l-3||kr.right>rt+3){
+      LASTBLOCK=(n.className||n.tagName)+' > '+(c.className||c.tagName)+' '+Math.round(kr.top-t)+'/'+Math.round(kr.bottom-b); return true; }
+  }
+  return false;
+}
+function overflow(root){
+  if(badBox(root,true)) return true;
+  var ns=root.querySelectorAll('*');
+  for(var i=0;i<ns.length;i++){ var n=ns[i]; if(!hasBox(n)) continue; if(badBox(n,false)) return true; }
+  return false;
+}
+var BOXSEL='.card,.stat,.sc,.pi,.opt,.oi,.rf,.pl,.task,.bl,.clip';
+function boxOver(n){
+  if(badBox(n,false)) return true;
+  var ds=n.querySelectorAll('*');
+  for(var j=0;j<ds.length;j++){ var d=ds[j]; if(!hasBox(d)) continue; if(badBox(d,false)) return true; }
+  return false;
+}
+/* each box is a fixed slot from the grid, so its own text can grow to fill it
+   without moving anything else — this is what kills the leftover white space */
+function fitBoxes(e){
+  var ns=e.querySelectorAll(BOXSEL);
+  Array.prototype.forEach.call(ns,function(n){
+    n.style.removeProperty('--cs');
+    var top=2.6, cs=top, best=0;
+    for(;cs>=1.0;cs-=0.15){                 /* coarse, from the top */
+      n.style.setProperty('--cs',cs.toFixed(3));
+      if(!boxOver(n)){ best=cs; break; }
+    }
+    if(!best){ n.style.removeProperty('--cs'); return; }
+    var probe=[best+0.1,best+0.05];          /* fine, just above the coarse hit */
+    for(var q=0;q<probe.length;q++){
+      if(probe[q]>top) continue;
+      n.style.setProperty('--cs',probe[q].toFixed(3));
+      if(!boxOver(n)){ best=probe[q]; break; }
+    }
+    n.style.setProperty('--cs',best.toFixed(3));
+  });
+}
+/* layout score: smallest text wins, but a layout that leaves the boxes half-empty loses points */
+function layoutScore(e){
+  var m=1e9, used=0, tot=0, maxLines=1;
+  Array.prototype.forEach.call(e.querySelectorAll(BOXSEL),function(n){
+    var tx=n.querySelector('.v,.d,.tx')||n;
+    var cs=getComputedStyle(tx), v=parseFloat(cs.fontSize); if(v<m) m=v;
+    var lh=parseFloat(cs.lineHeight)||v*1.3, ln=Math.round(tx.getBoundingClientRect().height/lh);
+    if(ln>maxLines) maxLines=ln;
+    var r=n.getBoundingClientRect(), top=1e9, bot=-1e9, k=n.children, any=false;
+    for(var j=0;j<k.length;j++){ if(getComputedStyle(k[j]).position==='absolute') continue;
+      var kr=k[j].getBoundingClientRect(); if(kr.top<top) top=kr.top; if(kr.bottom>bot) bot=kr.bottom; any=true; }
+    if(any){ used+=bot-top; tot+=r.height; }
+  });
+  if(m===1e9) return 0;
+  var fill=tot?used/tot:1;
+  var read = maxLines>=7 ? 0.62 : maxLines>=5 ? 0.8 : maxLines>=4 ? 0.78 : 1;   /* narrow columns read badly */
+  return m*(0.6+0.4*fill)*read;
+}
+/* headings scale with the screen too, but stay capped so they never starve the body text */
+function hsCap(){ return 1.16*Math.max(1, stage.clientHeight/720); }
+function setS(e,v){ e.style.setProperty('--s',String(v)); e.style.setProperty('--hs',String(Math.min(v,hsCap()))); }
+function gfit(e,pad){
+  var base=stage.clientHeight/720;                      /* 1.0 at a 720p projector */
+  function at(v){ setS(e,v); return !overflow(pad); }
+  var s=Math.min(4.0, 1.2+1.5*base), lo=0, floor=Math.max(0.6, 1.0*base);
+  for(;s>0.5;s-=0.1){ if(at(s)){ lo=s; break; } }         /* scan from the top: finds 2-line fits a binary search would skip */
+  if(lo && at(lo+0.05)) lo+=0.05;
+  if(!lo || lo<floor){ lo=Math.max(lo,floor); }          /* never show a page tiny because measuring failed */
+  setS(e,lo);
+}
+function fit(i){
+  var e=els[i], pad=e.querySelector('.pad');
+  Array.prototype.forEach.call(e.querySelectorAll('.rise'),function(n){ n.classList.remove('rise'); });
+  Array.prototype.forEach.call(e.querySelectorAll(BOXSEL),function(n){ n.style.removeProperty('--cs'); });
+  var f=e.querySelector('.flow');
+  if(f){
+    var cands=candidates(+f.dataset.n), best=-1, bestC=cands[0];
+    if(cands.length>1){
+      cands.forEach(function(c){ layout(f,c); gfit(e,pad); fitBoxes(e); var sc=layoutScore(e); if(sc>best){ best=sc; bestC=c; } });
+    }
+    layout(f,bestC);
+  }
+  gfit(e,pad);
+  fitBoxes(e);
+  e.dataset.fit='1';
+}
+
+/* ---------- entrance animation ---------- */
+var ANIM='.frow>*,.opts>*,.ord>*,.blanks>*,.bank>*,.mvL>*,.mvR>*,.q,.exbar,.bins>*,.scw>*';
+function animate(e){
+  if(NOANIM) return;
+  var ns=e.querySelectorAll(ANIM);
+  Array.prototype.forEach.call(ns,function(n,i){
+    n.classList.remove('rise');
+    n.style.setProperty('--d',(i*38)+'ms');
+  });
+  void e.offsetWidth;
+  Array.prototype.forEach.call(ns,function(n){ n.classList.add('rise'); });
+  clearTimeout(animate._t);
+  animate._t=setTimeout(function(){
+    Array.prototype.forEach.call(ns,function(n){ n.classList.remove('rise'); n.style.removeProperty('--d'); });
+  }, 420+ns.length*38+120);
+}
+
+/* ---------- navigation ---------- */
+var pg=document.getElementById('pg');
+function show(i){
+  i=Math.max(0,Math.min(S.length-1,i));
+  closeModal();
+  els[cur].classList.remove('on');
+  cur=i;
+  var e=els[cur];
+  e.classList.add('on');
+  if(e.refresh){ delete e.dataset.fit; e.refresh(); } else SFX.page();
+  if(!e.dataset.fit) fit(cur);
+  animate(e);
+  pg.textContent=(cur+1)+' / '+S.length;
+  document.getElementById('notep').innerHTML='<b>講師提示</b>　'+(S[cur].note||'');
+  Array.prototype.forEach.call(document.querySelectorAll('#tocg button'),function(b,k){
+    b.classList.toggle('cur',k===cur);
+  });
+}
+document.getElementById('bprev').onclick=function(){show(cur-1);};
+document.getElementById('bnext').onclick=function(){show(cur+1);};
+
+/* toc */
+var tocg=document.getElementById('tocg'), tocv=document.getElementById('tocv');
+S.forEach(function(s,i){
+  var b=el('button','','<span class="ix">'+(i+1)+'</span>'+(s.h||s.tag||''));
+  b.onclick=function(){ tocv.classList.remove('on'); show(i); };
+  tocg.appendChild(b);
+});
+document.getElementById('btoc').onclick=function(){ tocv.classList.toggle('on'); };
+tocv.onclick=function(e){ if(e.target===tocv) tocv.classList.remove('on'); };
+
+/* notes */
+function toggleNote(){ document.getElementById('notep').classList.toggle('on'); }
+document.getElementById('bnote').onclick=toggleNote;
+
+/* timer */
+var tmr=document.getElementById('tmr'), tid=null, left=20;
+function toggleTimer(){
+  if(tid){ clearInterval(tid); tid=null; tmr.classList.remove('on'); return; }
+  left=20; tmr.classList.add('on'); tmr.textContent='⏱ '+left;
+  tid=setInterval(function(){
+    left--; tmr.textContent = left>0 ? ('⏱ '+left) : '⏱ 時間到';
+    if(left<=3&&left>0) tone(880,0,0.07,'square',0.09);
+    if(left<=0){ clearInterval(tid); tid=null; tone(300,0,0.4,'sawtooth',0.12,180); }
+  },1000);
+}
+document.getElementById('btime').onclick=toggleTimer;
+
+/* fullscreen */
+function toggleFull(){
+  if(document.fullscreenElement) document.exitFullscreen();
+  else if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+}
+document.getElementById('bfull').onclick=toggleFull;
+
+/* lightbox */
+var lbv=document.getElementById('lbv'), lbf=document.getElementById('lbf'), lbo=document.getElementById('lbo');
+function openClip(id){
+  lbf.setAttribute('allow','autoplay; encrypted-media; fullscreen');
+  lbf.src='https://www.youtube-nocookie.com/embed/'+id+'?rel=0&autoplay=1';
+  lbo.href='https://www.youtube.com/watch?v='+id;
+  lbv.classList.add('on');
+}
+function closeClip(){ lbv.classList.remove('on'); lbf.removeAttribute('src'); lbf.removeAttribute('allow'); }
+document.getElementById('lbc').onclick=closeClip;
+lbv.onclick=function(e){ if(e.target===lbv) closeClip(); };
+
+/* keyboard */
+document.addEventListener('keydown',function(e){
+  var k=e.key;
+  if(lbv.classList.contains('on')){ if(k==='Escape') closeClip(); return; }
+  if(tocv.classList.contains('on')){ if(k==='Escape') tocv.classList.remove('on'); return; }
+  if(ansv.classList.contains('on')){
+    if(k==='Enter'||k===' '||k==='ArrowRight'||k==='Escape'){ e.preventDefault(); closeModal(); }
+    return;
+  }
+  if(k==='ArrowRight'||k===' '||k==='PageDown'){ e.preventDefault(); show(cur+1); }
+  else if(k==='ArrowLeft'||k==='PageUp'){ e.preventDefault(); show(cur-1); }
+  else if(k==='n'||k==='N'){ toggleNote(); }
+  else if(k==='t'||k==='T'){ toggleTimer(); }
+  else if(k==='f'||k==='F'){ toggleFull(); }
+  else if(k==='s'||k==='S'){ toggleSnd(); }
+  else if(k==='d'||k==='D'){ diag(); }
+  else if(k==='Home'){ show(0); }
+  else if(k==='End'){ show(S.length-1); }
+});
+
+/* diagnostics: press D to see why a page is the size it is */
+function diag(){
+  var e=els[cur], pad=e.querySelector('.pad');
+  var s=parseFloat(getComputedStyle(e).getPropertyValue('--s'))||0;
+  setS(e,s+0.2); var blocked=overflow(pad); var why=blocked?LASTBLOCK:'(nothing blocks at +0.2)'; setS(e,s);
+  var f=e.querySelector('.flow');
+  var txt='viewport '+window.innerWidth+'×'+window.innerHeight+'  dpr '+(window.devicePixelRatio||1)+'  stage '+stage.clientWidth+'×'+stage.clientHeight
+    +'\n--s '+s.toFixed(2)+(f?('  cols '+f.dataset.c):'')+'  UA '+navigator.userAgent.slice(0,80)
+    +'\nblocker @+0.2: '+why;
+  var d=document.getElementById('dbg');
+  if(!d){ d=el('pre','',''); d.id='dbg'; d.style.cssText='position:fixed;left:8px;top:8px;z-index:99;background:rgba(0,0,0,.85);color:#fff;font:14px/1.4 monospace;padding:10px 14px;border-radius:8px;white-space:pre-wrap;max-width:90vw'; document.body.appendChild(d); }
+  if(d.dataset.on==='1'){ d.remove(); return; }
+  d.dataset.on='1'; d.textContent=txt;
+}
+
+/* resize */
+var rt=null;
+window.addEventListener('resize',function(){
+  clearTimeout(rt);
+  rt=setTimeout(function(){
+    els.forEach(function(e){ delete e.dataset.fit; });
+    fit(cur); prefit();
+  },160);
+});
+
+var pre=null;
+function prefit(){
+  clearTimeout(pre);
+  var i=0;
+  (function step(){
+    while(i<els.length && els[i].dataset.fit) i++;
+    if(i>=els.length) return;
+    if(!els[i].refresh) fit(i);
+    else els[i].dataset.fit='1';
+    i++; pre=setTimeout(step,80);
+  })();
+}
+sctr.textContent='⭐ 0 / '+TOTAL;
+show(0);
+setTimeout(prefit,400);
+window.__deck={ check:function(i){ var e=els[i==null?cur:i]; var o=overflow(e.querySelector('.pad')); return o?LASTBLOCK:''; },
+  get cur(){return cur;}, get score(){return score;}, total:TOTAL, show:show, slides:S, els:els, fit:fit,
+  mute:function(){ SND=false; },
+  setAnim:function(v){ NOANIM=!v; document.documentElement.classList.toggle('noanim',NOANIM); if(NOANIM){ els.forEach(function(e){
+    Array.prototype.forEach.call(e.querySelectorAll('.rise'),function(n){ n.classList.remove('rise'); }); }); } } };
+})();
+</script>
+</body>
+</html>
